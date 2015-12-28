@@ -34,7 +34,7 @@
         $args = func_get_args();
 
         foreach( $args as $arg )
-            echo "<script src="$subroot/common/js/$arg.js"></script>";
+            echo "<script src=\"$subroot/common/js/$arg.js\"></script>";
     }
 
     /*
