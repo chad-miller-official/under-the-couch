@@ -1,4 +1,27 @@
 <?
+    /*
+     * Gets an array of blog posts from the database.
+     * A blog post is represented as a hash with the following fields:
+     *   blog_post       : integer - the PK of the blog post.
+     *   title           : string  - the title of the blog post.
+     *   body            : string  - the body of the blog post.
+     *   created         : string  - the blog post's creation time.
+     *   author          : string  - the first and last name of the blog post's author.
+     *   position        : string  - the officer position of the blog post's author.
+     *   editor          : string  - the first and last name of the last person to edit
+     *                               the blog post, or NULL if it was never edited.
+     *   edited          : string  - the blog post's edit time, or NULL if it was never edited.
+     *   editor_position : string  - the officer position of the blog post's last editor,
+     *                               or NULL if it was never edited.
+     *
+     * Params:
+     *   $max_num_posts : integer - the maximum number of blog posts to return.
+     *   $offset        : integer - the number of blog posts to skip before the first
+     *                              blog post in the array (default 0).
+     * Returns:
+     *   <<an array of blog posts hashes>> if retrieval was successful;
+     *   <<false>> otherwise.
+     */
     function get_blog_posts( $max_num_posts, $offset=0 )
     {
         $body_posts_query = <<<SQL
@@ -40,7 +63,6 @@ SQL;
 
         pg_prepare( '', $body_posts_query );
         $result = pg_execute( '', [ $max_num_posts, $offset ] );
-
-        return pg_fetch_all( $result );
+        return $result ? pg_fetch_all( $result ) : false;
     }
 ?>

@@ -1,4 +1,12 @@
 <?
+    /*
+     * Gets the equipment manager's email address from the database.
+     *
+     * Params:
+     *   None.
+     * Returns:
+     *   The equipment manager's email address.
+     */
     function get_equipment_manager_email()
     {
         $email_query = <<<SQL

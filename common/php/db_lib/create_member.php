@@ -1,8 +1,22 @@
 <?
+    /*
+     * Inserts a new member into the database.
+     *
+     * Params:
+     *   $gatech_email : string - the new member's @gatech.edu email address
+     *   $first_name   : string - the new member's first name
+     *   $last_name    : string - the new member's last name
+     *   $password     : string - the new member's password
+     * Returns:
+     *   <<0>> if a member with the specified email address already exists;
+     *   <<the newly-inserted member's integer PK>> if insertion was successful;
+     *   <<false>> otherwise.
+     */
     function create_member( $gatech_email, $first_name, $last_name, $password )
     {
         db_include( 'get_member_by_gatech_email' );
 
+        // Check to see if the member exists
         if( !get_member_by_gatech_email( $gatech_email ) )
         {
             $password_hash = hash( 'sha512', $password );
@@ -32,9 +46,13 @@ SQL;
                 $password_hash
             ];
 
-            pg_query_params( $insert_member, $params );
-            $retval = get_member_by_gatech_email( $gatech_email );
-            return $retval['member'];
+            if( pg_query_params( $insert_member, $params ) )
+            {
+                $retval = get_member_by_gatech_email( $gatech_email );
+                return $retval['member'];
+            }
+            else
+                return false;
         }
         else
             return 0;

@@ -1,8 +1,24 @@
 <?
-    function create_or_update_blog_post( $title=0, $body=0, $update_pk=0 )
+    /*
+     * Inserts a new blog post into the database or updates an existing blog post.
+     *
+     * Params:
+     *   $title     : string  - the title the post should have (default empty)
+     *   $body      : string  - the body the post should have (default empty)
+     *   $update_pk : integer - the PK of the existing blog post, if updating instead of inserting (default 0)
+     * Returns:
+     *   If updating:
+     *     <<true>> if update was successful;
+     *     <<false>> otherwise.
+     *   If inserting:
+     *     <<the newly-inserted blog post's PK>> if insertion was successful;
+     *     <<false>> otherwise.
+     */
+    function create_or_update_blog_post( $title="", $body="", $update_pk=0 )
     {
         global $session_member;
 
+        // Presence of $update_pk means we're updating, not inserting
         if( $update_pk )
         {
             $query = <<<SQL
@@ -12,15 +28,18 @@
 SQL;
 
             $params = [ $session_member['member'] ];
-            $i = 2;
+            $i = 2; // Keep track of which variable number we're on
 
+            // Update the title if we've been given one
             if( $title )
             {
+                // $i is used to keep track of the variables we substitute in
                 $query .= ", title = \${$i}";
                 $i++;
                 array_push( $params, $title );
             }
 
+            // Update the body if we're given one
             if( $body )
             {
                 $query .= ", body = \${$i}";
@@ -34,8 +53,9 @@ SQL;
         }
         else
         {
+            // Reject an insertion if we're missing a title or a body
             if( !$title || !$body )
-                return 0;
+                return false;
 
             $query = <<<SQL
                 INSERT INTO tb_blog_post
@@ -52,6 +72,7 @@ SQL;
                               $3
                             )
 SQL;
+
             $params = [
                 $session_member['member'],
                 $title,
