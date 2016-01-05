@@ -14,15 +14,16 @@
     global $webroot;
     global $subroot;
 
-    if( isset( $_SERVER['DOCUMENT_ROOT'] ) && $_SERVER['DOCUMENT_ROOT'] )
-        $webroot = $_SERVER['DOCUMENT_ROOT'];
+    if( isset( $_SERVER['CONTEXT_DOCUMENT_ROOT'] ) && $_SERVER['CONTEXT_DOCUMENT_ROOT'] )
+        $webroot = $_SERVER['CONTEXT_DOCUMENT_ROOT'];
     else if( preg_match( '/(\/var\/www\/html\/[^\/]+)\//', __FILE__, $matches ) == 1 )
         $webroot = $matches[1];
 
     // Get the rest of the directory we're in after the webroot
-    $end_dir = strrpos( $_SERVER['PHP_SELF'], '/' );
-    $subroot = $end_dir !== FALSE ? substr( $_SERVER['PHP_SELF'], 0, $end_dir ) : '';
-
+    $subroot = str_replace( $webroot, '', $_SERVER['SCRIPT_FILENAME'] );
+    $end_dir = strrpos( $subroot, '/' );
+    $subroot = substr( $subroot, 0, $end_dir );
+    
     $webroot .= $subroot;
 
     // Initialize the database connection
