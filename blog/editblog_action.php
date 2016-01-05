@@ -1,6 +1,4 @@
 <?
-	global $subroot;
-
 	db_include( 'create_or_update_blog_post' );
 
 	if( !is_admin() || !isset( $_POST['postid'] ) || !isset( $_POST['body'] ) || !isset( $_POST['title'] ) )

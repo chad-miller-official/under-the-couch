@@ -20,11 +20,15 @@
         $webroot = $matches[1];
 
     // Get the rest of the directory we're in after the webroot
-    $subroot = str_replace( $webroot, '', $_SERVER['SCRIPT_FILENAME'] );
-    $end_dir = strrpos( $subroot, '/' );
-    $subroot = substr( $subroot, 0, $end_dir );
+    $subroot_lib = str_replace( $webroot, '', $_SERVER['SCRIPT_FILENAME'] );
+    $end_dir     = strrpos( $subroot_lib, '/' );
+    $subroot_lib = substr( $subroot_lib, 0, $end_dir );
     
-    $webroot .= $subroot;
+    $webroot .= $subroot_lib;
+    
+    // Set the subroot for actual webpages
+    $end_dir = strrpos( $_SERVER['PHP_SELF'], '/' );
+    $subroot = $end_dir !== FALSE ? substr( $_SERVER['PHP_SELF'], 0, $end_dir ) : '';
 
     // Initialize the database connection
     global $db_conn;
