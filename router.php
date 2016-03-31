@@ -16,7 +16,7 @@
 
     if( isset( $_SERVER['CONTEXT_DOCUMENT_ROOT'] ) && $_SERVER['CONTEXT_DOCUMENT_ROOT'] )
         $webroot = $_SERVER['CONTEXT_DOCUMENT_ROOT'];
-    else if( preg_match( '/(\/var\/www\/html\/[^\/]+)\//', __FILE__, $matches ) == 1 )
+    else if( preg_match( '/(\/var\/www\/dev.underthecouch.org\/[^\/]+)\//', __FILE__, $matches ) == 1 )
         $webroot = $matches[1];
 
     // Get the rest of the directory we're in after the webroot
