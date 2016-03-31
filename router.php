@@ -23,22 +23,16 @@
     $subroot_lib = str_replace( $webroot, '', $_SERVER['SCRIPT_FILENAME'] );
     $end_dir     = strrpos( $subroot_lib, '/' );
     $subroot_lib = substr( $subroot_lib, 0, $end_dir );
-    
+
     $webroot .= $subroot_lib;
-    
+
     // Set the subroot for actual webpages
     $end_dir = strrpos( $_SERVER['PHP_SELF'], '/' );
     $subroot = $end_dir !== FALSE ? substr( $_SERVER['PHP_SELF'], 0, $end_dir ) : '';
 
     // Initialize the database connection
     global $db_conn;
-
-    $connection_str = 'host='     . SQL_POSTGRESQL_HOST
-                    .' port='     . SQL_POSTGRESQL_PORT
-                    .' dbname='   . SQL_POSTGRESQL_DB
-                    .' user='     . SQL_POSTGRESQL_USER
-                    .' password=' . SQL_POSTGRESQL_PASS;
-    $db_conn = pg_connect( $connection_str );
+    $db_conn = pg_connect( PSQL_CONNECT_STRING );
 
     // Set session variables
     session_start();
