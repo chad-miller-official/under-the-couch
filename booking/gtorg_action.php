@@ -1,17 +1,23 @@
 <?
+	lib_include( 'email_lib ');
+
+	$phone    = $_POST['phone']    ?: 'N/A';
+	$comments = $_POST['comments'] ?: 'N/A';
+
 	$email = <<<HTML
+<html>
+	<head>
+		<title>GT Org Request</title>
+	</head>
+	<body>
 		Organization name: {$_POST['orgname']}
 		<br />
 		Contact name: {$_POST['contactname']}
 		<br />
 		Email address: {$_POST['email']}
 		<br />
-HTML;
-
-	if( $_POST['phone'] )
-		$email .= "Contact number: {$_POST['phone']}<br />";
-
-	$email .= <<<HTML
+		Contact number: $phone
+		<br />
 		Date requested: {$_POST['date']}
 		<br />
 		Start time: {$_POST['start']}
@@ -22,25 +28,20 @@ HTML;
 		<br />
 		Expected number of attendees: {$_POST['attendees']}
 		<br />
+		Additional comments: $comments
+	</body>
+</html>
 HTML;
 
-	if( $_POST['comments'] )
-		$email .= "Additional comments: {$_POST['comments']}";
-
-	$mailed = mail(
-		EMAIL_BOOKING,
-		'[GT Organization] Booking Request',
-		$email,
-		'From: ' . EMAIL_WEBMASTER . "\r\nContent-type: text/html\r\n"
-	);
+	$to      = EMAIL_BOOKING;
+	$subject = '[GT Organization] Booking Request';
+	$mailed  = send_html_email( $to, $subject, $email );
 
 	if( $mailed )
 	{
-		global $subroot;
-
 		$message1 = 'Booking request sent!';
 		$message2 = "We'll get back to you within a few days.";
-		$redirect = "$subroot/index.php";
+		$redirect = "/index.php";
 	}
 	else
 	{

@@ -1,44 +1,45 @@
 <?
+	lib_include( 'email_lib' );
+
+	$phone    = $_POST['phone']    ?: 'N/A';
+	$style    = $_POST['style']    ?: 'N/A';
+	$website  = $_POST['website']  ?: 'N/A';
+	$comments = $_POST['comments'] ?: 'N/A';
+
 	$email = <<<HTML
+<html>
+	<head>
+		<title>Booking Request</title>
+	</head>
+	<body>
 		Contact name: {$_POST['contactname']}
 		<br />
 		Email address: {$_POST['email']}
 		<br />
-HTML;
-
-	if($_POST['phone'])
-		$email .= "Contact number: {$_POST['phone']}<br />";
-
-	$email = <<<HTML
+		Contact number: $phone
+		<br />
 		Band name: {$_POST['bandname']}
 		<br />
 		Date requested: {$_POST['date']}
 		<br />
+		Style of music: $style
+		<br />
+		Website: $website
+		<br />
+		Additional comments: $comments
+	</body>
+</html>
 HTML;
 
-	if($_POST['style'])
-		$email .= "Style of music: {$_POST['style']}<br />";
-
-	if($_POST['website'])
-		$email .= "Website: {$_POST['website']}<br />";
-
-	if($_POST['comments'])
-		$email .= "Additional comments: {$_POST['comments']}";
-
-	$mailed = mail(
-		EMAIL_BOOKING,
-		'[UTC Booking] Booking Request',
-		$email,
-		'From: ' . EMAIL_WEBMASTER . "\r\nContent-type: text/html\r\n"
-	);
+	$to      = EMAIL_BOOKING;
+	$subject = '[UTC Booking] Booking Request';
+	$mailed  = send_html_email( $to, $subject, $email );
 
 	if( $mailed )
 	{
-		global $subroot;
-		
 		$message1 = 'Booking request sent!';
 		$message2 = "If we're able to book you, we'll get back to you within a few days.";
-		$redirect = "$subroot/index.php";
+		$redirect = "/index.php";
 	}
 	else
 	{

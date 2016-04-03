@@ -33,8 +33,6 @@
                 <?
                     if( is_array( $blog_posts ) )
                     {
-                        global $session_member;
-
                         foreach( $blog_posts as $blog_post )
                         {
                             if( !isset( $curr_min ) )

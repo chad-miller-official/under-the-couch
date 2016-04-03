@@ -1,4 +1,12 @@
 <?
+    function lib_include()
+    {
+        $args = func_get_args();
+
+        foreach( $args as $arg )
+            require_once( "{$GLOBALS['webroot']}/common/php/functions/$arg.php" );
+    }
+
     /*
      * Includes a db_lib function.
      *
@@ -10,12 +18,10 @@
      */
     function db_include()
 	{
-        global $webroot;
-
         $args = func_get_args();
 
         foreach( $args as $arg )
-            require_once( "$webroot/common/php/db_lib/$arg.php" );
+            require_once( "{$GLOBALS['webroot']}/common/php/db_lib/$arg.php" );
 	}
 
     /*
@@ -29,31 +35,10 @@
      */
     function js_include()
     {
-        global $subroot;
-
         $args = func_get_args();
 
         foreach( $args as $arg )
-            echo "<script src=\"$subroot/common/js/$arg.js\"></script>";
-    }
-
-    /*
-     * Includes a ical_lib function.
-     *
-     * Params:
-     *   Any number of ical_lib function names (in common/ical_lib). Do not include
-     *   the ".php" at the end of the name.
-     * Returns:
-     *   Nothing.
-     */
-    function ical_include()
-    {
-        global $webroot;
-
-        $args = func_get_args();
-
-        foreach( $args as $arg )
-            require_once( "$webroot/common/php/ical_lib/$arg.php" );
+            echo "<script src=\"/common/js/$arg.js\"></script>";
     }
 
     /*
@@ -67,8 +52,6 @@
      */
     function ui_insert( $ui_file )
     {
-        global $webroot;
-
-        require( "$webroot/common/ui/$ui_file.php" );
+        require( "{$GLOBALS['webroot']}/common/ui/$ui_file.php" );
     }
 ?>

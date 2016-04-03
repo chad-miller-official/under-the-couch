@@ -11,40 +11,24 @@
     require_once( 'common/php/functions/session_lib.php' );
 
     // Set the webroot
-    global $webroot;
-    global $subroot;
-
     if( isset( $_SERVER['CONTEXT_DOCUMENT_ROOT'] ) && $_SERVER['CONTEXT_DOCUMENT_ROOT'] )
-        $webroot = $_SERVER['CONTEXT_DOCUMENT_ROOT'];
+        $GLOBALS['webroot'] = $_SERVER['CONTEXT_DOCUMENT_ROOT'];
     else if( preg_match( '/(\/var\/www\/dev.underthecouch.org\/[^\/]+)\//', __FILE__, $matches ) == 1 )
-        $webroot = $matches[1];
-
-    // Get the rest of the directory we're in after the webroot
-    $subroot_lib = str_replace( $webroot, '', $_SERVER['SCRIPT_FILENAME'] );
-    $end_dir     = strrpos( $subroot_lib, '/' );
-    $subroot_lib = substr( $subroot_lib, 0, $end_dir );
-
-    $webroot .= $subroot_lib;
-
-    // Set the subroot for actual webpages
-    $end_dir = strrpos( $_SERVER['PHP_SELF'], '/' );
-    $subroot = $end_dir !== FALSE ? substr( $_SERVER['PHP_SELF'], 0, $end_dir ) : '';
+        $GLOBALS['webroot'] = $matches[1];
 
     // Initialize the database connection
-    global $db_conn;
-    $db_conn = pg_connect( PSQL_CONNECT_STRING );
+    if( !isset( $GLOBALS['db_conn'] ) )
+        $GLOBALS['db_conn'] = pg_connect( PSQL_CONNECT_STRING );
 
     // Set session variables
     session_start();
-
-    global $session_member;
 
     if( is_logged_in() )
     {
         db_include( 'get_member' );
 
-        $session_member         = get_member( $_SESSION['member_pk'] );
-        $session_member['name'] = "{$session_member['first_name']} {$session_member['last_name']}";
+        $GLOBALS['session_member']         = get_member( $_SESSION['member_pk'] );
+        $GLOBALS['session_member']['name'] = "{$session_member['first_name']} {$session_member['last_name']}";
     }
     else
     {

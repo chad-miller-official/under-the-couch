@@ -1,11 +1,5 @@
 <?
-	global $subroot;
-
-	ical_include(
-		'get_ics_events',
-		'ics_to_array',
-		'compare_ics_events'
-	);
+	lib_include( 'ical_lib' );
 ?>
 
 <aside>
@@ -13,7 +7,7 @@
 		<center><b>Admin Control Panel</b></center>
 
 		<ul class="admin_sidebar">
-			<li><a href="<?= $subroot ?>/blog/writeblog.php">Write Blog Post</a></li>
+			<li><a href="/blog/writeblog.php">Write Blog Post</a></li>
 		</ul>
 
 		<hr />

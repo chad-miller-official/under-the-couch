@@ -16,8 +16,6 @@
      */
     function create_or_update_blog_post( $title="", $body="", $update_pk=0 )
     {
-        global $session_member;
-
         // Presence of $update_pk means we're updating, not inserting
         if( $update_pk )
         {
@@ -27,7 +25,7 @@
                        edited = now()
 SQL;
 
-            $params = [ $session_member['member'] ];
+            $params = [ $GLOBALS['session_member']['member'] ];
             $i = 2; // Keep track of which variable number we're on
 
             // Update the title if we've been given one
@@ -74,7 +72,7 @@ SQL;
 SQL;
 
             $params = [
-                $session_member['member'],
+                $GLOBALS['session_member']['member'],
                 $title,
                 $body
             ];

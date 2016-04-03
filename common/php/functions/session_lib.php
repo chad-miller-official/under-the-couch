@@ -61,8 +61,6 @@
      */
     function is_admin()
     {
-        global $session_member;
-
-        return $session_member['is_admin'];
+        return $GLOBALS['session_member']['is_admin'];
     }
 ?>
