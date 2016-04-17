@@ -7,6 +7,7 @@
     // Require the necessary includes
     // Note that constants, include_lib, and session_lib are implicitly included in every PHP file
     require_once( 'common/php/constants.php' );
+    require_once( 'common/php/functions/db_lib.php' );
     require_once( 'common/php/functions/include_lib.php' );
     require_once( 'common/php/functions/session_lib.php' );
 
