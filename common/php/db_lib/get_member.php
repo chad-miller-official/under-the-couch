@@ -24,17 +24,17 @@
     function get_member( $member )
     {
         $get_member_query = <<<SQL
-               SELECT m.*,
-                      o.officer IS NOT NULL AS is_admin
-                 FROM tb_member m
-            LEFT JOIN tb_officer o
-                   ON m.member = o.member
-                WHERE m.member = $1
+               select m.*,
+                      o.officer is not null as is_admin
+                 from tb_member m
+            left join tb_officer o
+                   on m.member = o.member
+                where m.member = ?member?
 SQL;
 
-        pg_prepare( '', $get_member_query );
-        $result = pg_execute( '', [ $member ] );
+        $params = [ 'member' => $member ];
+        $result = query_prepare_select( $get_member_query, $params );
 
-        return $result ? pg_fetch_assoc( $result ) : false;
+        return is_resource( $result ) ? query_fetch_one( $result ) : false;
     }
 ?>

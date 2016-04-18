@@ -23,42 +23,43 @@
     function get_blog_post( $blog_post )
     {
         $get_blog_post_query = <<<SQL
-                SELECT bp.blog_post AS blog_post,
-                       bp.title AS title,
-                       bp.body AS body,
-                       to_char( bp.created, 'Day, Month DD, YYYY HH:MI:SS AM' ) AS created,
-                       m.first_name || ' ' || m.last_name AS author,
-                       p.name AS position,
-                       CASE WHEN bp.editor IS NOT NULL
-                            THEN e.first_name || ' ' || e.last_name
-                            ELSE NULL
-                       END AS editor,
-                       CASE WHEN bp.editor IS NOT NULL
-                            THEN to_char( bp.edited, 'Day, Month DD, YYYY HH:MI:SS AM' )
-                            ELSE NULL
-                       END AS edited,
-                       CASE WHEN bp.editor IS NOT NULL
-                            THEN pe.name
-                            ELSE NULL
-                       END AS editor_position
-                  FROM tb_blog_post bp
-            INNER JOIN tb_member m
-                    ON bp.author = m.member
-             LEFT JOIN tb_officer o
-                    ON o.member = m.member
-             LEFT JOIN tb_position p
-                    ON o.position = p.position
-             LEFT JOIN tb_member e
-                    ON bp.editor = e.member
-             LEFT JOIN tb_officer oe
-                    ON oe.member = e.member
-             LEFT JOIN tb_position pe
-                    ON oe.position = pe.position
-                 WHERE bp.blog_post = $1
+                select bp.blog_post,
+                       bp.title,
+                       bp.body,
+                       to_char( bp.created, 'Day, Month DD, YYYY HH:MI:SS AM' ) as created,
+                       m.first_name || ' ' || m.last_name as author,
+                       p.name as position,
+                       case when bp.editor is not null
+                            then e.first_name || ' ' || e.last_name
+                            else null
+                       end as editor,
+                       case when bp.editor is not null
+                            then to_char( bp.edited, 'Day, Month DD, YYYY HH:MI:SS AM' )
+                            else null
+                       end as edited,
+                       case when bp.editor is not null
+                            then pe.name
+                            else null
+                       end as editor_position
+                  from tb_blog_post bp
+            inner join tb_member m
+                    on bp.author = m.member
+             left join tb_officer o
+                    on o.member = m.member
+             left join tb_position p
+                    on o.position = p.position
+             left join tb_member e
+                    on bp.editor = e.member
+             left join tb_officer oe
+                    on oe.member = e.member
+             left join tb_position pe
+                    on oe.position = pe.position
+                 where bp.blog_post = ?blog_post?
 SQL;
 
-        pg_prepare( '', $get_blog_post_query );
-        $result = pg_execute( '', [ $blog_post ] );
-        return $result ? pg_fetch_assoc( $result ) : false;
+        $params = [ 'blog_post' => $blog_post ];
+        $result = query_prepare_select( $get_blog_post_query, $params );
+
+        return is_resource( $result ) ? query_fetch_one( $result ) : false;
     }
 ?>

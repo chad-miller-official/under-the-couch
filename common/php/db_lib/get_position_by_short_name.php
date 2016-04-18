@@ -29,13 +29,13 @@
     function get_position_by_short_name( $short_name )
     {
         $description_query = <<<SQL
-            SELECT *
-              FROM tb_position
-             WHERE short_name = $1
+            select *
+              from tb_position
+             where short_name = ?short_name?
 SQL;
 
-        pg_prepare( '', $description_query );
-        $result = pg_execute( '', [ $short_name ] );
-        return $result ? pg_fetch_assoc( $result ) : false;
+        $params = [ 'short_name' => $short_name ];
+        $result = query_prepare_select( $description_query, $params );
+        return is_resource( $result ) ? query_fetch_one( $result ) : false;
     }
 ?>

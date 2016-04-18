@@ -31,22 +31,23 @@
                               password_hash
                             )
                      VALUES (
-                              $1,
-                              $2,
-                              $3,
-                              $3,
-                              $4
+                              ?first_name?,
+                              ?last_name?,
+                              ?gatech_email?,
+                              ?password_hash?
                             )
 SQL;
 
             $params = [
-                $first_name,
-                $last_name,
-                $gatech_email,
-                $password_hash
+                'first_name'    => $first_name,
+                'last_name'     => $last_name,
+                'gatech_email'  => $gatech_email,
+                'password_hash' => $password_hash
             ];
 
-            if( pg_query_params( $insert_member, $params ) )
+            $insert = query_insert( $insert_member, $params );
+
+            if( is_int( $insert ) && $insert > 0 )
             {
                 $retval = get_member_by_gatech_email( $gatech_email );
                 return $retval['member'];

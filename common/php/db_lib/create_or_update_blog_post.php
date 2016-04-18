@@ -14,40 +14,40 @@
      *     <<the newly-inserted blog post's PK>> if insertion was successful;
      *     <<false>> otherwise.
      */
-    function create_or_update_blog_post( $title="", $body="", $update_pk=0 )
+    function create_or_update_blog_post( $title='', $body='', $update_pk=0 )
     {
         // Presence of $update_pk means we're updating, not inserting
         if( $update_pk )
         {
             $query = <<<SQL
-                UPDATE tb_blog_post
-                   SET editor = $1,
+                update tb_blog_post
+                   set editor = ?editor?,
                        edited = now()
 SQL;
 
-            $params = [ $GLOBALS['session_member']['member'] ];
-            $i = 2; // Keep track of which variable number we're on
+            $params = [
+                'editor' => $GLOBALS['session_member']['member']
+            ];
 
             // Update the title if we've been given one
             if( $title )
             {
-                // $i is used to keep track of the variables we substitute in
-                $query .= ", title = \${$i}";
-                $i++;
-                array_push( $params, $title );
+                $query .= ', title = ?title?';
+                $params['title'] = $title;
             }
 
             // Update the body if we're given one
             if( $body )
             {
-                $query .= ", body = \${$i}";
-                $i++;
-                array_push( $params, $body );
+                $query .= ', body = ?body?';
+                $params['body'] = $body;
             }
 
-            $query .= "WHERE blog_post = \${$i}";
-            array_push( $params, $update_pk );
-            return pg_query_params( $query, $params ) ? true : false;
+            $query .= 'where blog_post = ?blog_post?';
+            $params['blog_post'] = $update_pk;
+
+            $update = query_update( $query, $params );
+            return is_int( $update ) && $update > 0;
         }
         else
         {
@@ -56,33 +56,34 @@ SQL;
                 return false;
 
             $query = <<<SQL
-                INSERT INTO tb_blog_post
+                insert into tb_blog_post
                             (
                               author,
                               created,
                               title,
                               body
                             )
-                     VALUES (
-                              $1,
+                     values (
+                              ?author?,
                               now(),
-                              $2,
-                              $3
+                              ?title?,
+                              ?body?
                             )
 SQL;
 
             $params = [
-                $GLOBALS['session_member']['member'],
-                $title,
-                $body
+                'author' => $GLOBALS['session_member']['member'],
+                'title'  => $title,
+                'body'   => $body
             ];
 
-            if( pg_query_params( $query, $params ) )
+            $insert = query_insert( $query, $params );
+
+            if( is_int( $insert ) && $insert > 0 )
             {
-                $query = "SELECT currval( 'sq_pk_blog_post' ) AS retval";
-                pg_prepare( '', $query );
-                $result = pg_execute( '', [] );
-                $retval = pg_fetch_assoc( $result );
+                $query  = "select currval( 'sq_pk_blog_post' ) as retval";
+                $result = query_prepare_select( $query );
+                $retval = query_fetch_one( $result );
 
                 return $retval['retval'];
             }

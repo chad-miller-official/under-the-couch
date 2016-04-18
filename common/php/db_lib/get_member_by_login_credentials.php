@@ -26,17 +26,20 @@
     function get_member_by_login_credentials( $gatech_email, $password_hash )
     {
         $get_member_query = <<<SQL
-                 SELECT m.member
-                   FROM tb_member m
-              LEFT JOIN tb_officer o
-                     ON m.member = o.member
-                  WHERE m.gatech_email_address = $1
-                    AND m.password_hash        = $2
+                 select m.member
+                   from tb_member m
+              left join tb_officer o
+                     on m.member = o.member
+                  where m.gatech_email_address = ?gatech_email?
+                    and m.password_hash        = ?password_hash?
 SQL;
 
-        pg_prepare( '', $get_member_query );
-        $result = pg_execute( '', [ $gatech_email, $password_hash ] );
+        $params = [
+            'gatech_email'  => $gatech_email,
+            'password_hash' => $password_hash
+        ];
 
-        return $result ? pg_fetch_assoc( $result ) : false;
+        $result = query_prepare_select( $get_member_query, $params );
+        return is_resource( $result ) ? query_fetch_one( $result ) : false;
     }
 ?>

@@ -10,18 +10,24 @@
     function get_equipment_manager_email()
     {
         $email_query = <<<SQL
-            SELECT m.display_email_address
-              FROM tb_member m
-              JOIN tb_officer o
-                ON o.member = m.member
-              JOIN tb_position p
-                ON p.position = o.position
-             WHERE p.position = $1
+            select m.display_email_address
+              from tb_member m
+              join tb_officer o
+                on o.member = m.member
+              join tb_position p
+                on p.position = o.position
+             where p.position = ?position?
 SQL;
 
-        pg_prepare( '', $email_query );
-        $result = pg_execute( '', [ EQUIPMENT_MANAGER ] );
-        $row    = pg_fetch_array( $result );
-        return $row[0];
+        $params = [ 'position' => EQUIPMENT_MANAGER ];
+        $result = query_prepare_select( $email_query, $params );
+
+        if( is_resource( $result ) )
+        {
+            $row = query_fetch_one( $result );
+            return $row['display_email_address'];
+        }
+        else
+            return false;
     }
 ?>

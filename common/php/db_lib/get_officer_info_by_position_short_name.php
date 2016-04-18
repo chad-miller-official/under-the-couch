@@ -30,22 +30,23 @@
     function get_officer_info_by_position_short_name( $short_name )
     {
         $get_officer_info_query = <<<SQL
-            SELECT m.member							  AS member,
-                   m.first_name || ' ' || m.last_name AS officer_name,
-                   m.display_email_address            AS display_email_address,
-                   p.name                             AS position_name,
-                   p.short_name                       AS short_name
-              FROM tb_member m
-              JOIN tb_officer o
-                ON o.member = m.member
-              JOIN tb_position p
-                ON p.position = o.position
-             WHERE p.short_name = $1
+            select m.member,
+                   m.first_name || ' ' || m.last_name as officer_name,
+                   m.display_email_address,
+                   p.name as position_name,
+                   p.short_name as short_name
+              from tb_member m
+              join tb_officer o
+                on o.member = m.member
+              join tb_position p
+                on p.position = o.position
+             where p.short_name = ?short_name?
 SQL;
-        pg_prepare( '', $get_officer_info_query );
-        $result = pg_execute( '', [ $short_name ] );
 
-        // pg_fetch_all because there may be more than one officer per position
-        return $result ? pg_fetch_all( $result ) : false;
+        $params = [ 'short_name' => $short_name ];
+        $result = query_prepare_select( $get_officer_info_query, $params );
+
+        // query_fetch_all because there may be more than one officer per position
+        return is_resource( $result ) ? query_fetch_all( $result ) : false;
     }
 ?>
