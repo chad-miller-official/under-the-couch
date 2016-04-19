@@ -2,7 +2,7 @@
 	<h1>Under The Couch</h1>
 
 	<nav>
-		Welcome, <?= $GLOBALS['session_member']['name'] ?: 'guest' ?>!
+		Welcome, <?= $GLOBALS['session_member'] ? $GLOBALS['session_member']['name'] : 'guest' ?>!
 	</nav>
 	<br />
 

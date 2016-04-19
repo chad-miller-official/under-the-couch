@@ -3,7 +3,7 @@
 ?>
 
 <aside>
-	<? if( is_admin() ): ?>
+	<? if( is_logged_in() && is_admin() ): ?>
 		<center><b>Admin Control Panel</b></center>
 
 		<ul class="admin_sidebar">

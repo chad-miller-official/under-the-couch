@@ -29,6 +29,10 @@
         db_include( 'get_member' );
         $GLOBALS['session_member'] = get_member( $_SESSION['member_pk'] );
     }
+    else
+    {
+        $GLOBALS['session_member'] = [];
+    }
 
     // Finally load the requested page
     if( isset( $_REQUEST['file'] ) && file_exists( $_REQUEST['file'] ) )
