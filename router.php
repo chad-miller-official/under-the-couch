@@ -27,16 +27,7 @@
     if( is_logged_in() )
     {
         db_include( 'get_member' );
-
-        $GLOBALS['session_member']         = get_member( $_SESSION['member_pk'] );
-        $GLOBALS['session_member']['name'] = "{$session_member['first_name']} {$session_member['last_name']}";
-    }
-    else
-    {
-        $session_member = [
-            'name'     => 'guest',
-            'is_admin' => false
-        ];
+        $GLOBALS['session_member'] = get_member( $_SESSION['member_pk'] );
     }
 
     // Finally load the requested page

@@ -25,6 +25,7 @@
     {
         $get_member_query = <<<SQL
                select m.*,
+                      m.first_name || ' ' || m.last_name as name,
                       o.officer is not null as is_admin
                  from tb_member m
             left join tb_officer o

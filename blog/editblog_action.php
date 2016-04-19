@@ -9,11 +9,15 @@
 	}
 	else
 	{
-		$did_update = create_or_update_blog_post(
-			$_POST['title'],
-			$_POST['body'],
-			$_POST['postid']
-		);
+		$params = [
+			'title'     => $_POST['title'],
+			'body'      => $_POST['body'],
+			'editor'    => $GLOBALS['session_member']['member'],
+			'edited'    => 'now()'
+			'blog_post' => $_POST['postid']
+		];
+
+		$did_update = create_or_update_blog_post( $params );
 
 		if( !$did_update )
 		{

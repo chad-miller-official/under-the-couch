@@ -9,7 +9,13 @@
 	}
 	else
 	{
-		$posted = create_or_update_blog_post( $_POST['title'], $_POST['body'] );
+		$params = [
+			'title'  => $_POST['title'],
+			'body'   => $_POST['body'],
+			'author' => $GLOBALS['session_member']['member']
+		];
+
+		$posted = create_or_update_blog_post( $params );
 
 		if( $posted )
 		{

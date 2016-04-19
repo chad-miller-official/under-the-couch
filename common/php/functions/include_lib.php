@@ -52,6 +52,6 @@
      */
     function ui_insert( $ui_file )
     {
-        require( "{$GLOBALS['webroot']}/common/ui/$ui_file.php" );
+        require( "{$GLOBALS['webroot']}/ui/$ui_file.php" );
     }
 ?>
