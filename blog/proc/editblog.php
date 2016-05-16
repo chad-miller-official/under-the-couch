@@ -5,7 +5,7 @@
 	{
 		$edit     = isset( $_POST['postid'] ) ? 'edit' : '';
 		$message  = 'No changes made!';
-		$redirect = "{$edit}blog.php?id={$_POST['postid']}";
+		$redirect = "../{$edit}blog.php?id={$_POST['postid']}";
 	}
 	else
 	{
@@ -31,7 +31,7 @@
 			$edit     = '';
 		}
 
-		$redirect = "{$edit}blog.php?id={$_POST['postid']}";
+		$redirect = "../{$edit}blog.php?id={$_POST['postid']}";
 	}
 ?>
 
@@ -40,7 +40,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - Updating Post...</title>
-		<link rel="stylesheet" type="text/css" href="../styles.css" />
+		<link rel="stylesheet" type="text/css" href="/styles.css" />
 		<meta http-equiv="refresh" content="3;url=<?= $redirect ?>" />
 	</head>
 

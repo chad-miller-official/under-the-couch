@@ -25,7 +25,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - <?= $position_name ?></title>
-		<link rel="stylesheet" type="text/css" href="../styles.css" />
+		<link rel="stylesheet" type="text/css" href="/styles.css" />
 	</head>
 
 	<body>
@@ -40,7 +40,7 @@
                     <center>
 						<? if( $officers ): ?>
 							<? foreach( $officers as $officer ): ?>
-								<img src="pics/<?= "{$officer['short_name']}_{$officer['member']}" ?>.jpg" />
+								<img src="media/<?= "{$officer['short_name']}_{$officer['member']}" ?>.jpg" />
 								<br />
 								<b> <?= $officer['officer_name'] ?> </b>
 								<br />

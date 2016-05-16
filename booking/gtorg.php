@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Under the Couch - Booking</title>
-		<link rel="stylesheet" type="text/css" href="../styles.css">
+		<link rel="stylesheet" type="text/css" href="/styles.css">
 
 		<?
 			js_include(
@@ -32,7 +32,7 @@
 					<br />
 					Sound Engineer Rates: $10/hour per engineer
 					<br /><br />
-					<form method="post" id="bookingform" action="gtorg_action.php">
+					<form method="post" id="bookingform" action="proc/gtorg.php">
 						<fieldset>
 							<legend>Booking Form</legend>
 							<p>
@@ -88,7 +88,7 @@
 							Required fields are marked with "*".
 							<br />
 							<br />
-							<u><a href="useageaggrement.pdf">USAGE AGREEMENT</a></u>: What we expect from you:
+							<u><a href="usageaggrement.pdf">USAGE AGREEMENT</a></u>: What we expect from you:
 							<ul>
 								<li>
 									You must clean up after the event; this includes taking trash out to the dumpster (do not
@@ -115,17 +115,17 @@
 					<script>
 						$( "#bookingform" ).validate( {
 							rules : {
-								orgname : "required",
+								orgname     : "required",
 								contactname : "required",
-								email : {
+								email       : {
 									required : true,
 									email    : true
 								},
-								date : "required",
-								start : "required",
-								end : "required",
-								description: "required",
-								attendees: "required"
+								date        : "required",
+								start       : "required",
+								end         : "required",
+								description : "required",
+								attendees   : "required"
 							}
 						} );
 					</script>

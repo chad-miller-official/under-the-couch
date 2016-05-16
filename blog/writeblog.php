@@ -23,15 +23,20 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - Write Blog Post</title>
-		<link rel="stylesheet" type="text/css" href="../styles.css" />
+		<link rel="stylesheet" type="text/css" href="/styles.css" />
 
 		<? js_include( 'tinymce/tinymce.min' ); ?>
 
 		<script>
 			tinymce.init({
-				selector: 'textarea',
-				width: 600,
-				toolbar: 'undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | link image'
+				selector : 'textarea',
+				width    : 600,
+				toolbar  : 'undo redo '
+				         . '| styleselect '
+						 . '| bold italic underline strikethrough '
+						 . '| alignleft aligncenter alignright alignjustify '
+						 . '| bullist numlist '
+						 . '| link image'
 			});
 		</script>
 	</head>
@@ -39,7 +44,7 @@
 	<body>
 		<? ui_insert( 'header' ); ?>
 
-		<form method="post" action="writeblog_action.php">
+		<form method="post" action="proc/writeblog.php">
 			<fieldset>
 				<legend>Write Blog Post</legend>
 				<p>

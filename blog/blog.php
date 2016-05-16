@@ -9,7 +9,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - Blog Post #<?= $_GET['id'] ?></title>
-		<link rel="stylesheet" type="text/css" href="../styles.css" />
+		<link rel="stylesheet" type="text/css" href="/styles.css" />
 	</head>
 
 	<body>

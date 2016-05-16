@@ -4,7 +4,7 @@
 	if( !isset( $_POST['password'] ) || !isset( $_POST['email'] ) )
 	{
 		$display_message = 'No email address or password provided!';
-		$redirect = 'login.php';
+		$redirect = '/login.php';
 	}
 	else
 	{
@@ -18,18 +18,18 @@
 			if( $status )
 			{
 				$display_message = 'Successfully logged in!';
-				$redirect        = 'index.php';
+				$redirect        = '/index.php';
 			}
 			else
 			{
 				$display_message = 'You are already logged in!';
-				$redirect        = 'index.php';
+				$redirect        = '/index.php';
 			}
 		}
 		else
 		{
 			$display_message = 'Incorrect email or password provided!';
-			$redirect        = 'login.php';
+			$redirect        = '../login.php';
 		}
 	}
 ?>
@@ -40,7 +40,7 @@
 		<meta charset="utf-8" />
 		<title>Under the Couch - Logging In...</title>
 		<meta http-equiv="refresh" content="3;url=<?= $redirect ?>" />
-		<link rel="stylesheet" type="text/css" href="styles.css" />
+		<link rel="stylesheet" type="text/css" href="/styles.css" />
 	</head>
 
 	<body>

@@ -18,8 +18,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - Deleting post...</title>
-		<meta http-equiv="refresh" content="3;url=../index.php" />
-		<link rel="stylesheet" type="text/css" href="../styles.css" />
+		<meta http-equiv="refresh" content="3;url=/index.php" />
+		<link rel="stylesheet" type="text/css" href="/styles.css" />
 	</head>
 
 	<body>

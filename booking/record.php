@@ -9,7 +9,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - Recording</title>
-		<link rel="stylesheet" type="text/css" href="../styles.css" />
+		<link rel="stylesheet" type="text/css" href="/styles.css" />
 
 		<?
 			js_include(
@@ -37,7 +37,7 @@
 						<li>+ Sound engineer rate ($10/hr minimum)</li>
 						<li>[+ An assistant engineer will also be required for large tracking sessions]</li>
 					</ul>
-					<form method="post" id="recordingform" action="record_action.php">
+					<form method="post" id="recordingform" action="proc/record.php">
 						<fieldset>
 							<legend>Recording Form</legend>
 							<p>
@@ -75,11 +75,11 @@
 						$( "#recordingform" ).validate( {
 							rules : {
 								contactname : "required",
-								email : {
+								email       : {
 									required : true,
 									email    : true
 								},
-								date : "required"
+								date        : "required"
 							}
 						} );
 					</script>

@@ -47,7 +47,7 @@ HTML;
 	{
 		$message1 = 'Booking request not sent!';
 		$message2 = 'Returning to form page...';
-		$redirect = 'gtorg.php';
+		$redirect = '../gtorg.php';
 	}
 ?>
 
@@ -56,7 +56,7 @@ HTML;
 <head>
 	<meta charset="utf-8" />
 	<title>Under the Couch - Submitting Booking Form...</title>
-	<link rel="stylesheet" type="text/css" href="../styles.css" />
+	<link rel="stylesheet" type="text/css" href="/styles.css" />
 	<meta http-equiv="refresh" content="3;url=<?= $redirect ?>" />
 </head>
 

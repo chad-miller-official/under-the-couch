@@ -1,4 +1,4 @@
-create or replace function fn_insert_or_update_row
+create or replace function fn_select_or_insert_row
 (
     in_table            text,
     in_col_values       json,
@@ -31,26 +31,8 @@ begin
     execute my_select
        into my_pk_val;
 
-    -- If a row with those values already exists, then update it using what we passed in
-    if my_pk_val is not null then
-        my_query := 'UPDATE ' || in_table || ' SET ';
-
-        for my_col, my_val in
-            select *
-              from json_each_text( in_col_values )
-        loop
-            my_query := my_query || my_col || ' = ' || quote_literal( my_val ) || ', ';
-        end loop;
-
-        select trim( trailing ', ' from my_query )
-          into my_query;
-
-        my_query := my_query || ' WHERE ' || my_pk_col || ' = ' || quote_literal( my_pk_val );
-        execute my_query;
-
-        -- And return the PK of the row we updated
-        return my_pk_val;
-    else -- Otherwise, insert a new row entirely
+    -- If a row with those values does not exist, then create it
+    if my_pk_val is null then
         my_query  := 'INSERT INTO ' || in_table || ' ( ';
         my_values := 'VALUES ( ';
 
@@ -68,18 +50,14 @@ begin
         select trim( trailing ', ' from my_values )
           into my_values;
 
-        my_query := my_query || ' ) ' || my_values || ' )';
-        execute my_query;
+        my_query := my_query || ' ) ' || my_values || ' ) returning ' || my_pk_col;
 
-        -- And return the PK of the row we just inserted.
-        -- For all intents and purposes, this is the maximum PK
-        -- value in the table immediately after insertion.
-        my_query := 'SELECT max( ' || my_pk_col || ' ) FROM ' || in_table;
         execute my_query
            into my_pk_val;
-
-        return my_pk_val;
     end if;
+
+    -- Return the PK of what we just selected/inserted
+    return my_pk_val;
 end;
  $_$
 

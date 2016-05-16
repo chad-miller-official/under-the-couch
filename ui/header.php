@@ -53,9 +53,9 @@
 			</li>
 
 			<? if( !is_logged_in() ): ?>
-				<li><a href="/login.php">Login</a></li>
+				<li><a href="/user/login.php">Login</a></li>
 			<? else: ?>
-				<li><a href="/logout.php">Logout</a></li>
+				<li><a href="/user/logout.php">Logout</a></li>
 			<? endif; ?>
 
 		</ul>

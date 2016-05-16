@@ -20,7 +20,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Under the Couch</title>
-        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <link rel="stylesheet" type="text/css" href="/styles.css" />
     </head>
 
     <body>
@@ -41,15 +41,15 @@
                             $curr_max = $blog_post['blog_post'];
                 ?>
                             <article>
-                                <h3><a href="blog/blog.php?id=<?= $blog_post['blog_post']?>"> <?= $blog_post['title'] ?> </a></h3>
+                                <h3><a href="/blog/blog.php?id=<?= $blog_post['blog_post']?>"> <?= $blog_post['title'] ?> </a></h3>
                                 Author: <?= $blog_post['author'] ?> (<?= $blog_post['position'] ?>)
                                 <br />
                                 Posted: <?= $blog_post['created'] ?>
                                 <br />
 
                                 <? if( is_admin() ): ?>
-                                    <a href="blog/deleteblog.php?id=<?= $blog_post['blog_post']?>">[Delete]</a>
-                                    <a href="blog/editblog.php?id=<?= $blog_post['blog_post']?>">[Edit]</a>
+                                    <a href="/blog/deleteblog.php?id=<?= $blog_post['blog_post']?>">[Delete]</a>
+                                    <a href="/blog/editblog.php?id=<?= $blog_post['blog_post']?>">[Edit]</a>
                                 <? endif; ?>
 
                                 <hr />
@@ -78,13 +78,13 @@
             <div class="pagenav">
                 <div class="prev">
                     <? if( $curr_min > $all_min ): ?>
-                        <a href="index.php?page=<?= $prev ?>"><< Previous Page</a>
+                        <a href="/index.php?page=<?= $prev ?>"><< Previous Page</a>
                     <? endif; ?>
                 </div>
 
                 <div class="next">
                     <? if( $curr_max < $all_max ): ?>
-                        <a href="index.php?page=<?= $next ?>">Next Page >></a>
+                        <a href="/index.php?page=<?= $next ?>">Next Page >></a>
                     <? endif; ?>
                 </div>
 

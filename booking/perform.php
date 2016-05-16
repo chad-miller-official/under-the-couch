@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - Performing</title>
-		<link rel="stylesheet" type="text/css" href="../styles.css" />
+		<link rel="stylesheet" type="text/css" href="/styles.css" />
 
 		<?
 			js_include(
@@ -24,7 +24,7 @@
 					Bands and promoters should fill out the form below to book the venue. We will read every email, but if we do
 					not respond to you, that means we cannot fit you into our schedule at the present time.
 					<br /><br />
-					<form method="post" id="bookingform" action="perform_action.php">
+					<form method="post" id="bookingform" action="proc/perform.php">
 						<fieldset>
 							<legend>Booking Form</legend>
 							<p>
@@ -73,14 +73,14 @@
 					<br />
 					<script>
 						$( "#bookingform" ).validate( {
-							rules : {
+							rules           : {
 								contactname : "required",
-								email : {
+								email       : {
 									required : true,
 									email    : true
 								},
-								bandname : "required",
-								date : "required"
+								bandname    : "required",
+								date        : "required"
 							}
 						} );
 					</script>

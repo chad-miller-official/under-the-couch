@@ -14,10 +14,10 @@
     {
         $param_json = json_encode( $param_map );
         $query      = <<<SQL
-            select fn_create_or_update_row
+            select fn_insert_or_update_row
                    (
                      ?table?,
-                     ?param_json,
+                     ?param_json?,
                      array[ ?pk_column? ]
                    ) as blog_post
 SQL;

@@ -4,7 +4,7 @@
 	if( !isset( $_POST['email'] ) || !isset( $_POST['password'] ) )
 	{
 		$display_message = 'No email address or password provided!';
-		$redirect = 'accountform.php';
+		$redirect        = '../accountform.php';
 	}
 	else
 	{
@@ -15,12 +15,12 @@
 			login( $member_pk );
 
 			$display_message = 'Successfully created account! You are now logged in.';
-			$redirect        = 'index.php';
+			$redirect        = '/index.php';
 		}
 		else
 		{
 			$display_message = "An account with the specified email - <b>{$_POST['email']}</b> - already exists!";
-			$redirect        = 'accountform.php';
+			$redirect        = '../accountform.php';
 		}
 	}
 ?>
@@ -31,7 +31,7 @@
 		<meta charset="utf-8" />
 		<title>Under the Couch - Creating Account...</title>
 		<meta http-equiv="refresh" content="3;url=<?= $redirect ?>" />
-		<link rel="stylesheet" type="text/css" href="styles.css" />
+		<link rel="stylesheet" type="text/css" href="/styles.css" />
 	</head>
 
 	<body>

@@ -37,16 +37,21 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - Edit Blog Post</title>
-		<link rel="stylesheet" type="text/css" href="../styles.css" />
+		<link rel="stylesheet" type="text/css" href="/styles.css" />
 
 		<? js_include( 'tinymce/tinymce.min' ); ?>
 
 		<? if( !isset( $message ) ): ?>
 			<script>
 				tinymce.init( {
-					selector: 'textarea',
-					width: 600,
-					toolbar: 'undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | link image'
+					selector : 'textarea',
+					width    : 600,
+					toolbar  : 'undo redo '
+					         . '| styleselect '
+							 . '| bold italic underline strikethrough '
+							 . '| alignleft aligncenter alignright alignjustify '
+							 . '| bullist numlist '
+							 . '| link image'
 				} );
 			</script>
 		<? else: ?>
@@ -57,7 +62,7 @@
 	<body>
 		<? ui_insert( 'header' ); ?>
 
-		<form method="post" action="editblog_action.php">
+		<form method="post" action="proc/editblog.php">
 			<fieldset>
 				<legend>Edit Blog Post</legend>
 				<p>
