@@ -1,22 +1,32 @@
 <?
     // SQL constants
-    define( 'PSQL_HOST', 'localhost' );
-    define( 'PSQL_PORT', '5432' );
-    define( 'PSQL_DB'  , 'gtmnorg_mnclub' );
-    define( 'PSQL_USER', 'gtmnorg' );
-
-    define( 'PSQL_CONNECT_STRING',
-            ' host='   . PSQL_HOST
-          . ' port='   . PSQL_PORT
-          . ' dbname=' . PSQL_DB
-          . ' user='   . PSQL_USER );
+    define( 'PSQL_HOST',           'localhost' );
+    define( 'PSQL_PORT',           '5432'      );
+    define( 'PSQL_DB'  ,           'gtmn'      );
+    define( 'PSQL_USER',           'gtmn'      );
+    define( 'PSQL_CONNECT_STRING', 'host='   . PSQL_HOST
+                                 . ' port='   . PSQL_PORT
+                                 . ' dbname=' . PSQL_DB
+                                 . ' user='   . PSQL_USER );
 
     // Primary keys
-    define( 'EQUIPMENT_MANAGER', 9 );
+    define( 'ROLE_MEMBER',                 1  );
+    define( 'ROLE_IT_OFFICER',             2  );
+    define( 'ROLE_PRESIDENT',              3  );
+    define( 'ROLE_VICE_PRESIDENT',         4  );
+    define( 'ROLE_TREASURER',              5  );
+    define( 'ROLE_SECRETARY',              6  );
+    define( 'ROLE_MINISTER_OF_PROPAGANDA', 7  );
+    define( 'ROLE_ADVERTISING_OFFICER',    8  );
+    define( 'ROLE_BOOKING_AGENT',          9  );
+    define( 'ROLE_OPEN_MIC_OFFICER',       10 );
+    define( 'ROLE_GENERAL_MANAGER',        11 );
+    define( 'ROLE_EQUIPMENT_MANAGER',      12 );
+    define( 'ROLE_SOCIAL_CHAIR',           13 );
 
     // URL constants
     define( 'URL_ICAL_BOOKING', 'http://www.google.com/calendar/ical/kcbafbo67qe33jpj8s10b1ltk0@group.calendar.google.com/public/basic.ics');
-    define( 'URL_CALENDAR'    , 'https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTz=0&amp;height=600&amp;'
+    define( 'URL_CALENDAR',     'https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTz=0&amp;height=600&amp;'
                               . 'wkst=1&amp;bgcolor=%23FFFFFF&amp;src=c15nvehc365iejl19oedqf59ao%40group.calendar.google.com&amp;'
                               . 'color=%236B3304&amp;src=blq0j50tj034hu67u4gdltn8lc%40group.calendar.google.com&amp;color=%232952A3&amp;'
                               . 'src=2cn9iaf49hbdnbaddsect2rmks%40group.calendar.google.com&amp;color=%238C500B&amp;'
@@ -30,5 +40,5 @@
 
     //Email constants
     define( 'EMAIL_WEBMASTER', 'webmaster@gtmn.org' );
-    define( 'EMAIL_BOOKING'  , 'utcbooking@gmail.com' );
+    define( 'EMAIL_BOOKING',   'utcbooking@gmail.com' );
 ?>

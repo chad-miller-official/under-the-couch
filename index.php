@@ -42,7 +42,7 @@
                 ?>
                             <article>
                                 <h3><a href="/blog/blog.php?id=<?= $blog_post['blog_post']?>"> <?= $blog_post['title'] ?> </a></h3>
-                                Author: <?= $blog_post['author'] ?> (<?= $blog_post['position'] ?>)
+                                Author: <?= $blog_post['author'] ?> (<?= $blog_post['role'] ?>)
                                 <br />
                                 Posted: <?= $blog_post['created'] ?>
                                 <br />
@@ -57,7 +57,7 @@
                                 <?= $blog_post['body'] ?>
 
                                 <? if( $blog_post['editor'] != NULL ): ?>
-                                    <i>Last edited by: <?= "{$blog_post['editor']} ({$blog_post['editor_position']}) at {$blog_post['edited']}" ?></i>
+                                    <i>Last edited by: <?= "{$blog_post['editor']} ({$blog_post['editor_role']}) at {$blog_post['edited']}" ?></i>
                                     <br />
                                 <? endif; ?>
                             </article>

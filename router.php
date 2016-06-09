@@ -5,11 +5,12 @@
      */
 
     // Require the necessary includes
-    // Note that constants, include_lib, and session_lib are implicitly included in every PHP file
+    // Note that constants, include_lib, db_lib, and session_lib are implicitly included in every PHP file
     require_once( 'common/php/constants.php' );
-    require_once( 'common/php/functions/db_lib.php' );
-    require_once( 'common/php/functions/include_lib.php' );
-    require_once( 'common/php/functions/session_lib.php' );
+    require_once( 'common/php/include.php' );
+
+    lib_include( 'db_lib' );
+    lib_include( 'session_lib' );
 
     // Set the webroot
     if( isset( $_SERVER['CONTEXT_DOCUMENT_ROOT'] ) && $_SERVER['CONTEXT_DOCUMENT_ROOT'] )

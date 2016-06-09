@@ -32,7 +32,7 @@
 			<?= $blog_post['body'] ?>
 
 			<? if( $blog_post['editor'] != NULL ): ?>
-				<i>Last edited by: <?= "{$blog_post['editor']} ({$blog_post['editor_position']}) at {$blog_post['edited']}" ?></i>
+				<i>Last edited by: <?= "{$blog_post['editor']} ({$blog_post['editor_role']}) at {$blog_post['edited']}" ?></i>
 				<br />
 			<? endif; ?>
 		</article>

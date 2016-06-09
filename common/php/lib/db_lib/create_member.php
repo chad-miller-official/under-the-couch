@@ -19,8 +19,6 @@
         // Check to see if the member exists
         if( !get_member_by_gatech_email( $gatech_email ) )
         {
-            $password_hash = hash( 'sha512', $password );
-
             $insert_member = <<<SQL
                 INSERT INTO tb_member
                             (
@@ -34,7 +32,7 @@
                               ?first_name?,
                               ?last_name?,
                               ?gatech_email?,
-                              ?password_hash?
+                              crypt( ?password?, gen_salt( 'bf' ) )
                             )
 SQL;
 
@@ -42,7 +40,7 @@ SQL;
                 'first_name'    => $first_name,
                 'last_name'     => $last_name,
                 'gatech_email'  => $gatech_email,
-                'password_hash' => $password_hash
+                'password' => $password
             ];
 
             $insert = query_insert( $insert_member, $params );

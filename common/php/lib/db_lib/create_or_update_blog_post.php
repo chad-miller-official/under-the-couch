@@ -12,19 +12,19 @@
      */
     function create_or_update_blog_post( $param_map )
     {
-        $param_json = json_encode( $param_map );
-        $query      = <<<SQL
+        $query = <<<SQL
             select fn_insert_or_update_row
                    (
                      ?table?,
-                     ?param_json?,
+                     ?param_json?::json,
                      array[ ?pk_column? ]
                    ) as blog_post
 SQL;
 
-        params = [
+        $param_json = json_encode( $param_map );
+        $params     = [
             'table'      => 'tb_blog_post',
-            'param_json' => "'$param_json'::json",
+            'param_json' => $param_json,
             'pk_column'  => 'blog_post'
         ];
 

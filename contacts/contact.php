@@ -1,15 +1,15 @@
 <?
 	db_include(
-		'get_officer_info_by_position_short_name',
-		'get_position_by_short_name'
+        'get_role_by_abbreviation',
+		'get_officer_info'
 	);
 
-	$position = get_position_by_short_name( $_GET['name'] );
+	$position = get_role_by_abbreviation( $_GET['name'] );
 
 	if( $position )
 	{
 		$position_name        = $position['name'];
-		$position_description = $position['description'];
+		$position_description = $position['description_html'];
 	}
 	else
 	{
@@ -17,7 +17,7 @@
 		$position_description = 'Officer position not found!';
 	}
 
-	$officers = get_officer_info_by_position_short_name( $_GET['name'] );
+	$officers = get_officer_info( $position['role'] );
 ?>
 
 <!doctype html>
@@ -40,7 +40,7 @@
                     <center>
 						<? if( $officers ): ?>
 							<? foreach( $officers as $officer ): ?>
-								<img src="media/<?= "{$officer['short_name']}_{$officer['member']}" ?>.jpg" />
+								<img src="media/<?= "{$position['abbreviation']}_{$officer['member']}" ?>.jpg" />
 								<br />
 								<b> <?= $officer['officer_name'] ?> </b>
 								<br />

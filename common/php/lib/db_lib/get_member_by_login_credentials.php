@@ -23,20 +23,23 @@
      *   <<the user as a hash>> if retrieval was successful;
      *   <<false>> otherwise.
      */
-    function get_member_by_login_credentials( $gatech_email, $password_hash )
+    function get_member_by_login_credentials( $gatech_email, $password )
     {
         $get_member_query = <<<SQL
-                 select m.member
-                   from tb_member m
-              left join tb_officer o
-                     on m.member = o.member
-                  where m.gatech_email_address = ?gatech_email?
-                    and m.password_hash        = ?password_hash?
+            select m.*,
+                   r.is_admin
+              from tb_member m
+              join tb_member_role mr
+                on m.member = mr.member
+              join tb_role r
+                on mr.role = r.role
+             where m.gatech_email_address = ?gatech_email?
+               and m.password_hash        = crypt( ?password?, gen_salt( 'bf' ) )
 SQL;
 
         $params = [
-            'gatech_email'  => $gatech_email,
-            'password_hash' => $password_hash
+            'gatech_email' => $gatech_email,
+            'password'     => $password
         ];
 
         $result = query_prepare_select( $get_member_query, $params );

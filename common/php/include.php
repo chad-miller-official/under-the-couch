@@ -4,7 +4,7 @@
         $args = func_get_args();
 
         foreach( $args as $arg )
-            require_once( "{$GLOBALS['webroot']}/common/php/functions/$arg.php" );
+            require_once( "{$GLOBALS['webroot']}/common/php/lib/$arg.php" );
     }
 
     /*
@@ -21,7 +21,7 @@
         $args = func_get_args();
 
         foreach( $args as $arg )
-            require_once( "{$GLOBALS['webroot']}/common/php/db_lib/$arg.php" );
+            require_once( "{$GLOBALS['webroot']}/common/php/lib/db_lib/$arg.php" );
 	}
 
     /*

@@ -8,8 +8,7 @@
 	}
 	else
 	{
-		$password_hash = hash( 'sha512', $_POST['password'] );
-		$member        = get_member_by_login_credentials( $_POST['email'], $password_hash );
+		$member = get_member_by_login_credentials( $_POST['email'], $_POST['password'] );
 
 		if( $member )
 		{

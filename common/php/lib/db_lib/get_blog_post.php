@@ -23,38 +23,29 @@
     function get_blog_post( $blog_post )
     {
         $get_blog_post_query = <<<SQL
-                select bp.blog_post,
-                       bp.title,
-                       bp.body,
-                       to_char( bp.created, 'Day, Month DD, YYYY HH:MI:SS AM' ) as created,
-                       m.first_name || ' ' || m.last_name as author,
-                       p.name as position,
-                       case when bp.editor is not null
-                            then e.first_name || ' ' || e.last_name
-                            else null
-                       end as editor,
-                       case when bp.editor is not null
-                            then to_char( bp.edited, 'Day, Month DD, YYYY HH:MI:SS AM' )
-                            else null
-                       end as edited,
-                       case when bp.editor is not null
-                            then pe.name
-                            else null
-                       end as editor_position
-                  from tb_blog_post bp
-            inner join tb_member m
-                    on bp.author = m.member
-             left join tb_officer o
-                    on o.member = m.member
-             left join tb_position p
-                    on o.position = p.position
-             left join tb_member e
-                    on bp.editor = e.member
-             left join tb_officer oe
-                    on oe.member = e.member
-             left join tb_position pe
-                    on oe.position = pe.position
-                 where bp.blog_post = ?blog_post?
+               select bp.blog_post,
+                      bp.title,
+                      bp.body,
+                      to_char( bp.created, 'Day, Month DD, YYYY HH:MI:SS AM' ) as created,
+                      m.first_name || ' ' || m.last_name                       as author,
+                      r.name                                                   as role,
+                      me.first_name || ' ' || me.last_name                     as editor,
+                      to_char( bp.edited, 'Day, Month DD, YYYY HH:MI:SS AM' )  as edited,
+                      mre.name                                                 as editor_role
+                 from tb_blog_post bp
+                 join tb_member m
+                   on bp.creator = m.member
+                 join tb_member_role mr
+                   on m.member = mr.member
+                 join tb_role r
+                   on mr.role = r.role
+            left join tb_member me
+                   on bp.editor = me.member
+            left join tb_member_role mre
+                   on me.member = mre.member
+            left join tb_role re
+                   on mre.role = re.role
+                where bp.blog_post = ?blog_post?
 SQL;
 
         $params = [ 'blog_post' => $blog_post ];

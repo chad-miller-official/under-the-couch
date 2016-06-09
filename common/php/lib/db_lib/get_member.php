@@ -13,6 +13,8 @@
      *   paid_practice_date    : string  - the date the user paid practice fees (may be NULL).
      *   locker_months         : integer - the number of months the user has their locker for (may be NULL).
      *   locker_number         : integer - the locker the user has (may be NULL).
+     *   name                  : string  - the member's first name, a space, and first name,
+     *                                   concatenated in that order.
      *   is_admin              : boolean - true if the user is an officer; false otherwise.
      *
      * Params:
@@ -26,10 +28,12 @@
         $get_member_query = <<<SQL
                select m.*,
                       m.first_name || ' ' || m.last_name as name,
-                      o.officer is not null as is_admin
+                      r.is_admin
                  from tb_member m
-            left join tb_officer o
-                   on m.member = o.member
+                 join tb_member_role mr
+                   on m.member = mr.member
+                 join tb_role r
+                   on mr.role = r.role
                 where m.member = ?member?
 SQL;
 

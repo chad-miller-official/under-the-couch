@@ -13,7 +13,7 @@
      *   paid_practice_date    : string  - the date the user paid practice fees (may be NULL).
      *   locker_months         : integer - the number of months the user has their locker for (may be NULL).
      *   locker_number         : integer - the locker the user has (may be NULL).
-     *   is_admin              : boolean - true if the user is an officer; false otherwise.
+     *   is_admin              : boolean - true if the user has an admin role; false otherwise.
      *
      * Params:
      *   $gatech_email : string - the @gatech.edu email address of the member to be retrieved.
@@ -24,12 +24,14 @@
     function get_member_by_gatech_email( $gatech_email )
     {
         $get_member_query = <<<SQL
-               select m.*,
-                      o.officer is not null as is_admin
-                 from tb_member m
-            left join tb_officer o
-                   on m.member = o.member
-                where m.gatech_email_address = ?gatech_email?
+            select m.*,
+                   r.is_admin
+              from tb_member m
+              join tb_member_role mr
+                on m.member = mr.member
+              join tb_role r
+                on mr.role = r.role
+             where m.gatech_email_address = ?gatech_email?
 SQL;
 
         $params = [ 'gatech_email' => $gatech_email ];
