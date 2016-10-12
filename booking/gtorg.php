@@ -32,7 +32,7 @@
 					<br />
 					Sound Engineer Rates: $10/hour per engineer
 					<br /><br />
-					<form method="post" id="bookingform" action="proc/gtorg.php">
+					<form method="post" id="bookingform" action="/booking/proc/gtorg.php">
 						<fieldset>
 							<legend>Booking Form</legend>
 							<p>

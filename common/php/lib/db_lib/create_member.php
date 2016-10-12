@@ -8,52 +8,73 @@
      *   $last_name    : string - the new member's last name
      *   $password     : string - the new member's password
      * Returns:
-     *   <<0>> if a member with the specified email address already exists;
      *   <<the newly-inserted member's integer PK>> if insertion was successful;
      *   <<false>> otherwise.
      */
     function create_member( $gatech_email, $first_name, $last_name, $password )
     {
-        db_include( 'get_member_by_gatech_email' );
+        $insert_member = <<<SQL
+insert into tb_member
+            (
+              first_name,
+              last_name,
+              gatech_email_address,
+              display_email_address,
+              password_hash
+            )
+     values (
+              ?first_name?,
+              ?last_name?,
+              ?gatech_email?,
+              ?gatech_email?,
+              crypt( ?password?, gen_salt( 'bf' ) )
+            )
+  returning member
+SQL;
 
-        // Check to see if the member exists
-        if( !get_member_by_gatech_email( $gatech_email ) )
+        $params = [
+            'first_name'    => $first_name,
+            'last_name'     => $last_name,
+            'gatech_email'  => $gatech_email,
+            'password'      => $password
+        ];
+
+        begin_transaction();
+
+        $insert = query_execute( $insert_member, $params );
+
+        if( query_success( $insert ) )
         {
-            $insert_member = <<<SQL
-                INSERT INTO tb_member
-                            (
-                              first_name,
-                              last_name,
-                              gatech_email_address,
-                              display_email_address,
-                              password_hash
-                            )
-                     VALUES (
-                              ?first_name?,
-                              ?last_name?,
-                              ?gatech_email?,
-                              crypt( ?password?, gen_salt( 'bf' ) )
-                            )
+            $member_created = query_fetch_one( $insert );
+            $member_pk      = $member_created['member'];
+
+            $insert_role = <<<SQL
+insert into tb_member_role
+            (
+              member,
+              role
+            )
+     values (
+              ?member?,
+              ?role?
+            )
 SQL;
 
             $params = [
-                'first_name'    => $first_name,
-                'last_name'     => $last_name,
-                'gatech_email'  => $gatech_email,
-                'password' => $password
+                'member' => $member_pk,
+                'role'   => ROLE_MEMBER
             ];
 
-            $insert = query_insert( $insert_member, $params );
+            $result = query_execute( $insert_role, $params );
 
-            if( is_int( $insert ) && $insert > 0 )
+            if( query_success( $result ) )
             {
-                $retval = get_member_by_gatech_email( $gatech_email );
-                return $retval['member'];
+                commit_transaction();
+                return $member_pk;
             }
-            else
-                return false;
         }
-        else
-            return 0;
+
+        rollback_transaction();
+        return false;
     }
 ?>

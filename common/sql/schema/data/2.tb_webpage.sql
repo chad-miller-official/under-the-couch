@@ -11,11 +11,17 @@ blog/editblog.php,false
 blog/writeblog.php,false
 blog/blog.php,true
 booking/%,true
+common/%,false
 contacts/%,true
 fonts/%,false
 info/%,true
 media/%,true
+ui/footer.php,true
+ui/header.php,true
+ui/sidebar.php,true
+ui/sidebar_admin.php,false
 user/%,true
+404.php,true
 calendar.php,true
 index.php,true
 router.php,true
@@ -28,8 +34,7 @@ insert into tb_webpage
 )
    select base_uri_glob,
           access_allowed_by_default
-     from tt_webpage
-returning webpage;
+     from tt_webpage;
 
 insert into tb_role_webpage
 (
@@ -48,5 +53,4 @@ insert into tb_role_webpage
                      true
                 from tb_webpage
                where access_allowed_by_default is false
-            ) w
-  returning role_webpage;
+            ) w;

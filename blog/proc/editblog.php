@@ -5,14 +5,14 @@
 	{
 		$edit     = isset( $_POST['postid'] ) ? 'edit' : '';
 		$message  = 'No changes made!';
-		$redirect = "../{$edit}blog.php?id={$_POST['postid']}";
+		$redirect = "/blog/{$edit}blog.php?id={$_POST['postid']}";
 	}
 	else
 	{
 		$params = [
 			'title'     => $_POST['title'],
 			'body'      => $_POST['body'],
-			'editor'    => $GLOBALS['session_member']['member'],
+			'editor'    => SessionLib::get( 'user_member.member' ),
 			'edited'    => 'now()'
 			'blog_post' => $_POST['postid']
 		];
@@ -31,7 +31,7 @@
 			$edit     = '';
 		}
 
-		$redirect = "../{$edit}blog.php?id={$_POST['postid']}";
+		$redirect = "/blog/{$edit}blog.php?id={$_POST['postid']}";
 	}
 ?>
 

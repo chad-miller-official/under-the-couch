@@ -26,15 +26,15 @@
     function get_member_by_login_credentials( $gatech_email, $password )
     {
         $get_member_query = <<<SQL
-            select m.*,
-                   r.is_admin
-              from tb_member m
-              join tb_member_role mr
-                on m.member = mr.member
-              join tb_role r
-                on mr.role = r.role
-             where m.gatech_email_address = ?gatech_email?
-               and m.password_hash        = crypt( ?password?, gen_salt( 'bf' ) )
+select m.*,
+       r.is_admin
+  from tb_member m
+  join tb_member_role mr
+    on m.member = mr.member
+  join tb_role r
+    on mr.role = r.role
+ where m.gatech_email_address = ?gatech_email?
+   and m.password_hash        = crypt( ?password?, m.password_hash )
 SQL;
 
         $params = [
@@ -42,7 +42,7 @@ SQL;
             'password'     => $password
         ];
 
-        $result = query_prepare_select( $get_member_query, $params );
-        return is_resource( $result ) ? query_fetch_one( $result ) : false;
+        $result = query_execute( $get_member_query, $params );
+        return query_success( $result ) ? query_fetch_one( $result ) : false;
     }
 ?>

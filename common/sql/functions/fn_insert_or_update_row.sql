@@ -57,7 +57,7 @@ begin
               from json_each_text( in_col_values )
         loop
             my_query  := my_query || my_col || ', ';
-            my_values := my_values || quote_literal( my_val ) || ', ';
+            my_values := my_values || coalesce( quote_literal( my_val ), 'null' ) || ', ';
         end loop;
 
         select trim( trailing ', ' from my_query )
@@ -74,7 +74,6 @@ begin
 
     -- Return the PK of what we just inserted/updated
     return my_pk_val;
-end;
+end
  $_$
-
 language plpgsql;

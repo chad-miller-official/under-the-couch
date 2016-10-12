@@ -37,7 +37,7 @@ HTML;
 	{
 		$message1 = 'Recording request not sent!';
 		$message2 = 'Redirecting to form page...';
-		$redirect = '../record.php';
+		$redirect = '/booking/record.php';
 	}
 ?>
 

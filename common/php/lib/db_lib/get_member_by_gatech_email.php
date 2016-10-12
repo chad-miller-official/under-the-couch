@@ -24,19 +24,19 @@
     function get_member_by_gatech_email( $gatech_email )
     {
         $get_member_query = <<<SQL
-            select m.*,
-                   r.is_admin
-              from tb_member m
-              join tb_member_role mr
-                on m.member = mr.member
-              join tb_role r
-                on mr.role = r.role
-             where m.gatech_email_address = ?gatech_email?
+select m.*,
+       r.is_admin
+  from tb_member m
+  join tb_member_role mr
+    on m.member = mr.member
+  join tb_role r
+    on mr.role = r.role
+ where m.gatech_email_address = ?gatech_email?
 SQL;
 
         $params = [ 'gatech_email' => $gatech_email ];
-        $result = query_prepare_select( $get_member_query, $params );
+        $result = query_execute( $get_member_query, $params );
 
-        return is_resource( $result ) ? query_fetch_one( $result ) : false;
+        return query_success( $result ) ? query_fetch_one( $result ) : false;
     }
 ?>

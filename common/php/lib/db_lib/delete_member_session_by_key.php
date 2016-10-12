@@ -1,21 +1,21 @@
 <?
     /*
-     * Deletes a blog post from the database.
+     * Deletes a member session from the database by its key.
      *
      * Params:
-     *   $blog_post : integer - the PK of the blog post to delete.
+     *   $key : integer - the key of the member_session to delete.
      * Returns:
      *   <<true>> if deletion was successful;
      *   <<false>> otherwise.
      */
-    function delete_blog_post( $blog_post )
+    function delete_member_session_by_key( $key )
     {
         $delete_blog_post_query = <<<SQL
-delete from tb_blog_post
-      where blog_post = ?blog_post?
+delete from tb_member_session
+      where key = ?key?
 SQL;
 
-        $params = [ 'blog_post' => $blog_post ];
+        $params = [ 'key' => $key ];
         $delete = query_execute( $delete_blog_post_query, $params );
 
         return query_success( $delete );

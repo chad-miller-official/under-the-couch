@@ -4,7 +4,7 @@
     define( 'PSQL_PORT',           '5432'      );
     define( 'PSQL_DB'  ,           'gtmn'      );
     define( 'PSQL_USER',           'gtmn'      );
-    define( 'PSQL_CONNECT_STRING', 'host='   . PSQL_HOST
+    define( 'PSQL_CONNECT_STRING', ' host='   . PSQL_HOST
                                  . ' port='   . PSQL_PORT
                                  . ' dbname=' . PSQL_DB
                                  . ' user='   . PSQL_USER );
@@ -38,7 +38,11 @@
                               . 'src=qcolb7go6s8oouldedrpa45d48%40group.calendar.google.com&amp;color=%235229A3&amp;'
                               . 'ctz=America%2FNew_York' );
 
-    //Email constants
+    // Email constants
     define( 'EMAIL_WEBMASTER', 'webmaster@gtmn.org' );
     define( 'EMAIL_BOOKING',   'utcbooking@gmail.com' );
+
+    // Globals
+    define( 'WEBROOT',   'webroot'   );
+    define( 'DB_HANDLE', 'db_handle' );
 ?>

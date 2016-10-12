@@ -62,7 +62,7 @@
 	<body>
 		<? ui_insert( 'header' ); ?>
 
-		<form method="post" action="proc/editblog.php">
+		<form method="post" action="/blog/proc/editblog.php">
 			<fieldset>
 				<legend>Edit Blog Post</legend>
 				<p>

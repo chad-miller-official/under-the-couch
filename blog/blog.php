@@ -23,8 +23,8 @@
 			<br />
 
 			<? if( is_admin() ): ?>
-				<a href="deleteblog.php?id=<?= $blog_post['blog_post'] ?>">[Delete]</a>
-				<a href="editblog.php?id=<?= $blog_post['blog_post'] ?>">[Edit]</a>
+				<a href="/blog/deleteblog.php?id=<?= $blog_post['blog_post'] ?>">[Delete]</a>
+				<a href="/blog/editblog.php?id=<?= $blog_post['blog_post'] ?>">[Edit]</a>
 			<? endif; ?>
 
 			<hr />

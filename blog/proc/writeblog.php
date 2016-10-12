@@ -13,7 +13,7 @@
 		$params = [
 			'title'  => $_POST['title'],
 			'body'   => $_POST['body'],
-			'author' => $GLOBALS['session_member']['member']
+			'author' => SessionLib::get( 'user_member.member' )
 		];
 
 		$posted = create_or_update_blog_post( $params );
@@ -21,7 +21,7 @@
 		if( $posted )
 		{
 			$display_message = 'Wrote post! <br />';
-			$redirect        = "../blog.php?id=$posted";
+			$redirect        = "/blog/blog.php?id=$posted";
 
 			if( isset( $_POST['sendemail'] ) && $_POST['sendemail'] )
 			{
@@ -37,7 +37,7 @@
 		else
 		{
 			$display_message           = 'Failed to write post!';
-			$redirect                  = '../writeblog.php';
+			$redirect                  = '/blog/writeblog.php';
 			$_POST['blog_fail_return'] = true;
 		}
 	}

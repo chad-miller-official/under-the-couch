@@ -1,6 +1,5 @@
 <?
-	$status  = logout();
-	$message = $status ? 'Successfully logged out!' : 'You are not logged in!';
+	logout();
 ?>
 
 <!doctype html>
@@ -15,7 +14,7 @@
 	<body>
 		<? ui_insert( 'header' ); ?>
 
-		<center><h1> <?= $message ?> </h1></center>
+		<center><h1>Logged out!</h1></center>
 
 		<? ui_insert( 'footer' ); ?>
 	</body>

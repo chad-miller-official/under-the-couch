@@ -1,66 +1,50 @@
 <?
-    /*
-     * Checks if the user is currently logged in.
-     *
-     * Params:
-     *   None.
-     * Returns:
-     *   <<true>> if the user is currently logged in;
-     *   <<false>> otherwise.
-     */
+    require_once( 'session_lib/SessionLib.php' );
+    require_once( 'session_lib/GTMNSessionHandler.php' );
+
+    db_include( 'get_member_by_login_credentials' );
+
+    function set_session_save_handler()
+    {
+        static $handler_set = false;
+
+        if( !$handler_set )
+        {
+            $session_handler = new GTMNSessionHandler();
+            session_set_save_handler( $session_handler, true );
+            $handler_set = true;
+        }
+    }
+
     function is_logged_in()
     {
-        return isset( $_SESSION['member_pk'] );
+        return SessionLib::get( 'user_member.member' ) != -1;
     }
 
-    /*
-     * Logs the user in.
-     *
-     * Params:
-     *   $member_pk : integer - the PK of the member that the user should be logged in as.
-     * Returns:
-     *   <<true>> if the user was successfully logged in;
-     *   <<false>> otherwise.
-     */
-    function login( $member_pk )
+    function login( $email, $password )
     {
-        if( is_logged_in() )
-            return false;
+        $member = get_member_by_login_credentials( $email, $password );
 
-        $_SESSION['member_pk'] = $member_pk;
-        return true;
+        if( $member )
+        {
+            $name = "{$member['first_name']} {$member['last_name']}";
+
+            SessionLib::set( 'user_member.member',   $member['member']   );
+            SessionLib::set( 'user_member.name',     $name               );
+            SessionLib::set( 'user_member.is_admin', $member['is_admin'] );
+
+            SessionLib::closeSession();
+
+            return [ 'Successfully logged in!', '/index.php' ];
+        }
+        else
+            return [ 'Incorrect email or password provided!', '/user/login.php' ];
+
+        return [ 'Failed to log in!', '/user/login.php' ];
     }
 
-    /*
-     * Logs the user out. This function implicitly destroys the current session.
-     *
-     * Params:
-     *   None.
-     * Returns:
-     *   <<true>> if the user was successfully logged out;
-     *   <<false>> otherwise.
-     */
     function logout()
     {
-        if( !is_logged_in() )
-            return false;
-
-        unset( $_SESSION['member_pk'] );
-        session_destroy();
-        return true;
-    }
-
-    /*
-     * Checks if the user currently logged in is an admin.
-     *
-     * Params:
-     *   None.
-     * Returns:
-     *   <<true>> if the user currently logged in is an admin.
-     *   <<false>> otherwise.
-     */
-    function is_admin()
-    {
-        return $GLOBALS['session_member']['is_admin'];
+        SessionLib::destroySession();
     }
 ?>

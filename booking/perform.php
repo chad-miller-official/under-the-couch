@@ -24,7 +24,7 @@
 					Bands and promoters should fill out the form below to book the venue. We will read every email, but if we do
 					not respond to you, that means we cannot fit you into our schedule at the present time.
 					<br /><br />
-					<form method="post" id="bookingform" action="proc/perform.php">
+					<form method="post" id="bookingform" action="/booking/proc/perform.php">
 						<fieldset>
 							<legend>Booking Form</legend>
 							<p>

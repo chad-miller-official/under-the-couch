@@ -18,7 +18,7 @@
 		<? ui_insert( 'header' ); ?>
 
 		<? if( !is_logged_in() ): ?>
-			<form method="post" id="loginform" action="proc/login.php">
+			<form method="post" id="loginform" action="/user/proc/login.php">
 				<fieldset>
 					<legend>Login</legend>
 					<p>
@@ -34,7 +34,7 @@
 					<br />
 					<br />
 
-					Don't have an account? Register <a href="accountform.php">here</a>.
+					Don't have an account? Register <a href="/user/accountform.php">here</a>.
 				</fieldset>
 			</form>
 

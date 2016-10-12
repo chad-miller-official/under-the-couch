@@ -26,20 +26,20 @@
     function get_member( $member )
     {
         $get_member_query = <<<SQL
-               select m.*,
-                      m.first_name || ' ' || m.last_name as name,
-                      r.is_admin
-                 from tb_member m
-                 join tb_member_role mr
-                   on m.member = mr.member
-                 join tb_role r
-                   on mr.role = r.role
-                where m.member = ?member?
+select m.*,
+       m.first_name || ' ' || m.last_name as name,
+       r.is_admin
+  from tb_member m
+  join tb_member_role mr
+    on m.member = mr.member
+  join tb_role r
+    on mr.role = r.role
+ where m.member = ?member?
 SQL;
 
         $params = [ 'member' => $member ];
-        $result = query_prepare_select( $get_member_query, $params );
+        $result = query_execute( $get_member_query, $params );
 
-        return is_resource( $result ) ? query_fetch_one( $result ) : false;
+        return query_success( $result ) ? query_fetch_one( $result ) : false;
     }
 ?>

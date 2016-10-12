@@ -58,7 +58,6 @@ begin
 
     -- Return the PK of what we just selected/inserted
     return my_pk_val;
-end;
+end
  $_$
-
 language plpgsql;

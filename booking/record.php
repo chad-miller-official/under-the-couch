@@ -37,7 +37,7 @@
 						<li>+ Sound engineer rate ($10/hr minimum)</li>
 						<li>[+ An assistant engineer will also be required for large tracking sessions]</li>
 					</ul>
-					<form method="post" id="recordingform" action="proc/record.php">
+					<form method="post" id="recordingform" action="/booking/proc/record.php">
 						<fieldset>
 							<legend>Recording Form</legend>
 							<p>

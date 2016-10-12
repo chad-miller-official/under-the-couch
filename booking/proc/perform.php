@@ -45,7 +45,7 @@ HTML;
 	{
 		$message1 = 'Booking request not sent!';
 		$message2 = 'Redirecting to form page...';
-		$redirect = '../perform.php';
+		$redirect = '/booking/perform.php';
 	}
 ?>
 

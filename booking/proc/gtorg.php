@@ -47,7 +47,7 @@ HTML;
 	{
 		$message1 = 'Booking request not sent!';
 		$message2 = 'Returning to form page...';
-		$redirect = '../gtorg.php';
+		$redirect = '/booking/gtorg.php';
 	}
 ?>
 

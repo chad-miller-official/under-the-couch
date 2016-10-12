@@ -44,7 +44,7 @@
 	<body>
 		<? ui_insert( 'header' ); ?>
 
-		<form method="post" action="proc/writeblog.php">
+		<form method="post" action="/blog/proc/writeblog.php">
 			<fieldset>
 				<legend>Write Blog Post</legend>
 				<p>

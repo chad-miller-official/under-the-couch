@@ -1,2 +1,3 @@
 common/js/jquery*
 common/js/tinymce
+common/sql/*.bak

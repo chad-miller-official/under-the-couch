@@ -1,36 +1,16 @@
 <?
 	db_include( 'get_member_by_login_credentials' );
 
-	if( !isset( $_POST['password'] ) || !isset( $_POST['email'] ) )
+    $password = @$_POST['password'];
+    $email    = @$_POST['email'];
+
+	if( !isset( $email ) || !isset( $password ) )
 	{
 		$display_message = 'No email address or password provided!';
 		$redirect = '/login.php';
 	}
 	else
-	{
-		$member = get_member_by_login_credentials( $_POST['email'], $_POST['password'] );
-
-		if( $member )
-		{
-			$status = login( $member['member'] );
-
-			if( $status )
-			{
-				$display_message = 'Successfully logged in!';
-				$redirect        = '/index.php';
-			}
-			else
-			{
-				$display_message = 'You are already logged in!';
-				$redirect        = '/index.php';
-			}
-		}
-		else
-		{
-			$display_message = 'Incorrect email or password provided!';
-			$redirect        = '../login.php';
-		}
-	}
+        list( $display_message, $redirect ) = login( $email, $password );
 ?>
 
 <!doctype html>

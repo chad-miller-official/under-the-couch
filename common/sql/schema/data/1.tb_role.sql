@@ -112,11 +112,9 @@ values
     'The Social Chair organizes monthly social events at the Under the Couch space and helps reach out to new members.',
     90,
     true
-)
-returning role;
+);
 
 -- Set parent for all non-Members so far to be Member
    update tb_role
       set parent = ( select role from tb_role where name = 'Member' )
-    where name <> 'Member'
-returning role;
+    where name <> 'Member';

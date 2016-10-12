@@ -18,7 +18,7 @@
 		<? ui_insert( 'header' ); ?>
 
 		<? if( !is_logged_in() ): ?>
-			<form method="post" id="accountform" action="proc/accountform.php">
+			<form method="post" id="accountform" action="/user/proc/accountform.php">
 				<fieldset>
 					<legend>Create Account</legend>
 					<p>

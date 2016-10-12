@@ -17,13 +17,14 @@
     function get_role_by_abbreviation( $abbreviation )
     {
         $description_query = <<<SQL
-            select *
-              from tb_role
-             where abbreviation = ?abbreviation?
+select *
+  from tb_role
+ where abbreviation = ?abbreviation?
 SQL;
 
         $params = [ 'abbreviation' => $abbreviation ];
-        $result = query_prepare_select( $description_query, $params );
-        return is_resource( $result ) ? query_fetch_one( $result ) : false;
+        $result = query_execute( $description_query, $params );
+
+        return query_success( $result ) ? query_fetch_one( $result ) : false;
     }
 ?>

@@ -13,24 +13,21 @@
     function create_or_update_blog_post( $param_map )
     {
         $query = <<<SQL
-            select fn_insert_or_update_row
-                   (
-                     ?table?,
-                     ?param_json?::json,
-                     array[ ?pk_column? ]
-                   ) as blog_post
+select fn_insert_or_update_row
+       (
+         'tb_blog_post',
+         ?param_json?::json,
+         array[ 'blog_post' ]
+       ) as blog_post
 SQL;
 
         $param_json = json_encode( $param_map );
-        $params     = [
-            'table'      => 'tb_blog_post',
-            'param_json' => $param_json,
-            'pk_column'  => 'blog_post'
+        $params     = [ 'param_json' => $param_json ];
         ];
 
-        $upsert = query_prepare_select( $query, $params );
+        $upsert = query_execute( $query, $params );
 
-        if( is_resource( $upsert ) )
+        if( query_success( $upsert ) )
         {
             $retval = query_fetch_one( $upsert );
             return $retval['blog_post'];

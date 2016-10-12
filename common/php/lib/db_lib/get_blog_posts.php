@@ -25,31 +25,31 @@
     function get_blog_posts( $max_num_posts, $offset=0 )
     {
         $body_posts_query = <<<SQL
-               select bp.blog_post,
-                      bp.title,
-                      bp.body,
-                      to_char( bp.created, 'Day, Month DD, YYYY HH:MI:SS AM' ) as created,
-                      m.first_name || ' ' || m.last_name                       as author,
-                      r.name                                                   as role,
-                      me.first_name || ' ' || me.last_name                     as editor,
-                      to_char( bp.edited, 'Day, Month DD, YYYY HH:MI:SS AM' )  as edited,
-                      mre.name                                                 as editor_role
-                 from tb_blog_post bp
-                 join tb_member m
-                   on bp.creator = m.member
-                 join tb_member_role mr
-                   on m.member = mr.member
-                 join tb_role r
-                   on mr.role = r.role
-            left join tb_member me
-                   on bp.editor = me.member
-            left join tb_member_role mre
-                   on me.member = mre.member
-            left join tb_role re
-                   on mre.role = re.role
-             order by bp.blog_post desc
-                limit ?limit?
-               offset ?offset?
+   select bp.blog_post,
+          bp.title,
+          bp.body,
+          to_char( bp.created, 'Day, Month DD, YYYY HH:MI:SS AM' ) as created,
+          m.first_name || ' ' || m.last_name                       as author,
+          r.name                                                   as role,
+          me.first_name || ' ' || me.last_name                     as editor,
+          to_char( bp.edited, 'Day, Month DD, YYYY HH:MI:SS AM' )  as edited,
+          re.name                                                  as editor_role
+     from tb_blog_post bp
+     join tb_member m
+       on bp.creator = m.member
+     join tb_member_role mr
+       on m.member = mr.member
+     join tb_role r
+       on mr.role = r.role
+left join tb_member me
+       on bp.editor = me.member
+left join tb_member_role mre
+       on me.member = mre.member
+left join tb_role re
+       on mre.role = re.role
+ order by bp.blog_post desc
+    limit ?limit?
+   offset ?offset?
 SQL;
 
         $params = [
@@ -57,7 +57,7 @@ SQL;
             'offset' => $offset
         ];
 
-        $result = query_prepare_select( $body_posts_query, $params );
-        return is_resource( $result ) ? query_fetch_all( $result ) : false;
+        $result = query_execute( $body_posts_query, $params );
+        return query_success( $result ) ? query_fetch_all( $result ) : false;
     }
 ?>

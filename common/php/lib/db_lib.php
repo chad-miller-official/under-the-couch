@@ -1,4 +1,12 @@
 <?
+    function get_or_connect_to_db()
+    {
+        if( !isset( $GLOBALS[DB_HANDLE]) )
+            $GLOBALS[DB_HANDLE] = pg_connect( PSQL_CONNECT_STRING );
+
+        return $GLOBALS[DB_HANDLE];
+    }
+
     /*
      * Prepare a query for pg_prepare().
      * First, this finds all question mark-escaped params in $query and builds
@@ -25,7 +33,7 @@
      * And the modified query and constructed param array are returned.
      *
      * The resulting return query and return params are suitable for use with
-     * pg_prepare().
+     * pg_prepare() or pg_query_params().
      *
      * Params:
      *   $query  : string                    - the query to prepare
@@ -47,7 +55,7 @@
             {
                 // First time this function is called, "$1" is returned
                 // Second time, "$2" is returned, and so forth
-                STATIC $i = 0;
+                static $i = 0;
 
                 // At the same time, add the corresponding value to the params array
                 array_push( $params_array, $params[$match[1]] );
@@ -60,48 +68,39 @@
     }
 
     /*
-     * Alias for pg_query() or pg_query_params(). If parameters are present,
-     * the query and parameters are prepped using __query_prep_params().
-     *
-     * Parameters:
-     *   $query  : string                    - the query to execute
-     *   $params : array[ string => scalar ] - the parameters the query uses (default false)
-     * Returns:
-     *   <<PG resource object>> on success,
-     *   <<false>> otherwise.
-     */
-    function __query( $query, $params=false )
-    {
-        if( $params )
-        {
-            list( $query_prepped, $params_array ) = __query_prep_params( $query, $params );
-            return pg_query_params( $query_prepped, $params_array );
-        }
-        else
-            return pg_query( $query );
-    }
-
-    /*
-     * Prepares a SELECT statement for use with query_fetch_one() or query_fetch_all().
+     * Prepares and executes a SQL query.
      *
      * Parameters:
      *   $query  : string                    - the SELECT query to execute
      *   $params : array[ string => scalar ] - the parameters the query uses (default false)
      * Returns:
      *   <<PG resource object>> on success,
-     *   <<error message as a string>> otherwise.
+     *   <<false>> otherwise.
      */
-    function query_prepare_select( $query, $params=false )
+    function query_execute( $query, $params=false )
     {
-        $result = __query( $query, $params );
-        return $result ?: pg_result_error( $result );
+        if( $params )
+        {
+            list( $query_prepped, $params_array ) = __query_prep_params( $query, $params );
+            $result = pg_query_params( $query_prepped, $params_array );
+        }
+        else
+            $result = pg_query( $query );
+
+        if( $result )
+            return $result;
+        else
+        {
+            error_log( pg_result_error( $result ) );
+            return false;
+        }
     }
 
     /*
      * Wrapper for pg_fetch_assoc().
      *
      * Parameters:
-     *   $resource : PG resource - the result of a successful query_prepare_select() call
+     *   $resource : PG resource - the result of a successful query_execute() call
      * Returns:
      *   <<an array mapping columns to values>> on success if there is a row left to fetch;
      *   <<false>> otherwise.
@@ -115,7 +114,7 @@
      * Wrapper for pg_fetch_all().
      *
      * Parameters:
-     *   $resource : PG resource - the result of a successful query_prepare_select() call
+     *   $resource : PG resource - the result of a successful query_execute() call
      * Returns:
      *   <<an array of [arrays mapping columns to values]>> on success if there are rows to fetch;
      *   <<false>> otherwise.
@@ -126,36 +125,31 @@
     }
 
     /*
-     * Prepares an INSERT, UPDATE, or DELETE statement for use with query_fetch_one()
-     * or query_fetch_all().
+     * Wrapper for is_resource().
      *
      * Parameters:
-     *   $query  : string                    - the SELECT query to execute
-     *   $params : array[ string => scalar ] - the parameters the query uses (default false)
+     *   $resource : PG resource - the result of a call to query_execute()
      * Returns:
-     *   <<number of rows affected>> on success,
-     *   <<error message as a string>> otherwise.
+     *   <<true>> if the query was successful;
+     *   <<false>> otherwise.
      */
-    function __query_insert_update_delete( $query, $params=false )
+    function query_success( $resource )
     {
-        $result = __query( $query, $params=false );
-        return $result ? pg_affected_rows( $result ) : pg_result_error( $result );
+        return is_resource( $resource );
     }
 
-    /* The next three functions are aliases for __query_insert_update_delete() */
-
-    function query_insert( $query, $params=false )
+    function begin_transaction()
     {
-        return __query_insert_update_delete( $query, $params );
+        return pg_query( 'begin' );
     }
 
-    function query_update( $query, $params=false )
+    function commit_transaction()
     {
-        return __query_insert_update_delete( $query, $params );
+        return pg_query( 'commit' );
     }
 
-    function query_delete( $query, $params=false )
+    function rollback_transaction()
     {
-        return __query_insert_update_delete( $query, $params );
+        return pg_query( 'rollback' );
     }
 ?>

@@ -16,21 +16,21 @@
     function get_officer_info( $role )
     {
         $get_officer_info_query = <<<SQL
-            select m.member,
-                   m.first_name || ' ' || m.last_name as officer_name,
-                   m.display_email_address
-              from tb_member m
-              join tb_member_role mr
-                on m.member = mr.member
-              join tb_role r
-                on mr.role = r.role
-             where r.role = ?role?
+select m.member,
+       m.first_name || ' ' || m.last_name as officer_name,
+       m.display_email_address
+  from tb_member m
+  join tb_member_role mr
+    on m.member = mr.member
+  join tb_role r
+    on mr.role = r.role
+ where r.role = ?role?
 SQL;
 
         $params = [ 'role' => $role ];
-        $result = query_prepare_select( $get_officer_info_query, $params );
+        $result = query_execute( $get_officer_info_query, $params );
 
         // query_fetch_all because there may be more than one officer per position
-        return is_resource( $result ) ? query_fetch_all( $result ) : false;
+        return query_success( $result ) ? query_fetch_all( $result ) : false;
     }
 ?>
