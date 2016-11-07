@@ -4,9 +4,7 @@
         $args = func_get_args();
 
         foreach( $args as $arg )
-        {
             require_once( $GLOBALS[WEBROOT] . "/common/php/lib/$arg.php" );
-        }
     }
 
     /*
@@ -30,7 +28,7 @@
      * Includes a Javascript plugin.
      *
      * Params:
-     *   Any number of Javascript plugin names (in common/js). Do not include
+     *   Any number of Javascript plugin names (in common/js). Do include
      *   the ".js" at the end of the name.
      * Returns:
      *   Nothing.
@@ -40,7 +38,15 @@
         $args = func_get_args();
 
         foreach( $args as $arg )
-            echo "<script src=\"/common/js/$arg.js\"></script>";
+            echo "<script src=\"/common/js/$arg\"></script>";
+    }
+
+    function js_common_include()
+    {
+        js_include(
+            'ext/jquery-3.1.1.min.js',
+            'common_document.js'
+        );
     }
 
     /*

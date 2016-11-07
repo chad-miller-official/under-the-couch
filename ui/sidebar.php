@@ -1,5 +1,5 @@
 <?
-    db_include( 'get_webpage_access_allowed' );
+    db_include( 'access_allowed' );
 	lib_include( 'ical_lib' );
 
     $now = new DateTime();
@@ -15,7 +15,7 @@
 
 <aside>
 	<?
-        if( get_webpage_access_allowed( 'ui/sidebar_admin.php' ) )
+        if( access_allowed( 'ui/sidebar_admin.php' ) )
             include( 'sidebar_admin.php' );
     ?>
 

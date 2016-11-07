@@ -1,5 +1,5 @@
 <?
-    function get_webpage_access_allowed( $page_name )
+    function access_allowed( $page_name )
     {
         $session_member = SessionLib::get( 'user_member.member' );
         $params         = [ 'page_name' => $page_name ];
@@ -15,13 +15,16 @@ SQL;
         else
         {
             $get_access_query = <<<SQL
-select tt.access_allowed
-  from tb_member_role rm,
-       fn_get_page_permissions_for_role( rm.role ) tt
-  join tb_webpage w
- using ( webpage )
- where rm.member = ?member?
-   and ?page_name? ilike w.base_uri_glob
+  select tt.access_allowed
+    from tb_member_role rm
+    join tb_role r
+   using ( role ),
+         fn_get_page_permissions_for_role( rm.role ) tt
+    join tb_webpage w
+   using ( webpage )
+   where rm.member = ?member?
+     and ?page_name? ilike w.base_uri_glob
+order by r.rank
 SQL;
 
             $params['member'] = $session_member;

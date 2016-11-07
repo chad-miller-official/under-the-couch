@@ -5,12 +5,13 @@ create temp table tt_webpage
 );
 
 \copy tt_webpage from stdin with csv;
-blog/proc/%,false
-blog/deleteblog.php,false
-blog/editblog.php,false
-blog/writeblog.php,false
-blog/blog.php,true
-booking/%,true
+blog/edit_blog_post.php,false
+blog/write_blog_post.php,false
+blog/blog_post.php,true
+booking/gt_org.php,true
+booking/perform.php,true
+booking/record.php,true
+booking/requests.php,false
 common/%,false
 contacts/%,true
 fonts/%,false

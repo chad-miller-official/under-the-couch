@@ -25,7 +25,8 @@
     function get_blog_posts( $max_num_posts, $offset=0 )
     {
         $body_posts_query = <<<SQL
-   select bp.blog_post,
+   select distinct on ( bp.blog_post )
+          bp.blog_post,
           bp.title,
           bp.body,
           to_char( bp.created, 'Day, Month DD, YYYY HH:MI:SS AM' ) as created,
@@ -47,7 +48,8 @@ left join tb_member_role mre
        on me.member = mre.member
 left join tb_role re
        on mre.role = re.role
- order by bp.blog_post desc
+ order by bp.blog_post desc,
+          r.rank asc
     limit ?limit?
    offset ?offset?
 SQL;

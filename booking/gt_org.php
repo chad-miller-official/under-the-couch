@@ -6,11 +6,11 @@
 		<link rel="stylesheet" type="text/css" href="/styles.css">
 
 		<?
-			js_include(
-				'jquery-2.1.1.min',
-				'jquery-validation-1.13.0/jquery.validate.min'
-			);
+            js_common_include();
+			js_include( 'ext/jquery-validation-1.15.1/dist/jquery.validate.min.js' );
 		?>
+
+        <script src="/booking/js/gt_org.js"></script>
 	</head>
 
 	<body>
@@ -32,18 +32,18 @@
 					<br />
 					Sound Engineer Rates: $10/hour per engineer
 					<br /><br />
-					<form method="post" id="bookingform" action="/booking/proc/gtorg.php">
+					<form method="post" id="gt_org_booking_form" action="/">
 						<fieldset>
 							<legend>Booking Form</legend>
 							<p>
 								<label class="nowidth" for="orgname">*Organization Name:</label>
 								<br />
-								<input class="textbox" type="text" name="orgname" id="orgname">
+								<input class="textbox" type="text" name="org_name" id="org_name">
 							</p>
 							<p>
 								<label class="nowidth" for="contactname">*Contact Name:</label>
 								<br />
-								<input class="textbox" type="text" name="contactname" id="contactname">
+								<input class="textbox" type="text" name="contact_name" id="contact_name">
 							</p>
 							<p>
 								<label class="nowidth" for="email">*Email Address:</label>
@@ -53,7 +53,7 @@
 							<p>
 								<label class="nowidth" for="number">Contact Phone Number:</label>
 								<br />
-								<input class="textbox" type="tel" name="phone">
+								<input class="textbox" type="tel" name="phone" id="phone">
 							</p>
 							<p>
 								<label class="nowidth" for="date">*Date Requested:</label>
@@ -83,7 +83,7 @@
 							<p>
 								<label class="nowidth" for="comments">Additional comments:</label>
 								<br />
-								<textarea name="comments"></textarea>
+								<textarea name="comments" id="comments"></textarea>
 							</p>
 							Required fields are marked with "*".
 							<br />
@@ -111,24 +111,9 @@
 							<input type="submit">
 						</fieldset>
 					</form>
+
 					<br />
-					<script>
-						$( "#bookingform" ).validate( {
-							rules : {
-								orgname     : "required",
-								contactname : "required",
-								email       : {
-									required : true,
-									email    : true
-								},
-								date        : "required",
-								start       : "required",
-								end         : "required",
-								description : "required",
-								attendees   : "required"
-							}
-						} );
-					</script>
+
 					The above form is the standard for booking events, but the booking agent may be emailed directly at
 					<a href="<?= EMAIL_BOOKING?>"><?= EMAIL_BOOKING ?></a>. Please have your email title begin
 					with "[GT Organization]" and include as much of the above information as possible in the email. If you

@@ -19,7 +19,7 @@
         $description_query = <<<SQL
 select *
   from tb_role
- where abbreviation = ?abbreviation?
+ where lower( abbreviation ) = lower( ?abbreviation? )
 SQL;
 
         $params = [ 'abbreviation' => $abbreviation ];

@@ -1,6 +1,5 @@
 <?
 	db_include( 'get_equipment_manager_email' );
-
 	$email = get_equipment_manager_email();
 ?>
 
@@ -12,11 +11,11 @@
 		<link rel="stylesheet" type="text/css" href="/styles.css" />
 
 		<?
-			js_include(
-				'jquery-2.1.1.min',
-				'jquery-validation-1.13.0/jquery.validate.min'
-			);
+            js_common_include();
+            js_include( 'ext/jquery-validation-1.15.1/dist/jquery.validate.min.js' );
 		?>
+
+        <script src="/booking/js/record.js"></script>
 	</head>
 
 	<body>
@@ -27,7 +26,7 @@
 
 			<div class="primary">
 				<article>
-					Under the Couch has a freshly built studio.
+					Under the Couch has a newly built studio.
 					<br />
 					<br />
 					Hourly Rates:
@@ -37,13 +36,13 @@
 						<li>+ Sound engineer rate ($10/hr minimum)</li>
 						<li>[+ An assistant engineer will also be required for large tracking sessions]</li>
 					</ul>
-					<form method="post" id="recordingform" action="/booking/proc/record.php">
+					<form method="post" id="record_booking_form" action="/">
 						<fieldset>
 							<legend>Recording Form</legend>
 							<p>
 								<label class="nowidth" for="contactname">*Contact Name:</label>
 								<br />
-								<input class="textbox" type="text" name="contactname" id="contactname">
+								<input class="textbox" type="text" name="contact_name" id="contact_name">
 							</p>
 							<p>
 								<label class="nowidth" for="email">*Email Address:</label>
@@ -53,7 +52,7 @@
 							<p>
 								<label class="nowidth" for="number">Contact Phone Number:</label>
 								<br />
-								<input class="textbox" type="tel" name="phone">
+								<input class="textbox" type="tel" name="phone" id="phone">
 							</p>
 							<p>
 								<label class="nowidth" for="date">*Date Requested:</label>
@@ -65,24 +64,14 @@
 								<br />
 								<font size="2">(Please explain the type of recording you want - number of songs, instruments, etc.)</font>
 								<br />
-								<textarea name="comments"></textarea>
+								<textarea name="comments" id="comments"></textarea>
 							</p>
 							<input type="submit">
 						</fieldset>
 					</form>
+
 					<br />
-					<script>
-						$( "#recordingform" ).validate( {
-							rules : {
-								contactname : "required",
-								email       : {
-									required : true,
-									email    : true
-								},
-								date        : "required"
-							}
-						} );
-					</script>
+
 					Required fields are marked with "*".
 					<br />
 					<br />

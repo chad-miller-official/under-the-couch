@@ -16,7 +16,7 @@ declare
     my_values text;
 begin
     -- Get the PK column name
-    select trim( leading 'tb_' from in_table )
+    select regexp_replace( in_table, '^tb_', '' )
       into my_pk_col;
 
     -- Get the existing PK (if it exists) by using the identifying
@@ -25,7 +25,7 @@ begin
 
     foreach my_col in array in_identifying_cols
     loop
-        my_select := my_select || ' AND ' || my_col || ' = ' || quote_literal( in_col_values->>my_col );
+        my_select := my_select || ' AND ' || my_col || ' = ' || coalesce( quote_literal( in_col_values->>my_col ), 'null' );
     end loop;
 
     execute my_select

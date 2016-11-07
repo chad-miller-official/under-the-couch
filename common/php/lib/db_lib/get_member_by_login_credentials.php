@@ -26,15 +26,10 @@
     function get_member_by_login_credentials( $gatech_email, $password )
     {
         $get_member_query = <<<SQL
-select m.*,
-       r.is_admin
-  from tb_member m
-  join tb_member_role mr
-    on m.member = mr.member
-  join tb_role r
-    on mr.role = r.role
- where m.gatech_email_address = ?gatech_email?
-   and m.password_hash        = crypt( ?password?, m.password_hash )
+select member
+  from tb_member
+ where gatech_email_address = ?gatech_email?
+   and password_hash        = crypt( ?password?, password_hash )
 SQL;
 
         $params = [

@@ -7,7 +7,7 @@
     // Set the webroot
     if( isset( $_SERVER['CONTEXT_DOCUMENT_ROOT'] ) && $_SERVER['CONTEXT_DOCUMENT_ROOT'] )
         $GLOBALS['webroot'] = $_SERVER['CONTEXT_DOCUMENT_ROOT'];
-    else if( preg_match( '/(\/var\/www\/dev.underthecouch.org\/[^\/]+)\//', __FILE__, $matches ) == 1 )
+    else if( preg_match( '/(\/var\/www\/vhosts\/dev.underthecouch.org\/[^\/]+)\//', __FILE__, $matches ) == 1 )
         $GLOBALS['webroot'] = $matches[1];
 
     // Require the necessary includes
@@ -17,7 +17,7 @@
     lib_include( 'db_lib' );
     lib_include( 'session_lib' );
 
-    db_include( 'get_webpage_access_allowed' );
+    db_include( 'access_allowed' );
 
     // Initialize the database connection
     get_or_connect_to_db();
@@ -30,14 +30,22 @@
     // Make sure we can access the page we want
     $requested_page = $_REQUEST['file'];
 
-    if( !get_webpage_access_allowed( $requested_page ) )
-        require_once( '404.php' );
-    else
+    // Always permit AJAX requests
+    if( isset( $requested_page ) && file_exists( $requested_page ) )
     {
-        // Finally load the requested page
-        if( isset( $requested_page ) && file_exists( $requested_page ) )
+        if(
+               preg_match( '/^common\/php\/lib\/ajax\/.+\.php$/', $requested_page )
+            || access_allowed( $requested_page )
+        )
+        {
+            lib_include( 'ajax_lib' );
             require_once( $requested_page );
+        }
+        else
+            require_once( '404.php' );
     }
+    else
+        require_once( '404.php' );
 
     exit();
 ?>

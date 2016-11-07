@@ -1,4 +1,6 @@
 <?
+    db_include( 'get_member' );
+
     class SessionLib
     {
         private static $sessionStarted    = false;
@@ -43,8 +45,6 @@
 
         public static function startSession()
         {
-            error_log( "Starting session!" );
-
             if( !self::$sessionStarted )
             {
                 self::$sessionStarted = true;
@@ -69,12 +69,8 @@
 
         public static function regenerateSession()
         {
-            error_log( "Regenerating!" );
-
             if( !self::get( 'obsolete' ) )
             {
-                error_log( "Not obsolete yet!" );
-
                 self::set( 'obsolete', true        );
                 self::set( 'expires',  time() + 10 );
 
@@ -100,7 +96,6 @@
                 error_log( "Tried to close an unregistered session!" );
             else
             {
-                error_log( "Closing session!" );
                 self::$sessionClosed = true;
                 session_write_close();
 
@@ -114,16 +109,18 @@
         {
             if( self::$sessionStarted )
             {
-                error_log( "Registering session!" );
-
                 self::$sessionRegistered = true;
-                $sessionMember           = self::get( 'user_member' );
+                $sessionMember           = self::get( 'user_member.member' );
 
                 if( $sessionMember === null )
+                    self::set( 'user_member.member', -1 );
+                elseif( $sessionMember != -1 )
                 {
-                    error_log( "Session member was null - setting guest credentials!" );
-                    self::set( 'user_member.member', -1      );
-                    self::set( 'user_member.name',   'guest' );
+                    $member = get_member( $sessionMember );
+                    $name = "{$member['first_name']} {$member['last_name']}";
+
+                    SessionLib::set( 'user_member.name',                 $name                           );
+                    SessionLib::set( 'user_member.gatech_email_address', $member['gatech_email_address'] );
                 }
 
                 return true;
@@ -137,13 +134,11 @@
 
         public static function clearSession()
         {
-            error_log( "Clearing session!" );
             session_unset();
         }
 
         public static function destroySession()
         {
-            error_log( "Destroying session!" );
             self::clearSession();
             return session_destroy();
         }

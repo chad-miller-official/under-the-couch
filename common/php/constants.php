@@ -24,6 +24,10 @@
     define( 'ROLE_EQUIPMENT_MANAGER',      12 );
     define( 'ROLE_SOCIAL_CHAIR',           13 );
 
+    define( 'BOOKING_REQUEST_TYPE_GT_ORGANIZATION', 1 );
+    define( 'BOOKING_REQUEST_TYPE_PERFORMANCE',     2 );
+    define( 'BOOKING_REQUEST_TYPE_RECORDING',       3 );
+
     // URL constants
     define( 'URL_ICAL_BOOKING', 'http://www.google.com/calendar/ical/kcbafbo67qe33jpj8s10b1ltk0@group.calendar.google.com/public/basic.ics');
     define( 'URL_CALENDAR',     'https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTz=0&amp;height=600&amp;'
@@ -39,8 +43,9 @@
                               . 'ctz=America%2FNew_York' );
 
     // Email constants
-    define( 'EMAIL_WEBMASTER', 'webmaster@gtmn.org' );
-    define( 'EMAIL_BOOKING',   'utcbooking@gmail.com' );
+    define( 'EMAIL_WEBMASTER',    'webmaster@gtmn.org' );
+    define( 'EMAIL_BOOKING',      'utcbooking@gmail.com' );
+    define( 'EMAIL_MAILING_LIST', 'MusiciansNetwork@groupspaces.com' );
 
     // Globals
     define( 'WEBROOT',   'webroot'   );

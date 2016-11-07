@@ -6,11 +6,11 @@
 		<link rel="stylesheet" type="text/css" href="/styles.css" />
 
 		<?
-			js_include(
-				'jquery-2.1.1.min',
-				'jquery-validation-1.13.0/jquery.validate.min'
-			);
-		?>
+            js_common_include();
+            js_include( 'ext/jquery-validation-1.15.1/dist/jquery.validate.min.js' );
+        ?>
+
+        <script src="/booking/js/perform.js"></script>
 	</head>
 
 	<body>
@@ -24,13 +24,13 @@
 					Bands and promoters should fill out the form below to book the venue. We will read every email, but if we do
 					not respond to you, that means we cannot fit you into our schedule at the present time.
 					<br /><br />
-					<form method="post" id="bookingform" action="/booking/proc/perform.php">
+					<form method="post" id="perform_booking_form" action="/">
 						<fieldset>
 							<legend>Booking Form</legend>
 							<p>
 								<label class="nowidth" for="contactname">*Contact Name:</label>
 								<br />
-								<input class="textbox" type="text" name="contactname" id="contactname">
+								<input class="textbox" type="text" name="contact_name" id="contact_name">
 							</p>
 							<p>
 								<label class="nowidth" for="email">*Email Address:</label>
@@ -40,12 +40,12 @@
 							<p>
 								<label class="nowidth" for="number">Contact Phone Number:</label>
 								<br />
-								<input class="textbox" type="tel" name="phone">
+								<input class="textbox" type="tel" name="phone" id="phone">
 							</p>
 							<p>
 								<label class="nowidth" for="bandname">*Band Name:</label>
 								<br />
-								<input class="textbox" type="text" name="bandname" id="bandname">
+								<input class="textbox" type="text" name="band_name" id="band_name">
 							</p>
 							<p>
 								<label class="nowidth" for="date">*Date Requested:</label>
@@ -55,35 +55,24 @@
 							<p>
 								<label class="nowidth" for="style">Style of Music:</label>
 								<br />
-								<input class="textbox" type="text" name="style">
+								<input class="textbox" type="text" name="style" id="style">
 							</p>
 							<p>
 								<label class="nowidth" for="website">Website:</label>
 								<br />
-								<input class="textbox" type="text" name="website">
+								<input class="textbox" type="text" name="website" id="website">
 							</p>
 							<p>
 								<label class="nowidth" for="comments">Additional comments:</label>
 								<br />
-								<textarea name="comments"></textarea>
+								<textarea name="comments" id="comments"></textarea>
 							</p>
 							<input type="submit">
 						</fieldset>
 					</form>
+
 					<br />
-					<script>
-						$( "#bookingform" ).validate( {
-							rules           : {
-								contactname : "required",
-								email       : {
-									required : true,
-									email    : true
-								},
-								bandname    : "required",
-								date        : "required"
-							}
-						} );
-					</script>
+
 					Required fields are marked with "*".
 					<br />
 					<br />

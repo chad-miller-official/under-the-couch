@@ -23,7 +23,6 @@ SQL;
 
         $param_json = json_encode( $param_map );
         $params     = [ 'param_json' => $param_json ];
-        ];
 
         $upsert = query_execute( $query, $params );
 

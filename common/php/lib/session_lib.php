@@ -25,22 +25,15 @@
     {
         $member = get_member_by_login_credentials( $email, $password );
 
-        if( $member )
+        if( $member !== false )
         {
-            $name = "{$member['first_name']} {$member['last_name']}";
-
-            SessionLib::set( 'user_member.member',   $member['member']   );
-            SessionLib::set( 'user_member.name',     $name               );
-            SessionLib::set( 'user_member.is_admin', $member['is_admin'] );
-
+            SessionLib::set( 'user_member.member', $member['member'] );
             SessionLib::closeSession();
 
-            return [ 'Successfully logged in!', '/index.php' ];
+            return true;
         }
-        else
-            return [ 'Incorrect email or password provided!', '/user/login.php' ];
 
-        return [ 'Failed to log in!', '/user/login.php' ];
+        return false;
     }
 
     function logout()

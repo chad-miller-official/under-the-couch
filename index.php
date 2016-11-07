@@ -4,9 +4,9 @@
         'get_max_and_min_blog_post'
     );
 
-    $offset = isset( $_GET['page'] ) ? $_GET['page'] : 0;
-    $prev = $offset - 1;
-    $next = $offset + 1;
+    $offset = isset( $_REQUEST['page'] ) ? $_REQUEST['page'] : 0;
+    $prev   = $offset - 1;
+    $next   = $offset + 1;
 
     $max_min = get_max_and_min_blog_post();
     $all_max = $max_min['max'];
@@ -21,6 +21,8 @@
         <meta charset="utf-8" />
         <title>Under the Couch</title>
         <link rel="stylesheet" type="text/css" href="/styles.css" />
+
+        <? js_common_include(); ?>
     </head>
 
     <body>
@@ -35,29 +37,35 @@
                     {
                         foreach( $blog_posts as $blog_post )
                         {
-                            if( !isset( $curr_min ) )
-                                $curr_min = $blog_post['blog_post'];
+                            $blog_post_pk = $blog_post['blog_post'];
+                            $title        = $blog_post['title'];
+                            $author       = $blog_post['author'];
+                            $role         = $blog_post['role'];
+                            $created      = $blog_post['created'];
+                            $body         = $blog_post['body'];
 
-                            $curr_max = $blog_post['blog_post'];
+                            $editor      = $blog_post['editor'];
+                            $editor_role = $blog_post['editor_role'];
+                            $edited      = $blog_post['edited'];
+
+                            if( !isset( $curr_min ) )
+                                $curr_min = $blog_post_pk;
+
+                            $curr_max = $blog_post_pk;
                 ?>
                             <article>
-                                <h3><a href="/blog/blog.php?id=<?= $blog_post['blog_post']?>"> <?= $blog_post['title'] ?> </a></h3>
-                                Author: <?= $blog_post['author'] ?> (<?= $blog_post['role'] ?>)
+                                <h3><a href="/blog/blog_post.php?id=<?= $blog_post_pk ?>"> <?= $title ?> </a></h3>
+                                Author: <?= $author ?> (<?= $role ?>)
                                 <br />
-                                Posted: <?= $blog_post['created'] ?>
+                                Posted: <?= $created ?>
                                 <br />
-
-                                <? if( is_admin() ): ?>
-                                    <a href="/blog/deleteblog.php?id=<?= $blog_post['blog_post']?>">[Delete]</a>
-                                    <a href="/blog/editblog.php?id=<?= $blog_post['blog_post']?>">[Edit]</a>
-                                <? endif; ?>
 
                                 <hr />
 
-                                <?= $blog_post['body'] ?>
+                                <?= $body ?>
 
-                                <? if( $blog_post['editor'] != NULL ): ?>
-                                    <i>Last edited by: <?= "{$blog_post['editor']} ({$blog_post['editor_role']}) at {$blog_post['edited']}" ?></i>
+                                <? if( $editor != NULL ): ?>
+                                    <i>Last edited by: <?= "$editor ($editor_role)" ?> at <?= $edited ?></i>
                                     <br />
                                 <? endif; ?>
                             </article>

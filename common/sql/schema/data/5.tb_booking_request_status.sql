@@ -1,0 +1,22 @@
+insert into tb_booking_request_status
+(
+    booking_request_status,
+    label
+)
+values
+(
+    1,
+    'Unreviewed'
+),
+(
+    2,
+    'Reviewed'
+),
+(
+    3,
+    'Replied'
+),
+(
+    4,
+    'Closed'
+);

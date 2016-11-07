@@ -40,7 +40,7 @@
                     <center>
 						<? if( $officers ): ?>
 							<? foreach( $officers as $officer ): ?>
-								<img src="media/<?= "{$position['abbreviation']}_{$officer['member']}" ?>.jpg" />
+								<img src="/contacts/media/<?= "{$position['abbreviation']}_{$officer['member']}" ?>.jpg" />
 								<br />
 								<b> <?= $officer['officer_name'] ?> </b>
 								<br />

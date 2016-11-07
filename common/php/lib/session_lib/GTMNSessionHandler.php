@@ -30,7 +30,7 @@
                 self::_HTTP_ONLY => true
             ];
 
-            ini_set( 'session.use_cookies', 1 );
+            ini_set( 'session.use_cookies',      1 );
             ini_set( 'session.use_only_cookies', 1 );
 
             session_name( self::_SESSION_NAME );
@@ -46,31 +46,24 @@
 
         public function open( $save_path, $session_name )
         {
-            error_log( "SessionHandler::open() called!" );
             $this->dbHandle = get_or_connect_to_db();
             return $this->dbHandle !== null;
         }
 
         public function close()
         {
-            error_log( "SessionHandler::close() called!" );
             return true;
         }
 
         public function read( $session_id )
         {
-            error_log( "SessionHandler::read() called!" );
-
             $session = get_member_session_by_key( $session_id );
 
             if( !is_array( $session ) )
                 return '';
 
-            error_log( "Member session found!" );
-
             if( $session['age_seconds'] >= self::_SESSION_TIMEOUT_SECONDS )
             {
-                error_log( "Member session is old - deleting!" );
                 $this->destroy( $session_id );
                 return '';
             }
@@ -80,8 +73,6 @@
 
         public function write( $session_id, $data )
         {
-            error_log( "SessionHandler::write() called!" );
-
             $member_session_columns = [
                 'member'   => SessionLib::get( 'user_member.member' ),
                 'value'    => $data,
@@ -94,8 +85,6 @@
 
         public function destroy( $session_id )
         {
-            error_log( "SessionHandler::destroy() called!" );
-
             setcookie(
                 self::_SESSION_NAME,
                 '',
@@ -112,7 +101,6 @@
 
         public function gc( $lifetime )
         {
-            error_log( "SessionHandler::gc() called!" );
             //delete_stale_member_sessions( $lifetime );
             return true;
         }
