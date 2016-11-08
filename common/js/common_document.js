@@ -7,10 +7,10 @@ function initialize()
 
 function logout()
 {
-    var url = '/common/php/lib/ajax/logout.php';
+    var url = '/common/php/ajax/logout.php';
 
     $.post( url, null, function( response, textStatus, jqXHR ) {
         alert( 'You have been logged out.' );
-        location.reload();
+        window.location = '/index.php';
     }, 'json' );
 }

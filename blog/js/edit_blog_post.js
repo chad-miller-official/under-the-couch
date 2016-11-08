@@ -19,7 +19,7 @@ function edit_blog_post( event )
         'body'      : body
     };
 
-    var url = '/common/php/lib/ajax/update_blog_post.php';
+    var url = '/common/php/ajax/update_blog_post.php';
 
     $.post( url, data, function( response, textStatus, jqXHR ) {
         if( response['success'] )

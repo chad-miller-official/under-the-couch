@@ -25,7 +25,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - <?= $position_name ?></title>
-		<link rel="stylesheet" type="text/css" href="/styles.css" />
+		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
 	</head>
 
 	<body>

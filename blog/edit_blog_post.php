@@ -13,7 +13,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - Edit Blog Post</title>
-		<link rel="stylesheet" type="text/css" href="/styles.css" />
+		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
 
         <?
             js_common_include();

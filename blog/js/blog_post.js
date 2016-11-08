@@ -17,7 +17,7 @@ function delete_blog_post()
             'blog_post' : blog_post
         };
 
-        var url = '/common/php/lib/ajax/delete_blog_post.php';
+        var url = '/common/php/ajax/delete_blog_post.php';
 
         $.post( url, data, function( response, textStatus, jqXHR ) {
             if( response['success'] )

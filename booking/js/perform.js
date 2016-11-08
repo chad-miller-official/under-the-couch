@@ -42,7 +42,7 @@ function send_perform_booking_request( event )
         'band_website'          : website
     };
 
-    var url = '/common/php/lib/ajax/create_performance_booking_request.php';
+    var url = '/common/php/ajax/create_performance_booking_request.php';
 
     $.post( url, data, function( response, textStatus, jqXHR ) {
         if( response['success'] )

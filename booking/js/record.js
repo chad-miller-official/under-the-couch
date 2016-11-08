@@ -34,7 +34,7 @@ function send_record_booking_request( event )
         'comments'              : comments
     };
 
-    var url = '/common/php/lib/ajax/create_recording_booking_request.php';
+    var url = '/common/php/ajax/create_recording_booking_request.php';
 
     $.post( url, data, function( response, textStatus, jqXHR ) {
         if( response['success'] )

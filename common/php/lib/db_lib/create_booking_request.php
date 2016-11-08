@@ -10,9 +10,7 @@ insert into tb_booking_request
     contact_phone_number,
     date_requested,
     comments,
-    additional_information,
-    created,
-    modified
+    additional_information
 )
 values
 (
@@ -22,9 +20,7 @@ values
     ?contact_phone_number?,
     ?date_requested?,
     ?comments?,
-    ?additional_information?,
-    now(),
-    now()
+    ?additional_information?
 )
 returning booking_request
 SQL;

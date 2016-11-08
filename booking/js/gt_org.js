@@ -50,7 +50,7 @@ function send_gt_org_booking_request( event )
         'attendee_count'        : attendees,
     }
 
-    var url = '/common/php/lib/ajax/create_gt_org_booking_request.php';
+    var url = '/common/php/ajax/create_gt_org_booking_request.php';
 
     $.post( url, data, function( response, textStatus, jqXHR ) {
         if( response['success'] )

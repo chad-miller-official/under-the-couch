@@ -12,15 +12,8 @@
 
     usort( $events, 'compare_ics_events' );
 ?>
-
 <aside>
-	<?
-        if( access_allowed( 'ui/sidebar_admin.php' ) )
-            include( 'sidebar_admin.php' );
-    ?>
-
 	<center><b>Upcoming Events</b></center>
-
 	<? foreach( $events as $key => $value ): ?>
 		<br />
 		<?= "{$value['Date']} {$value['Time']}" ?>

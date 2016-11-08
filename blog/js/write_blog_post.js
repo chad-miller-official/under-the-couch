@@ -19,7 +19,7 @@ function create_blog_post( event )
         'send_to_mailing_list' : send_to_mailing_list
     };
 
-    var url = '/common/php/lib/ajax/create_blog_post.php';
+    var url = '/common/php/ajax/create_blog_post.php';
 
     $.post( url, data, function( response, textStatus, jqXHR ) {
         if( response['blog_post_success'] )

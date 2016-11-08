@@ -43,7 +43,7 @@ function send_create_account_request( event )
         'password'             : password
     };
 
-    var url = '/common/php/lib/ajax/create_member.php';
+    var url = '/common/php/ajax/create_member.php';
 
     $.post( url, data, function( response, textStatus, jqXHR ) {
         if( response['success'] )
@@ -60,7 +60,7 @@ function perform_login( gatech_email, password )
         'password'             : password
     };
 
-    var url = '/common/php/lib/ajax/login.php';
+    var url = '/common/php/ajax/login.php';
 
     $.post( url, data, function( response, textStatus, jqXHR ) {
         window.location = '/index.php';

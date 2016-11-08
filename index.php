@@ -14,29 +14,22 @@
 
     $blog_posts = get_blog_posts( 7, $offset );
 ?>
-
 <!doctype html>
 <html>
     <head>
         <meta charset="utf-8" />
         <title>Under the Couch</title>
-        <link rel="stylesheet" type="text/css" href="/styles.css" />
-
+        <link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
         <? js_common_include(); ?>
     </head>
-
     <body>
         <? ui_insert( 'header' ); ?>
-
-        <div class="container">
+        <section>
             <? ui_insert( 'sidebar' ); ?>
-
-            <div class="primary">
-                <?
-                    if( is_array( $blog_posts ) )
-                    {
-                        foreach( $blog_posts as $blog_post )
-                        {
+            <section>
+                <? if( is_array( $blog_posts ) ): ?>
+                    <? foreach( $blog_posts as $blog_post ): ?>
+                        <?
                             $blog_post_pk = $blog_post['blog_post'];
                             $title        = $blog_post['title'];
                             $author       = $blog_post['author'];
@@ -52,54 +45,32 @@
                                 $curr_min = $blog_post_pk;
 
                             $curr_max = $blog_post_pk;
-                ?>
-                            <article>
-                                <h3><a href="/blog/blog_post.php?id=<?= $blog_post_pk ?>"> <?= $title ?> </a></h3>
-                                Author: <?= $author ?> (<?= $role ?>)
-                                <br />
-                                Posted: <?= $created ?>
-                                <br />
-
-                                <hr />
-
-                                <?= $body ?>
-
-                                <? if( $editor != NULL ): ?>
-                                    <i>Last edited by: <?= "$editor ($editor_role)" ?> at <?= $edited ?></i>
-                                    <br />
-                                <? endif; ?>
-                            </article>
-
+                        ?>
+                        <article>
+                            <h3><a href="/blog/blog_post.php?id=<?= $blog_post_pk ?>"> <?= $title ?> </a></h3>
+                            Author: <?= $author ?> (<?= $role ?>)
                             <br />
+                            Posted: <?= $created ?>
+                            <br />
+                            <hr />
+                            <?= $body ?>
+                            <? if( $editor != NULL ): ?>
+                                <i>Last edited by: <?= "$editor ($editor_role)" ?> at <?= $edited ?></i>
+                                <br />
+                            <? endif; ?>
+                        </article>
+                        <br />
+                    <? endforeach; ?>
+                <? endif; ?>
                 <?
-                        }
-                    }
-
                     if( !isset( $curr_min ) )
                         $curr_min = $all_min;
 
                     if( !isset( $curr_max ) )
                         $curr_max = $all_max;
                 ?>
-            </div>
-
-            <div class="pagenav">
-                <div class="prev">
-                    <? if( $curr_min > $all_min ): ?>
-                        <a href="/index.php?page=<?= $prev ?>"><< Previous Page</a>
-                    <? endif; ?>
-                </div>
-
-                <div class="next">
-                    <? if( $curr_max < $all_max ): ?>
-                        <a href="/index.php?page=<?= $next ?>">Next Page >></a>
-                    <? endif; ?>
-                </div>
-
-                <br />
-            </div>
-
+            </section>
             <? ui_insert('footer'); ?>
-        </div>
+        </section>
     </body>
 </html>

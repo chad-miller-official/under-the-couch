@@ -11,16 +11,15 @@ blog/blog_post.php,true
 booking/gt_org.php,true
 booking/perform.php,true
 booking/record.php,true
-booking/requests.php,false
 common/%,false
 contacts/%,true
+dashboard/booking/requests.php,false
 fonts/%,false
 info/%,true
 media/%,true
 ui/footer.php,true
 ui/header.php,true
 ui/sidebar.php,true
-ui/sidebar_admin.php,false
 user/%,true
 404.php,true
 calendar.php,true

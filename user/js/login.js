@@ -24,7 +24,7 @@ function send_login_request( event )
         'password'             : password
     };
 
-    var url = '/common/php/lib/ajax/login.php';
+    var url = '/common/php/ajax/login.php';
 
     $.post( url, data, function( response, textStatus, jqXHR ) {
         if( response['success'] )
