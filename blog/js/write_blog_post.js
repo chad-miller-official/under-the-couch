@@ -33,5 +33,8 @@ function create_blog_post( event )
         }
         else
             alert( 'An error has occurred - please contact support.' );
-    }, 'json' );
+    }, 'json' )
+    .fail( function() {
+        alert( 'An error has occurred - please contact support.' );
+    });;
 }

@@ -5,23 +5,20 @@
 		<title>Under the Couch - Capabilities</title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
 	</head>
-
 	<body>
 		<? ui_insert( 'header' ); ?>
-
+        <br />
 		<div class="container">
 			<? ui_insert( 'sidebar' ); ?>
-
-			<div class="primary">
+			<section class="focus-content">
 				<article>
-					<br />
-					Thinking of booking our space for your event?
-					<br /><br />
-					We have a nice sound system with awesome lights on stage, computers with internet
-					that drive large projectors, a recording studio, and various musical equipment and
-					processing gear. Utilizing these is up to the imagination of the user.
-					<br /><br />
-					A few things our space is often rented for:
+					<p>Thinking of booking our space for your event?</p>
+                    <p>
+					    We have a nice sound system with awesome lights on stage, computers with internet
+					    that drive large projectors, a recording studio, and various musical equipment and
+					    processing gear. Utilizing these is up to the imagination of the user.
+                    </p>
+                    <p>A few things our space is often rented for:</p>
 					<ul>
 						<li>Audio/video playback</li>
 						<li>Concert/musical event production</li>
@@ -33,9 +30,9 @@
 						<li>Dance club type events</li>
 					</ul>
 				</article>
-			</div>
-
-			<? ui_insert( 'footer' ); ?>
+			</section>
 		</div>
+        <br />
+        <? ui_insert( 'footer' ); ?>
 	</body>
 </html>

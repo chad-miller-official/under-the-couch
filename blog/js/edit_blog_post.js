@@ -26,5 +26,8 @@ function edit_blog_post( event )
             window.location = '/blog/blog_post.php?id=' + blog_post;
         else
             alert( 'An error has occurred - please contact support.' );
-    }, 'json' );
+    }, 'json' )
+    .fail( function() {
+        alert( 'An error has occurred - please contact support.' );
+    });;
 }

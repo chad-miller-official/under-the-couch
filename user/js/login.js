@@ -31,5 +31,8 @@ function send_login_request( event )
             window.location = '/index.php';
         else
             alert( "Email address or password is incorrect." );
-    }, 'json' );
+    }, 'json' )
+    .fail( function() {
+        alert( 'An error has occurred - please contact support.' );
+    });
 }

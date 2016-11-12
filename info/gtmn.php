@@ -5,21 +5,20 @@
 		<title>Under the Couch - Musician's Network</title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
 	</head>
-
 	<body>
 		<? ui_insert( 'header' ); ?>
-
+        <br />
 		<div class="container">
 			<? ui_insert( 'sidebar' ); ?>
-
-			<div class="primary">
+			<section class="focus-content">
 				<article>
 					<a name="overview"></a>
 					<h2><a href="#overview">Overview</a></h2>
-					<b>Musician's Network</b> is the organization that runs Under the Couch.
-					As well as maintaining UTC, we offer a number of services for musicians
-					and music-lovers, including:
-
+                    <p>
+    					<b>Musician's Network</b> is the organization that runs Under the Couch.
+    					As well as maintaining UTC, we offer a number of services for musicians
+    					and music-lovers, including:
+                    </p>
 					<ul>
 						<li>Lockers to store your equipment</li>
 						<li>A place for you/your band to practice</li>
@@ -27,16 +26,17 @@
 						<li>A great place to meet people with similar interests</li>
 						<li>A great place to start a band (or find that one badly needed drummer)</li>
 					</ul>
-
-					We have meetings every Monday at 7 PM here at Under the Couch. Becoming a member
-					costs $10 and comes with a free UTC t-shirt (alternatively, membership is free with
-					the purchase of one $10 UTC t-shirt). Membership gives you access to everything listed
-					above, as well as guarantees you free admission to all of our shows! What kind of
-					fantastic deal is that?
-					<br /><br />
-					For more information about any of this, come to one of our 7 o’clock meetings and see what
-					we’re all about.
-
+                    <p>
+					    We have meetings every Monday at 7 PM here at Under the Couch. Becoming a member
+					    costs $10 and comes with a free UTC t-shirt (alternatively, membership is free with
+					    the purchase of one $10 UTC t-shirt). Membership gives you access to everything listed
+					    above, as well as guarantees you free admission to all of our shows! What kind of
+					    fantastic deal is that?
+                    </p>
+                    <p>
+					    For more information about any of this, come to one of our 7 o’clock meetings and see what
+					    we’re all about.
+                    </p>
 					<a name="fees"></a>
 					<h2><a href="#fees">Fees</a></h2>
 					<b>Membership:</b>
@@ -58,9 +58,9 @@
 						class.</li>
 					</ul>
 				</article>
-			</div>
-
-			<? ui_insert( 'footer' ); ?>
+			</section>
 		</div>
+        <br />
+        <? ui_insert( 'footer' ); ?>
 	</body>
 </html>

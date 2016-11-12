@@ -52,5 +52,8 @@ function send_perform_booking_request( event )
         }
         else
             alert( 'An error has occurred - please contact support.' );
-    }, 'json' );
+    }, 'json' )
+    .fail( function() {
+        alert( 'An error has occurred - please contact support.' );
+    });
 }

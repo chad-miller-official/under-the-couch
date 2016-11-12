@@ -12,7 +12,7 @@
 
     usort( $events, 'compare_ics_events' );
 ?>
-<aside>
+<aside class="main-sidebar">
 	<center><b>Upcoming Events</b></center>
 	<? foreach( $events as $key => $value ): ?>
 		<br />

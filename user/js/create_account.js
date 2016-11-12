@@ -50,7 +50,10 @@ function send_create_account_request( event )
             perform_login( gatech_email, password );
         else
             alert( 'Error creating account: ' + response['message'] );
-    }, 'json' );
+    }, 'json' )
+    .fail( function() {
+        alert( 'An error has occurred - please contact support.' );
+    });
 }
 
 function perform_login( gatech_email, password )
@@ -64,5 +67,9 @@ function perform_login( gatech_email, password )
 
     $.post( url, data, function( response, textStatus, jqXHR ) {
         window.location = '/index.php';
-    }, 'json' );
+    }, 'json' )
+    .fail( function() {
+        alert( 'Account created - please log in.' );
+        window.location = '/user/login.php';
+    });
 }

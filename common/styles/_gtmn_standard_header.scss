@@ -1,9 +1,15 @@
+$background-color: #333;
+$drop-head-hover-background-color: #ff4d4d;
+$drop-content-background-color: #f9f9f9;
+$drop-content-box-shadow-color: rgba(0,0,0,0.2);
+$drop-content-a-hover-background-color: #f1f1f1;
+
 .main-nav {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: $background-color;
     li {
         float: left;
     }
@@ -18,7 +24,7 @@
 }
 
 .main-nav-drop-head:hover {
-    background-color: red;
+    background-color: $drop-head-hover-background-color;
 }
 
 .main-nav-drop {
@@ -27,7 +33,7 @@
 
 .main-nav-drop:hover {
     .main-nav-drop-head {
-        background-color: red;
+        background-color: $drop-head-hover-background-color;
     }
     .main-nav-drop-content {
         display: block;
@@ -37,8 +43,8 @@
 .main-nav-drop-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    background-color: $drop-content-background-color;
+    box-shadow: 0px 8px 16px 0px $drop-content-box-shadow-color;
     a {
         color: black;
         padding: 12px 16px;
@@ -47,6 +53,6 @@
         text-align: left;
     }
     a:hover {
-        background-color: #f1f1f1;
+        background-color: $drop-content-a-hover-background-color;
     }
 }

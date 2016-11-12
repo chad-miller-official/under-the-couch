@@ -7,12 +7,12 @@
 	<nav>
 		<ul class="main-nav">
 			<li><a href="/index.php" class="main-nav-drop-head">Home</a></li>
-			<li><a href="/calendar.php" class="main-nav-drop-head">Calendar</a></li>
             <li class="main-nav-drop">
                 <a href="#" class="main-nav-drop-head">Dashboards</a>
                 <div class="main-nav-drop-content">
+                    <a href="/dashboard/calendar">Calendar</a>
                     <? if( access_allowed( 'dashboard/booking/index.php' ) ): ?>
-                        <a href="/booking/requests.php">Booking Requests</a>
+                        <a href="/dashboard/booking">Booking Requests</a>
                     <? endif; ?>
                 </div>
             </li>
@@ -57,4 +57,3 @@
 		</ul>
 	</nav>
 </header>
-<br />

@@ -34,7 +34,7 @@
     if( isset( $requested_page ) && file_exists( $requested_page ) )
     {
         if(
-               preg_match( '/^common\/php\/lib\/ajax\/.+\.php$/', $requested_page )
+               preg_match( '/^common\/php\/ajax\/.+\.php$/', $requested_page )
             || access_allowed( $requested_page )
         )
         {

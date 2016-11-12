@@ -5,23 +5,20 @@
 		<title>Under the Couch - About</title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
 	</head>
-
 	<body>
 		<? ui_insert( 'header' ); ?>
-
+        <br />
 		<div class="container">
 			<? ui_insert( 'sidebar' ); ?>
-
-			<div class="primary">
+			<section class="focus-content">
 				<article>
-					<b>Under The Couch</b> is a student-run music venue on the Georgia Tech Campus. We regularly
-					have shows for Tech and non-Tech students alike (although the shows are almost always free for
-					Tech students!). For an idea of the types of shows we often have, all of these bands (and many
-					more) have played at Under The Couch before:
-
-					<br /><br />
-
-					<table>
+                    <p>
+    					<b>Under The Couch</b> is a student-run music venue on the Georgia Tech Campus. We regularly
+    					have shows for Tech and non-Tech students alike (although the shows are almost always free for
+    					Tech students!). For an idea of the types of shows we often have, all of these bands (and many
+    					more) have played at Under The Couch before:
+                    </p>
+					<table class="static-data">
 						<tr>
 							<td>Jimmy Eat World</td>
 							<td>Cassette</td>
@@ -191,17 +188,15 @@
 							<td>Cartel</td>
 						</tr>
 					</table>
-
 					<br />
-
-					Under The Couch is run by the <b>Musician's Network</b> organization. If you are interested
-					in joining the organization, we have weekly meetings Mondays at 7 PM at Under The Couch.
-
-					<br />
+                    <p>
+					    Under The Couch is run by the <b>Musician's Network</b> organization. If you are interested
+					    in joining the organization, we have weekly meetings Mondays at 7 PM at Under The Couch.
+                    </p>
 				</article>
-			</div>
-
-			<? ui_insert( 'footer' ); ?>
+			</section>
 		</div>
+        <br />
+        <? ui_insert( 'footer' ); ?>
 	</body>
 </html>

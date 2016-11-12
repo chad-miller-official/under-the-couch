@@ -24,6 +24,9 @@ function delete_blog_post()
                 window.location = '/index.php';
             else
                 alert( 'An error has occurred - please contact support.' );
-        }, 'json' );
+        }, 'json' )
+        .fail( function() {
+            alert( 'An error has occurred - please contact support.' );
+        });;
     }
 }

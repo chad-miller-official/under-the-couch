@@ -24,9 +24,13 @@
     </head>
     <body>
         <? ui_insert( 'header' ); ?>
-        <section>
+        <br />
+        <div class="container">
             <? ui_insert( 'sidebar' ); ?>
-            <section>
+            <section class="focus-content">
+                <? if( access_allowed( 'blog/write_blog_post.php' ) ): ?>
+                    <a href="/blog/write_blog_post.php" class="clean-button" style="float:right">Write Blog Post</a>
+                <? endif; ?>
                 <? if( is_array( $blog_posts ) ): ?>
                     <? foreach( $blog_posts as $blog_post ): ?>
                         <?
@@ -40,14 +44,9 @@
                             $editor      = $blog_post['editor'];
                             $editor_role = $blog_post['editor_role'];
                             $edited      = $blog_post['edited'];
-
-                            if( !isset( $curr_min ) )
-                                $curr_min = $blog_post_pk;
-
-                            $curr_max = $blog_post_pk;
                         ?>
-                        <article>
-                            <h3><a href="/blog/blog_post.php?id=<?= $blog_post_pk ?>"> <?= $title ?> </a></h3>
+                        <article class="blog-post">
+                            <h3><a href="/blog/blog_post.php?id=<?= $blog_post_pk ?>"><?= $title ?></a></h3>
                             Author: <?= $author ?> (<?= $role ?>)
                             <br />
                             Posted: <?= $created ?>
@@ -62,15 +61,9 @@
                         <br />
                     <? endforeach; ?>
                 <? endif; ?>
-                <?
-                    if( !isset( $curr_min ) )
-                        $curr_min = $all_min;
-
-                    if( !isset( $curr_max ) )
-                        $curr_max = $all_max;
-                ?>
             </section>
-            <? ui_insert('footer'); ?>
-        </section>
+        </div>
+        <br />
+        <? ui_insert('footer'); ?>
     </body>
 </html>
