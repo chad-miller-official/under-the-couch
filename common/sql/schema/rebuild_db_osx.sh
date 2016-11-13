@@ -38,19 +38,19 @@ createdb -e -U "$user" -w "$db_temp"
 
 echo "\nCreating tables..."
 
-for table in $(ls -1v $tables); do
+for table in $(ls $tables | sort -n); do
     pg_file "$table" "$db_temp"
 done
 
 echo "\nPopulating tables..."
 
-for rows in $(ls -1v $data); do
+for rows in $(ls $data | sort -n); do
     pg_file "$rows" "$db_temp"
 done
 
 echo "\nCreating functions..."
 
-for func in $(ls -1v $funcs); do
+for func in $(ls $funcs | sort -n); do
     pg_file "$func" "$db_temp"
 done
 
