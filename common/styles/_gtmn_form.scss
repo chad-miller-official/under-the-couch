@@ -1,0 +1,19 @@
+form.login {
+    margin: auto;
+    max-width: 550px;
+}
+
+div.form-row {
+    clear: both;
+    padding: 10px;
+    span.form-label {
+        float: left;
+        width: 150px;
+        text-align: right;
+    }
+    span.form-input {
+        float: right;
+        width: 340px;
+        text-align: left;
+    }
+}

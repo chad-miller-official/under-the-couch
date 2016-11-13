@@ -1,4 +1,3 @@
-common/js/ext/*
 common/sql/*.bak
 *.css.map
 .sass-cache

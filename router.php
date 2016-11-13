@@ -7,8 +7,6 @@
     // Set the webroot
     if( isset( $_SERVER['CONTEXT_DOCUMENT_ROOT'] ) && $_SERVER['CONTEXT_DOCUMENT_ROOT'] )
         $GLOBALS['webroot'] = $_SERVER['CONTEXT_DOCUMENT_ROOT'];
-    else if( preg_match( '/(\/var\/www\/vhosts\/dev.underthecouch.org\/[^\/]+)\//', __FILE__, $matches ) == 1 )
-        $GLOBALS['webroot'] = $matches[1];
 
     // Require the necessary includes
     require_once( 'common/php/constants.php' );

@@ -1,4 +1,7 @@
 @import 'gtmn_standard_header';
+@import 'gtmn_blog';
+@import 'gtmn_table';
+@import 'gtmn_form';
 
 $font-color: #333;
 $max-page-width: 1050px;
@@ -34,27 +37,12 @@ footer {
     float: left;
 }
 
-section.focus-content {
+.focus-content {
     width: 750px;
     display: inline-block;
     padding-left: 12px;
     padding-right: 4px;
     border-left: 1.5px solid black;
-}
-
-.blog-post {
-    padding-left: 2px;
-    padding-right: 2px;
-    hr {
-        border: 0;
-        border-bottom: 1.5px solid black;
-    }
-}
-
-.blog-post-individual {
-    @extend .blog-post;
-    padding-left: 8px;
-    padding-right: 8px;
 }
 
 .clean-button {
@@ -69,15 +57,4 @@ section.focus-content {
 
 .clean-button:hover {
     background-color: $clean-button-hover-background-color;
-}
-
-table.static-data {
-    th, td {
-        padding: 8px;
-        text-align: left;
-    }
-}
-
-table.dynamic-data {
-    
 }

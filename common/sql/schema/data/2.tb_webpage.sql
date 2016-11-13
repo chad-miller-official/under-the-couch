@@ -13,7 +13,8 @@ booking/perform.php,true
 booking/record.php,true
 common/%,false
 contacts/%,true
-dashboard/booking/requests.php,false
+dashboard/booking/index.php,false
+dashboard/calendar/index.php,true
 fonts/%,false
 info/%,true
 media/%,true
@@ -22,7 +23,6 @@ ui/header.php,true
 ui/sidebar.php,true
 user/%,true
 404.php,true
-calendar.php,true
 index.php,true
 router.php,true
 \.
