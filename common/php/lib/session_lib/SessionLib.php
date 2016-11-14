@@ -117,7 +117,7 @@
                 elseif( $sessionMember != -1 )
                 {
                     $member = get_member( $sessionMember );
-                    $name = "{$member['first_name']} {$member['last_name']}";
+                    $name = "{$member['first_name']}";
 
                     SessionLib::set( 'user_member.name',                 $name                           );
                     SessionLib::set( 'user_member.gatech_email_address', $member['gatech_email_address'] );

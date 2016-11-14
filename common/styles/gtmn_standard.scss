@@ -7,6 +7,7 @@ $font-color: #333;
 $max-page-width: 1050px;
 $clean-button-background-color: #f9f9f9;
 $clean-button-hover-background-color: #f1f1f1;
+$banner-img: url("/media/oldbanner1.gif");
 
 body {
     font-family: sans-serif;
@@ -24,9 +25,37 @@ footer {
     text-align: center;
 }
 
+nav {
+
+}
+
+#banner-img {
+    padding-left: ($max-page-width / 2 - 950px / 2);
+    width: 950px;
+    height: 375px;
+}
+
+#site-title {
+    padding-top: 30px;
+    padding-bottom: 40px;
+    font-size: 42px;
+    text-align: center;
+}
+
+#welcome {
+    display: block;
+    color: white;
+    text-align: center;
+    float: right;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
 .container {
+    padding-top: 20px;
     margin: auto;
     max-width: $max-page-width;
+    z-index: -10000;
 }
 
 .main-sidebar {
@@ -35,6 +64,17 @@ footer {
     padding-left: 4px;
     padding-right: 8px;
     float: left;
+    border-style: solid;
+    border-color: #333;
+    //background-color: #78ffb3;
+}
+
+#main-sidebar-title {
+    padding-top: 6px;
+}
+
+#main-sidebar-items {
+    padding: 0px 6px 6px 6px;
 }
 
 .focus-content {

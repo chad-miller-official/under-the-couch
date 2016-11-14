@@ -13,12 +13,14 @@
     usort( $events, 'compare_ics_events' );
 ?>
 <aside class="main-sidebar">
-	<center><b>Upcoming Events</b></center>
-	<? foreach( $events as $key => $value ): ?>
-		<br />
-		<?= "{$value['Date']} {$value['Time']}" ?>
-		<br />
-		<?= $value['Summary'] ?>
-		<br />
-	<? endforeach; ?>
+	<center id="main-sidebar-title"><b>Upcoming Events</b></center>
+    <div id="main-sidebar-items">
+    	<? foreach( $events as $key => $value ): ?>
+    		<br />
+    		<?= "{$value['Date']} {$value['Time']}" ?>
+    		<br />
+    		<?= $value['Summary'] ?>
+    		<br />
+    	<? endforeach; ?>
+    </div>
 </aside>

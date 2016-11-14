@@ -15,7 +15,7 @@
 
 	<body>
 		<? ui_insert( 'header' ); ?>
-
+		
 		<div class="container">
 			<? ui_insert( 'sidebar' ); ?>
 

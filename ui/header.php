@@ -1,9 +1,11 @@
 <header>
-	<h1>Under The Couch</h1>
-	<nav>
-		Welcome, <?= SessionLib::get( 'user_member.name' ) ?: 'guest' ?>!
-	</nav>
-	<br />
+	<? if (!file_exists("{$GLOBALS['webroot']}/media/oldbanner.gif")): ?>
+		<h1 id="site-title">Under The Couch</h1>
+	<? else: ?>
+		<img src="/media/oldbanner.gif" id="banner-img">
+		<img/>
+	<? endif ?>
+
 	<nav>
 		<ul class="main-nav">
 			<li><a href="/index.php" class="main-nav-drop-head">Home</a></li>
@@ -23,6 +25,13 @@
     				<a href="/info/capabilities.php">Capabilities</a>
     				<a href="/info/gtmn.php">Musician's Network</a>
     				<a href="/info/open_mic.php">Open Mic Night</a>
+					<div class="main-nav-flip">
+						<a href="#" class="main-nav-flip-head">Social Media</a>
+						<div class="main-nav-flip-content">
+							<a href="https://www.facebook.com/underthecouch">Facebook</a>
+							<a href="https://twitter.com/underthecouch/">Twitter</a>
+						</div>
+					</div>
     			</div>
             </li>
             <li class="main-nav-drop">
@@ -50,10 +59,17 @@
                 </div>
 			</li>
 			<? if( !is_logged_in() ): ?>
-				<li><a href="/user/login.php" class="main-nav-drop-head">Login</a></li>
+				<li class="main-nav-personal">
+					<a href="/user/login.php" class="main-nav-drop-head">Login</a></li>
 			<? else: ?>
-				<li><a href="javascript:void(0)" class="main-nav-drop-head" id="logout">Logout</a></li>
+				<li class="main-nav-personal">
+					<a href="javascript:void(0)" class="main-nav-drop-head" id="logout">Logout</a></li>
+				<li class="main-nav-personal">
+					<a href="#" class="main-nav-drop-head" id="profile">Profile</a></li>
 			<? endif; ?>
+			<li id="welcome">
+				<b>Welcome, <?= SessionLib::get( 'user_member.name' ) ?: 'guest' ?>!</b>
+			</li>
 		</ul>
 	</nav>
 </header>

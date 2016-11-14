@@ -24,7 +24,7 @@
     </head>
     <body>
         <? ui_insert( 'header' ); ?>
-        <br />
+
         <div class="container">
             <? ui_insert( 'sidebar' ); ?>
             <section class="focus-content">

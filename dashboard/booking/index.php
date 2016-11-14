@@ -12,7 +12,7 @@
     </head>
     <body>
         <? ui_insert( 'header' ); ?>
-        <br />
+
         <div class="container">
             <table class="dynamic-data">
                 <tr>
