@@ -41,32 +41,29 @@
 							<legend>Recording Form</legend>
 							<p>
 								<label class="nowidth" for="contactname">*Contact Name:</label>
-								<br />
 								<input class="textbox" type="text" name="contact_name" id="contact_name">
 							</p>
 							<p>
 								<label class="nowidth" for="email">*Email Address:</label>
-								<br />
 								<input class="textbox" type="text" name="email" id="email">
 							</p>
 							<p>
 								<label class="nowidth" for="number">Contact Phone Number:</label>
-								<br />
 								<input class="textbox" type="tel" name="phone" id="phone">
 							</p>
 							<p>
 								<label class="nowidth" for="date">*Date Requested:</label>
-								<br />
 								<input class="textbox" type="date" name="date" id="date">
 							</p>
 							<p>
 								<label class="nowidth" for="comments">Additional comments:</label>
-								<br />
-								<font size="2">(Please explain the type of recording you want - number of songs, instruments, etc.)</font>
-								<br />
+								<br>
+								<font size="3">(Please explain the type of recording you want - number of songs, instruments, etc.)</font>
+								<br>
+								<br>
 								<textarea name="comments" id="comments"></textarea>
 							</p>
-							<input type="submit">
+							<input type="submit" class="submit-button"></input>
 						</fieldset>
 					</form>
 

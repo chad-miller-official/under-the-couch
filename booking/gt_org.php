@@ -37,52 +37,43 @@
 							<legend>Booking Form</legend>
 							<p>
 								<label class="nowidth" for="orgname">*Organization Name:</label>
-								<br />
 								<input class="textbox" type="text" name="org_name" id="org_name">
 							</p>
 							<p>
 								<label class="nowidth" for="contactname">*Contact Name:</label>
-								<br />
 								<input class="textbox" type="text" name="contact_name" id="contact_name">
 							</p>
 							<p>
 								<label class="nowidth" for="email">*Email Address:</label>
-								<br />
 								<input class="textbox" type="text" name="email" id="email">
 							</p>
 							<p>
 								<label class="nowidth" for="number">Contact Phone Number:</label>
-								<br />
 								<input class="textbox" type="tel" name="phone" id="phone">
 							</p>
 							<p>
 								<label class="nowidth" for="date">*Date Requested:</label>
-								<br />
 								<input class="textbox" type="date" name="date" id="date">
 							</p>
 							<p>
 								<label class="nowidth" for="start">*Start Time (including 30 minute setup time):</label>
-								<br />
 								<input class="textbox" type="time" name="start" id="start">
 							</p>
 							<p>
 								<label class="nowidth" for="website">*End Time (including 30 minute teardown time):</label>
-								<br />
 								<input class="textbox" type="time" name="end" id="end">
 							</p>
 							<p>
 								<label class="nowidth" for="description">*Description of Event:</label>
-								<br />
 								<input class="textbox" type="text" name="description" id="description">
 							</p>
 							<p>
 								<label class="nowidth" for="attendees">*Expected Number of Attendees:</label>
-								<br />
 								<input class="textbox" type="number" name="attendees" id="attendees">
 							</p>
 							<p>
 								<label class="nowidth" for="comments">Additional comments:</label>
-								<br />
+								<br>
 								<textarea name="comments" id="comments"></textarea>
 							</p>
 							Required fields are marked with "*".
@@ -108,7 +99,7 @@
 							By clicking the submit button below, you agree to the terms of the usage agreement above.
 							<br />
 							<br />
-							<input type="submit">
+							<input type="submit" class="submit-button"></input>
 						</fieldset>
 					</form>
 
