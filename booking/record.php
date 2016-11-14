@@ -12,7 +12,7 @@
 
 		<?
             js_common_include();
-            js_include( 'ext/jquery-validation-1.15.1/dist/jquery.validate.min.js' );
+            js_include( 'validate_lib.js' );
 		?>
 
         <script src="/booking/js/record.js"></script>

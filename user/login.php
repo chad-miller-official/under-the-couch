@@ -6,10 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
 		<?
             js_common_include();
-            js_include(
-                'ext/jquery-validation-1.15.1/dist/jquery.validate.min.js',
-                'validate_lib.js'
-            );
+            js_include( 'validate_lib.js' );
 		?>
         <script src="/user/js/login.js"></script>
 	</head>

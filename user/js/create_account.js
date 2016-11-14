@@ -2,52 +2,90 @@ $( document ).ready( create_account_initialize );
 
 function create_account_initialize()
 {
-    $( '#create_account_form' ).validate({
-        rules : {
-            first_name     : "required",
-            last_name      : "required",
-            gatech_email   : { email_is_gatech : true },
-            password       : "required",
-            password_again : { passwords_match : true }
-        }
-    });
+    $( '#create_account_form' ).submit( validate_create_account_request );
 
-    $.validator.addMethod(
-        'passwords_match',
-        passwords_match,
-        'Passwords do not match.'
-    );
+    $( '#first_name' ).change( reset_validation );
+    $( '#last_name' ).change( reset_validation );
+    $( '#gatech_email' ).change( reset_validation );
 
-    $( '#create_account_form' ).submit( send_create_account_request );
+    $( '#password' ).change( reset_password_validation );
+    $( '#password_again' ).change( reset_password_validation );
 }
 
-function passwords_match( value, element )
+function reset_password_validation()
 {
-    var password = $( '#password' ).val();
-    return value == password;
+    $( '#password' ).removeClass( error_border );
+    $( '#password_again' ).removeClass( error_border );
 }
 
-function send_create_account_request( event )
+function validate_create_account_request( event )
 {
     event.preventDefault();
 
-    var first_name   = $( '#first_name' ).val();
-    var last_name    = $( '#last_name' ).val();
-    var gatech_email = $( '#gatech_email' ).val();
-    var password     = $( '#password' ).val();
+    var first_name     = $( '#first_name' );
+    var last_name      = $( '#last_name' );
+    var gatech_email   = $( '#gatech_email' );
+    var password       = $( '#password' );
+    var password_again = $( '#password_again' );
 
-    var data = {
-        'first_name'           : first_name,
-        'last_name'            : last_name,
-        'gatech_email_address' : gatech_email,
-        'password'             : password
+    if( !first_name.val() )
+    {
+        validate_error( first_name, 'First name is required.' );
+        return;
+    }
+
+    if( !last_name.val() )
+    {
+        validate_error( last_name, 'Last name is required.' );
+        return;
+    }
+
+    if( !gatech_email.val() )
+    {
+        validate_error( gatech_email, 'Email is required.' );
+        return;
+    }
+    else if( !email_is_gatech( gatech_email.val() ) )
+    {
+        validate_error( gatech_email, 'Please use your @gatech.edu email address.' );
+        return;
+    }
+
+    if( !password.val() || !password_again.val() )
+    {
+        validate_error( [ password, password_again ], 'Password is required.' );
+        return;
+    }
+    else if( password.val() !== password_again.val() )
+    {
+        validate_error( password_again, 'Passwords do not match.' );
+        return;
+    }
+
+    var form_data = {
+        'first_name'           : first_name.val(),
+        'last_name'            : last_name.val(),
+        'gatech_email_address' : gatech_email.val(),
+        'password'             : password.val()
     };
 
+    send_create_account_request( form_data );
+}
+
+function send_create_account_request( data )
+{
     var url = '/common/php/ajax/create_member.php';
 
     $.post( url, data, function( response, textStatus, jqXHR ) {
         if( response['success'] )
-            perform_login( gatech_email, password );
+        {
+            var login_data = {
+                'gatech_email_address' : data['gatech_email_address'],
+                'password'             : data['password']
+            };
+
+            perform_login( data );
+        }
         else
             alert( 'Error creating account: ' + response['message'] );
     }, 'json' )
@@ -56,13 +94,8 @@ function send_create_account_request( event )
     });
 }
 
-function perform_login( gatech_email, password )
+function perform_login( data )
 {
-    var data = {
-        'gatech_email_address' : gatech_email,
-        'password'             : password
-    };
-
     var url = '/common/php/ajax/login.php';
 
     $.post( url, data, function( response, textStatus, jqXHR ) {

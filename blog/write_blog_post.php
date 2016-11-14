@@ -7,7 +7,10 @@
 
 		<?
             js_common_include();
-            js_include( 'ext/tinymce/tinymce.min.js' );
+            js_include(
+                'ext/tinymce/tinymce.min.js',
+                'validate_lib.js'
+            );
         ?>
         <script src="/blog/js/write_blog_post.js"></script>
 

@@ -2,23 +2,44 @@ $( document ).ready( initialize );
 
 function initialize()
 {
-    $( '#create_blog_post_form' ).submit( create_blog_post );
+    $( '#create_blog_post_form' ).submit( validate_blog_post );
+
+    $( '#title' ).change( reset_validation );
+    $( '#body' ).change( reset_validation );
 }
 
-function create_blog_post( event )
+function validate_blog_post( event )
 {
     event.preventDefault();
 
-    var title                = $( '#title' ).val();
-    var body                 = $( '#body' ).val();
+    var title = $( '#title' );
+    var body  = $( '#body' );
+
+    if( !title.val() )
+    {
+        validate_error( title, 'Title is required.' );
+        return;
+    }
+
+    if( !body.val() )
+    {
+        validate_error( body, 'Body is required.' );
+        return;
+    }
+
     var send_to_mailing_list = $( '#send_email:checked' ).val() === 'on';
 
-    var data = {
-        'title'                : title,
-        'body'                 : body,
+    var form_data = {
+        'title'                : title.val(),
+        'body'                 : body.val(),
         'send_to_mailing_list' : send_to_mailing_list
     };
 
+    create_blog_post( form_data );
+}
+
+function create_blog_post( data )
+{
     var url = '/common/php/ajax/create_blog_post.php';
 
     $.post( url, data, function( response, textStatus, jqXHR ) {
