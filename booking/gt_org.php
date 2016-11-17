@@ -21,6 +21,7 @@
 
 			<div class="primary">
 				<article>
+					<h1>GT Organization Booking</h1>
 					This option is for Georgia Tech organizations wishing to use our space. It is required
 					that at least two UTC sound engineers be present for the entirety of your event. Other
 					event details will be handled on a case-by-case basis.
@@ -34,7 +35,6 @@
 					<br /><br />
 					<form method="post" id="gt_org_booking_form" action="/">
 						<fieldset>
-							<legend>Booking Form</legend>
 							<p>
 								<label class="nowidth" for="orgname">*Organization Name:</label>
 								<input class="textbox" type="text" name="org_name" id="org_name">

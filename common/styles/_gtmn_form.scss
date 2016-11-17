@@ -4,7 +4,7 @@ $fieldset-border-width: 2px;
 $fieldset-border-color: #333;
 
 form.login {
-    margin: auto;
+    margin: inherit;
     max-width: 550px;
 }
 
@@ -29,6 +29,16 @@ fieldset {
     max-width: 386px;
     border: $fieldset-border-width solid $fieldset-border-color;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+fieldset.centered-fieldset {
+    position: relative;
+    left: 64px;
+    z-index: inherit;
+}
+
+fieldset#write-blog-post {
+    left: 205px;
 }
 
 article {
@@ -65,7 +75,7 @@ legend {
     text-decoration: none;
     border:none;
     font-size: 19px;
-    font-family: "TW Cen MT Regular", Verdana, sans-serif;
+    font-family: "font-body", Verdana, sans-serif;
     padding: 14px 16px;
     color: white;
     background-color: #333;

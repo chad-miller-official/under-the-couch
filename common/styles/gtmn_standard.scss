@@ -3,8 +3,12 @@
 @import 'gtmn_table';
 @import 'gtmn_form';
 @font-face {
-    font-family: "TW Cen MT Regular";
+    font-family: "font-body";
     src: url("fonts/TW Cen MT.ttf");
+}
+@font-face {
+    font-family: "font-title";
+    src: url("fonts/Cochin.ttc");
 }
 
 $font-color: #333;
@@ -14,9 +18,14 @@ $clean-button-hover-background-color: #f1f1f1;
 $banner-img: url("/media/oldbanner1.gif");
 
 body {
-    font-family: "TW Cen MT Regular", Verdana, sans-serif;
+    font-family: "font-body", Verdana, sans-serif;
     font-size: 19px;
     color: #333;
+    h1 {
+        font-size: 33px;
+        font-family: "font-title", Times, serif;
+        margin-top: 0px;
+    }
 }
 
 header {
@@ -33,7 +42,8 @@ footer {
 }
 
 nav {
-
+    position: relative;
+    z-index: 1000;
 }
 
 #banner-img {
@@ -62,7 +72,7 @@ nav {
     padding-top: 20px;
     margin: auto;
     max-width: $max-page-width;
-    z-index: -10000;
+    //z-index: -10000;
 }
 
 .main-sidebar {
@@ -102,4 +112,8 @@ nav {
 
 .clean-button:hover {
     background-color: $clean-button-hover-background-color;
+}
+
+.centered-title {
+    text-align: center;
 }

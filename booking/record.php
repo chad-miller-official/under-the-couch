@@ -26,6 +26,7 @@
 
 			<div class="primary">
 				<article>
+					<h1>Recording</h1>
 					Under the Couch has a newly built studio.
 					<br />
 					<br />
@@ -38,7 +39,6 @@
 					</ul>
 					<form method="post" id="record_booking_form" action="/">
 						<fieldset>
-							<legend>Recording Form</legend>
 							<p>
 								<label class="nowidth" for="contactname">*Contact Name:</label>
 								<input class="textbox" type="text" name="contact_name" id="contact_name">

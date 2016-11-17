@@ -31,24 +31,25 @@
 	<body>
 		<? ui_insert( 'header' ); ?>
 
-		<form method="post" action="/" id="create_blog_post_form">
-			<fieldset>
-				<legend>Write Blog Post</legend>
-				<p>
-					<label for="title">Post Title:</label>
-					<input type="text" name="title" id="title"></input>
-				</p>
-				<center>
-					<textarea name="body" id="body"></textarea>
-				</center>
-				<p>
-					<label class="nowidth" for="send_email">Send post to mailing list?</label>
-					<input type="checkbox" name="send_email" id="send_email" />
-				</p>
-				<input type="submit" />
-			</fieldset>
-		</form>
-
-		<? ui_insert( 'footer' ); ?>
+		<div class="container">
+			<h1 class="centered-title">Write Blog Post</h1>
+			<form method="post" action="/" id="create_blog_post_form">
+				<fieldset class="centered-fieldset" id="write-blog-post">
+					<p>
+						<label for="title">Post Title:</label>
+						<input type="text" name="title" id="title"></input>
+					</p>
+					<center>
+						<textarea name="body" id="body"></textarea>
+					</center>
+					<p>
+						<label class="nowidth" for="send_email">Send post to mailing list?</label>
+						<input type="checkbox" name="send_email" id="send_email" />
+					</p>
+					<input type="submit" />
+				</fieldset>
+			</form>
+			<? ui_insert( 'footer' ); ?>
+		</div>
 	</body>
 </html>

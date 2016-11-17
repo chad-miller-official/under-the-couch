@@ -17,32 +17,35 @@
 		<? ui_insert( 'header' ); ?>
 
 		<? if( !is_logged_in() ): ?>
-			<form method="post" id="create_account_form" action="/">
-				<fieldset>
-					<legend>Create Account</legend>
+		<div class="container">
+			<h1 class="centered-title">Create an Account</h1>
+			<form class="login" method="post" id="create_account_form" action="/">
+				<fieldset class="centered-fieldset">
 					<p>
-						<label for="firstname">First Name:</label>
+						<label class="nowidth" for="firstname">First Name:</label>
 						<input class="textbox" type="text" name="first_name" id="first_name" />
 					</p>
 					<p>
-						<label for="lastname">Last Name:</label>
+						<label class="nowidth" for="lastname">Last Name:</label>
 						<input class="textbox" type="text" name="last_name" id="last_name" />
 					</p>
 					<p>
-						<label for="email">GATech Email:</label>
+						<label class="nowidth" for="email">GATech Email:</label>
 						<input class="textbox" type="text" name="gatech_email" id="gatech_email" />
 					</p>
 					<p>
-						<label for="password">Password:</label>
+						<label class="nowidth" for="password">Password:</label>
 						<input class="textbox" type="password" name="password" id="password" />
 					</p>
                     <p>
-                        <label for="password_again">Password Again:</label>
+                        <label class="nowidth" for="password_again">Password Again:</label>
                         <input class="textbox" type="password" name="password_again" id="password_again" />
                     </p>
-					<input type="submit" />
+					<input type="submit" class="submit-button" id="submit-login"></input>
 				</fieldset>
 			</form>
+		</div>
+		<br />
 		<? else: ?>
             <script type="text/javascript">
                 window.location = '/index.php';
