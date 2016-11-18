@@ -2,7 +2,7 @@ $( document ).ready( initialize );
 
 function initialize()
 {
-    $( '#edit_blog_post_form' ).submit( edit_blog_post );
+    $( '#edit_blog_post_form' ).submit( validate_blog_post );
 
     $( '#title' ).change( reset_validation );
     $( '#body' ).change( reset_validation );
@@ -38,13 +38,13 @@ function validate_blog_post( event )
     edit_blog_post( form_data );
 }
 
-function edit_blog_post( event )
+function edit_blog_post( data )
 {
     var url = '/common/php/ajax/update_blog_post.php';
 
     $.post( url, data, function( response, textStatus, jqXHR ) {
         if( response['success'] )
-            window.location = '/blog/blog_post.php?id=' + blog_post;
+            window.location = '/blog/blog_post.php?id=' + data['blog_post'];
         else
             alert( 'An error has occurred - please contact support.' );
     }, 'json' )

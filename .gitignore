@@ -1,3 +1,4 @@
 common/sql/*.bak
 *.css.map
 .sass-cache
+test
