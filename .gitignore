@@ -1,4 +1,3 @@
-common/sql/*.bak
+common/sql/erd/*.bak
 *.css.map
 .sass-cache
-test

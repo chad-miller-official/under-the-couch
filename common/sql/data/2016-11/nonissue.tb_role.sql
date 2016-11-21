@@ -1,3 +1,15 @@
+/* TB_ROLE */
+
+create table tb_role
+(
+    role             integer     primary key,
+    name             varchar(40) not null unique,
+    abbreviation     varchar(10) not null unique,
+    description_html text,
+    rank             integer     not null unique,
+    is_admin         boolean     default false
+);
+
 insert into tb_role
 (
     role,
@@ -113,8 +125,3 @@ values
     90,
     true
 );
-
--- Set parent for all non-Members so far to be Member
-   update tb_role
-      set parent = ( select role from tb_role where name = 'Member' )
-    where name <> 'Member';

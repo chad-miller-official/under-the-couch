@@ -1,3 +1,5 @@
+--ignore
+
 create or replace function fn_insert_or_update_row
 (
     in_table            text,

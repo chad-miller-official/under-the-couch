@@ -49,7 +49,8 @@ left join tb_member_role mre
 left join tb_role re
        on mre.role = re.role
  order by bp.blog_post desc,
-          r.rank asc
+          r.rank asc,
+          re.rank asc
     limit ?limit?
    offset ?offset?
 SQL;

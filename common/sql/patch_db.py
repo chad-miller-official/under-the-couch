@@ -1,0 +1,227 @@
+#!/usr/bin/python
+
+# Before running, make sure of the following:
+# 1. tb_applied_patch exists as specified in data/2016-11/issue-1.patch_metadata_schema.sql
+# 2. fn_insert_or_update_row() exists as specified in functions/fn_insert_or_update_row.sql
+
+import getopt
+import hashlib
+import psycopg2
+import os
+import re
+import sys
+
+from subprocess import call
+
+IGNORE_DIRECTIVE   = r'^--\s*ignore$'
+REQUIRES_DIRECTIVE = r'^--\s*requires:\s*(.+)$'
+
+GET_PATCH_RECORD_CHECKSUM = """
+select checksum
+  from tb_applied_patch
+ where patch_folder = %(patch_folder)s
+   and patch_file   = %(patch_file)s
+"""
+
+INSERT_OR_UPDATE_PATCH_RECORD_QUERY = """
+select fn_insert_or_update_row(
+           'tb_applied_patch',
+           '{
+              "patch_folder" : "%s",
+              "patch_file"   : "%s",
+              "is_function"  : %s,
+              "checksum"     : "%s"
+            }'::json,
+           array[ 'patch_folder', 'patch_file' ]
+       )
+"""
+
+INSERT_OR_UPDATE_PATCH_RECORD_QUERY_NO_CHECKSUM = """
+select fn_insert_or_update_row(
+           'tb_applied_patch',
+           '{
+              "patch_folder" : "%s",
+              "patch_file"   : "%s",
+              "is_function"  : %s
+            }'::json,
+           array[ 'patch_folder', 'patch_file' ]
+       )
+"""
+
+SQL_PATH = os.path.dirname( os.path.realpath( __file__ ) )
+
+db_conn  = None
+database = None
+user     = None
+
+def file_checksum( patch_file ):
+    patch_fh = open( patch_file, 'rb' )
+    hash_gen = hashlib.md5()
+    buf      = patch_fh.read( 65536 )
+
+    while len( buf ) > 0:
+        hash_gen.update( buf )
+        buf = patch_fh.read( 65536 )
+
+    patch_fh.close()
+    return hash_gen.hexdigest()
+
+def insert_or_update_patch_record( patch_folder, patch_file, is_function, checksum ):
+    global db_conn
+
+    if not checksum:
+        upsert_query = INSERT_OR_UPDATE_PATCH_RECORD_QUERY_NO_CHECKSUM % (
+            patch_folder,
+            patch_file,
+            str( is_function ).lower(),
+        )
+    else:
+        upsert_query = INSERT_OR_UPDATE_PATCH_RECORD_QUERY % (
+            patch_folder,
+            patch_file,
+            str( is_function ).lower(),
+            checksum
+        )
+
+    db_cursor = db_conn.cursor()
+    db_cursor.execute( upsert_query )
+    db_conn.commit()
+
+def get_ordered_patches( patch_folder ):
+    hierarchy = {}
+
+    for patch_file in os.listdir( SQL_PATH + '/' + patch_folder ):
+        patch_fh       = open( SQL_PATH + '/' + patch_folder + '/' + patch_file, 'r' )
+        directives_remain = True
+
+        while directives_remain:
+            directive = patch_fh.readline()
+
+            ignore_match   = re.match( IGNORE_DIRECTIVE, directive )
+            requires_match = re.match( REQUIRES_DIRECTIVE, directive )
+
+            if ignore_match:
+                directives_remain = False
+            elif requires_match:
+                if patch_file not in hierarchy:
+                    hierarchy[patch_file] = []
+
+                required_function = requires_match.group( 1 )
+                hierarchy[patch_file].append( required_function )
+            else:
+                if patch_file not in hierarchy:
+                    hierarchy[patch_file] = None
+
+                directives_remain = False
+
+        patch_fh.close()
+
+    return hierarchy
+
+def get_patch_record_checksum( patch_file, patch_folder ):
+    global db_conn
+
+    params = {
+        'patch_file'   : patch_file,
+        'patch_folder' : patch_folder
+    }
+
+    db_cursor = db_conn.cursor()
+    db_cursor.execute( GET_PATCH_RECORD_CHECKSUM, params )
+    retval = db_cursor.fetchone()
+    return retval[0] if retval else None
+
+def apply_patch( patch_folder, patch_file ):
+    global database, user
+
+    full_patch_name = SQL_PATH + '/' + patch_folder + '/' + patch_file
+    call( [ 'psql', '-w', '-U', user, '-d', database, '-f', full_patch_name, '-1' ] )
+    print '\n'
+
+def apply_patch_with_requires( hierarchy, patch_file, patch_folder ):
+    try:
+        requires = hierarchy.pop( patch_file )
+    except KeyError:
+        requires = None
+
+    if patch_folder != 'functions':
+        existing_checksum = get_patch_record_checksum( patch_file, patch_folder )
+        checksum          = file_checksum( SQL_PATH + '/' + patch_folder + '/' + patch_file )
+
+        if existing_checksum and existing_checksum == checksum:
+            return
+        elif existing_checksum and existing_checksum != checksum:
+            applying_updated = True
+        else:
+            applying_updated = False
+
+        is_function = False
+    else:
+        is_function      = True
+        checksum         = None
+        applying_updated = False
+
+    if requires and len( requires ) > 0:
+        for required_patch in requires:
+            apply_patch_with_requires( hierarchy, required_patch, patch_folder )
+
+    if applying_updated:
+        print 'Applying updated patch: data/' + patch_folder + '/' + patch_file
+    else:
+        if is_function:
+            print 'Installing function: data/' + patch_folder + '/' + patch_file
+        else:
+            print 'Applying new patch: data/' + patch_folder + '/' + patch_file
+
+    apply_patch( patch_folder, patch_file )
+    insert_or_update_patch_record( patch_folder, patch_file, is_function, checksum )
+
+def usage():
+    print 'Usage: ./patch_db.py -d <database> -U <username>'
+    exit( 0 )
+
+def main( argv ):
+    global db_conn, database, user
+
+    try:
+        opts, args = getopt.getopt( argv, 'hd:U:' )
+    except getopt.GetoptError:
+        usage()
+
+    for opt, arg in opts:
+        if opt == '-h':
+            usage()
+        elif opt == '-d':
+            database = arg
+        elif opt == '-U':
+            user = arg
+
+    if not database or not user:
+        usage()
+
+    db_conn = psycopg2.connect(
+        database = database,
+        user     = user
+    )
+
+    print 'Applying patches...\n'
+
+    for patch_folder in os.listdir( 'data' ):
+        patch_hierarchy = get_ordered_patches( 'data/' + patch_folder )
+
+        while len( patch_hierarchy.keys() ) > 0:
+            patch_file = sorted( patch_hierarchy.keys() )[0]
+            apply_patch_with_requires( patch_hierarchy, patch_file, 'data/' + patch_folder )
+
+    print 'Installing functions...\n'
+
+    function_hierarchy = get_ordered_patches( 'functions' )
+
+    while len( function_hierarchy.keys() ) > 0:
+        patch_file = sorted( function_hierarchy.keys() )[0]
+        apply_patch_with_requires( function_hierarchy, patch_file, 'functions' )
+
+if __name__ == "__main__":
+    main( sys.argv[1:] )
+
+sys.exit( 0 )
