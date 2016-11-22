@@ -64,8 +64,12 @@
 						<p>
 							<label class="nowidth" for="comments">Additional comments:</label>
 							<br>
+<<<<<<< Updated upstream
+							<textarea name="comments" class="comments" id="comments"></textarea>
+=======
 							<textarea name="comments" class="comments"
 								placeholder="Anything else you'd like to add?"></textarea>
+>>>>>>> Stashed changes
 						</p>
 						<input type="submit" class="submit-button"></input>
 					</fieldset>
