@@ -22,7 +22,7 @@
      *   <<an array of blog posts hashes>> if retrieval was successful;
      *   <<false>> otherwise.
      */
-    function get_blog_posts( $max_num_posts, $offset=0 )
+    function get_blog_posts( $max_num_posts, $offset = 0 )
     {
         $body_posts_query = <<<SQL
    select distinct on ( bp.blog_post )

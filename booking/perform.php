@@ -58,7 +58,7 @@
 						<p>
 							<label class="nowidth" for="comments">Additional comments:</label>
 							<br>
-							<textarea name="comments" class="comments"></textarea>
+							<textarea name="comments" class="comments" id="comments"></textarea>
 						</p>
 						<input type="submit" class="submit-button"></input>
 					</fieldset>

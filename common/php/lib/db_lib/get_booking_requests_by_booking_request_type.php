@@ -9,7 +9,7 @@
          br.date_requested,
          br.comments,
          br.additional_information,
-         br.created,
+         to_char( br.created, 'YYYY-MM-DD' ) as created,
          brs.label as booking_request_status,
          brt.label as booking_request_type
     from tb_booking_request br
