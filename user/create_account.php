@@ -1,22 +1,23 @@
+<? if( is_logged_in() ): ?>
+    <script type="text/javascript">
+        window.location = '/index.php';
+    </script>
+    <? exit; ?>
+<? endif; ?>
 <!doctype html>
 <html>
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - Create Account</title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
-
 		<?
             js_common_include();
             js_include( 'validate_lib.js' );
 		?>
-
         <script src="/user/js/create_account.js"></script>
 	</head>
-
 	<body>
 		<? ui_insert( 'header' ); ?>
-
-		<? if( !is_logged_in() ): ?>
 		<div class="container">
 			<h1 class="centered-title">Create an Account</h1>
 			<form class="login" method="post" id="create_account_form" action="/">
@@ -45,13 +46,6 @@
 				</fieldset>
 			</form>
 		</div>
-		<br />
-		<? else: ?>
-            <script type="text/javascript">
-                window.location = '/index.php';
-            </script>
-		<? endif; ?>
-
 		<? ui_insert( 'footer' ); ?>
 	</body>
 </html>

@@ -174,12 +174,20 @@ legend {
 .required-is-empty {
   border: 2px solid rgba(255, 0, 0, 0.65); }
 
+#profile_photo {
+  border: 1px solid black;
+  height: 300px;
+  width: 300px; }
+
+#upload_profile_photo {
+  position: absolute; }
+
 @font-face {
   font-family: "font-body";
-  src: url("fonts/TW Cen MT.ttf"); }
+  src: url("/fonts/TW Cen MT.ttf"); }
 @font-face {
   font-family: "font-title";
-  src: url("fonts/Cochin.ttc"); }
+  src: url("/fonts/Cochin.ttc"); }
 body {
   font-family: "font-body", Verdana, sans-serif;
   font-size: 19px;
@@ -262,5 +270,10 @@ nav {
 
 .centered-title {
   text-align: center; }
+
+.contact-photo {
+  max-width: 300px;
+  max-height: 300px;
+  border: 1px solid black; }
 
 /*# sourceMappingURL=gtmn_standard.css.map */

@@ -1,3 +1,5 @@
 common/sql/erd/*.bak
 *.css.map
 .sass-cache
+media/profile/*
+!media/profile/default.jpg

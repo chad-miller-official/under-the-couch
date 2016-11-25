@@ -18,7 +18,8 @@
         $get_officer_info_query = <<<SQL
 select m.member,
        m.first_name || ' ' || m.last_name as officer_name,
-       m.display_email_address
+       m.display_email_address,
+       m.profile_photo_path
   from tb_member m
   join tb_member_role mr
     on m.member = mr.member

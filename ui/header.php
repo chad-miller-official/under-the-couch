@@ -1,11 +1,10 @@
 <header>
-	<? if (!file_exists("{$GLOBALS['webroot']}/media/oldbanner.gif")): ?>
+	<? if( !file_exists( "{$GLOBALS['webroot']}/media/oldbanner.gif" ) ): ?>
 		<h1 id="site-title">Under The Couch</h1>
 	<? else: ?>
 		<img src="/media/oldbanner.gif" id="banner-img">
 		<img/>
 	<? endif ?>
-
 	<nav>
 		<ul class="main-nav">
 			<li><a href="/index.php" class="main-nav-drop-head">Home</a></li>
@@ -65,10 +64,10 @@
 				<li class="main-nav-personal">
 					<a href="javascript:void(0)" class="main-nav-drop-head" id="logout">Logout</a></li>
 				<li class="main-nav-personal">
-					<a href="#" class="main-nav-drop-head" id="profile">Profile</a></li>
+					<a href="/user/profile.php" class="main-nav-drop-head" id="profile">Profile</a></li>
 			<? endif; ?>
 			<li id="welcome">
-				<b>Welcome, <?= SessionLib::get( 'user_member.name' ) ?: 'guest' ?>!</b>
+				<b>Welcome, <?= SessionLib::get( 'user_member.first_name' ) ?: 'guest' ?>!</b>
 			</li>
 		</ul>
 	</nav>

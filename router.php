@@ -28,17 +28,16 @@
     // Make sure we can access the page we want
     $requested_page = $_REQUEST['file'];
 
-    // Always permit AJAX requests
     if( isset( $requested_page ) && file_exists( $requested_page ) )
     {
-        if(
-               preg_match( '/^common\/php\/ajax\/.+\.php$/', $requested_page )
-            || access_allowed( $requested_page )
-        )
+        if( preg_match( '/^common\/php\/ajax\/.+\.php$/', $requested_page ) )
         {
+            // Always permit AJAX requests
             lib_include( 'ajax_lib' );
             require_once( $requested_page );
         }
+        elseif( access_allowed( $requested_page ) )
+            require_once( $requested_page );
         else
             require_once( '404.php' );
     }

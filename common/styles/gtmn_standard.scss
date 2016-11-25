@@ -2,13 +2,15 @@
 @import 'gtmn_blog';
 @import 'gtmn_table';
 @import 'gtmn_form';
+@import 'gtmn_profile';
+
 @font-face {
     font-family: "font-body";
-    src: url("fonts/TW Cen MT.ttf");
+    src: url("/fonts/TW Cen MT.ttf");
 }
 @font-face {
     font-family: "font-title";
-    src: url("fonts/Cochin.ttc");
+    src: url("/fonts/Cochin.ttc");
 }
 
 $font-color: #333;
@@ -116,4 +118,10 @@ nav {
 
 .centered-title {
     text-align: center;
+}
+
+.contact-photo {
+    max-width: 300px;
+    max-height: 300px;
+    border: 1px solid black;
 }

@@ -9,9 +9,8 @@ import hashlib
 import psycopg2
 import os
 import re
+import subprocess
 import sys
-
-from subprocess import call
 
 IGNORE_DIRECTIVE   = r'^--\s*ignore$'
 REQUIRES_DIRECTIVE = r'^--\s*requires:\s*(.+)$'
@@ -27,22 +26,7 @@ INSERT_OR_UPDATE_PATCH_RECORD_QUERY = """
 select fn_insert_or_update_row(
            'tb_applied_patch',
            '{
-              "patch_folder" : "%s",
-              "patch_file"   : "%s",
-              "is_function"  : %s,
-              "checksum"     : "%s"
-            }'::json,
-           array[ 'patch_folder', 'patch_file' ]
-       )
-"""
-
-INSERT_OR_UPDATE_PATCH_RECORD_QUERY_NO_CHECKSUM = """
-select fn_insert_or_update_row(
-           'tb_applied_patch',
-           '{
-              "patch_folder" : "%s",
-              "patch_file"   : "%s",
-              "is_function"  : %s
+              %s
             }'::json,
            array[ 'patch_folder', 'patch_file' ]
        )
@@ -66,22 +50,22 @@ def file_checksum( patch_file ):
     patch_fh.close()
     return hash_gen.hexdigest()
 
-def insert_or_update_patch_record( patch_folder, patch_file, is_function, checksum ):
+def insert_or_update_patch_record( patch_folder, patch_file, is_function, checksum, reapplied ):
     global db_conn
 
-    if not checksum:
-        upsert_query = INSERT_OR_UPDATE_PATCH_RECORD_QUERY_NO_CHECKSUM % (
-            patch_folder,
-            patch_file,
-            str( is_function ).lower(),
-        )
-    else:
-        upsert_query = INSERT_OR_UPDATE_PATCH_RECORD_QUERY % (
-            patch_folder,
-            patch_file,
-            str( is_function ).lower(),
-            checksum
-        )
+    params_string = '"patch_folder" : "%s", "patch_file" : "%s", "is_function" : %s' % (
+        patch_folder,
+        patch_file,
+        str( is_function ).lower()
+    )
+
+    if checksum:
+        params_string += ', "checksum" : "%s"' % ( checksum )
+
+    if reapplied:
+        params_string += ', "reapplied" : "%s"' % ( reapplied )
+
+    upsert_query = INSERT_OR_UPDATE_PATCH_RECORD_QUERY % params_string
 
     db_cursor = db_conn.cursor()
     db_cursor.execute( upsert_query )
@@ -135,8 +119,18 @@ def apply_patch( patch_folder, patch_file ):
     global database, user
 
     full_patch_name = SQL_PATH + '/' + patch_folder + '/' + patch_file
-    call( [ 'psql', '-w', '-U', user, '-d', database, '-f', full_patch_name, '-1' ] )
-    print '\n'
+    output          = subprocess.check_output(
+        [ 'psql', '-w', '-U', user, '-d', database, '-f', full_patch_name, '-1' ],
+        stderr=subprocess.STDOUT,
+    )
+
+    print output
+
+    for line in iter( output.splitlines() ):
+        if 'ERROR:' in line:
+            return False
+
+    return True
 
 def apply_patch_with_requires( hierarchy, patch_file, patch_folder ):
     try:
@@ -144,9 +138,12 @@ def apply_patch_with_requires( hierarchy, patch_file, patch_folder ):
     except KeyError:
         requires = None
 
+    full_patch_path = patch_folder + '/' + patch_file
+    reapplied       = None
+
     if patch_folder != 'functions':
         existing_checksum = get_patch_record_checksum( patch_file, patch_folder )
-        checksum          = file_checksum( SQL_PATH + '/' + patch_folder + '/' + patch_file )
+        checksum          = file_checksum( SQL_PATH + '/' + full_patch_path )
 
         if existing_checksum and existing_checksum == checksum:
             return
@@ -166,15 +163,29 @@ def apply_patch_with_requires( hierarchy, patch_file, patch_folder ):
             apply_patch_with_requires( hierarchy, required_patch, patch_folder )
 
     if applying_updated:
-        print 'Applying updated patch: data/' + patch_folder + '/' + patch_file
+        do_apply_updated = ''
+        print( 'The patch ' + full_patch_path + ' has been modified since last applied. Re-apply?' ),
+
+        while do_apply_updated.lower() not in [ 'y', 'n' ]:
+            do_apply_updated = raw_input( '(y/n) ' )
+
+        if do_apply_updated.lower() == 'y':
+            print 'Applying updated patch: ' + full_patch_path
+            reapplied = 'now()'
+        else:
+            return
     else:
         if is_function:
-            print 'Installing function: data/' + patch_folder + '/' + patch_file
+            print 'Installing function: ' + full_patch_path
         else:
-            print 'Applying new patch: data/' + patch_folder + '/' + patch_file
+            print 'Applying new patch: ' + full_patch_path
 
-    apply_patch( patch_folder, patch_file )
-    insert_or_update_patch_record( patch_folder, patch_file, is_function, checksum )
+    patch_success = apply_patch( patch_folder, patch_file )
+
+    if patch_success:
+        insert_or_update_patch_record( patch_folder, patch_file, is_function, checksum, reapplied )
+    else:
+        print 'Patch failed to apply.\n'
 
 def usage():
     print 'Usage: ./patch_db.py -d <database> -U <username>'

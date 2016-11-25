@@ -19,7 +19,6 @@
 
 	$officers = get_officer_info( $position['role'] );
 ?>
-
 <!doctype html>
 <html>
 	<head>
@@ -27,20 +26,17 @@
 		<title>Under the Couch - <?= $position_name ?></title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
 	</head>
-
 	<body>
 		<? ui_insert( 'header' ); ?>
-
 		<div class="container">
 			<? ui_insert( 'sidebar' ); ?>
-
 			<div class="primary">
 				<article>
 					<br/>
                     <center>
 						<? if( $officers ): ?>
 							<? foreach( $officers as $officer ): ?>
-								<img src="/contacts/media/<?= "{$position['abbreviation']}_{$officer['member']}" ?>.jpg" />
+								<img src="<?= $officer['profile_photo_path'] ?: '/media/profile/default.jpg' ?>" class="contact-photo" />
 								<br />
 								<b> <?= $officer['officer_name'] ?> </b>
 								<br />
@@ -54,7 +50,6 @@
 					<br/>
 				</article>
 			</div>
-
 			<? ui_insert( 'footer' ); ?>
 		</div>
 	</body>

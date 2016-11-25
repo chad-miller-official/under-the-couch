@@ -26,7 +26,19 @@
     function get_member( $member )
     {
         $get_member_query = <<<SQL
-select m.*,
+select m.first_name,
+       m.last_name,
+       m.gatech_email_address,
+       m.display_email_address,
+       to_char( m.paid_dues_date, 'MM/DD/YYYY' ) as paid_dues_date,
+       to_char( m.paid_locker_date, 'MM/DD/YYYY' ) as paid_locker_date,
+       to_char( m.paid_practice_date, 'MM/DD/YYYY' ) as paid_practice_date,
+       to_char(
+           m.paid_locker_date + ( m.locker_months * interval '1 month' ),
+           'MM/DD/YYYY'
+       ) as locker_end_date,
+       m.locker_number,
+       m.profile_photo_path,
        m.first_name || ' ' || m.last_name as name,
        r.is_admin
   from tb_member m

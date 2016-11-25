@@ -1,0 +1,19 @@
+$profile-photo-dimension: 300px;
+
+#profile_photo {
+    border: 1px solid black;
+    height: $profile-photo-dimension;
+    width: $profile-photo-dimension;
+}
+
+#upload_profile_photo {
+    position: absolute;
+}
+
+#public_info {
+    
+}
+
+#payment_dates {
+
+}
