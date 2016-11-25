@@ -28,7 +28,7 @@
         endif;
     }
 
-    $is_owner    = ( $member_pk == SessionLib::get( 'user_member.member' ) );
+    $is_owner    = ( $member_pk == SessionLib::get( 'user_member.member' ) || SessionLib::get( 'user_member.is_admin' ) );
     $member_info = get_member( $member_pk );
 
     $name          = $member_info['name'];

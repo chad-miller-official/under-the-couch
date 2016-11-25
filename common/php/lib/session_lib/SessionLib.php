@@ -123,6 +123,7 @@
                     SessionLib::set( 'user_member.first_name',           $first_name                     );
                     SessionLib::set( 'user_member.full_name',            $full_name                      );
                     SessionLib::set( 'user_member.gatech_email_address', $member['gatech_email_address'] );
+                    SessionLib::set( 'user_member.is_admin',             $member['is_admin']             );
                 }
 
                 return true;
