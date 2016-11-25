@@ -27,7 +27,7 @@ fieldset {
     background-color: #f1f1f1;
     padding-top: 0px;
     max-width: 386px;
-    border: $fieldset-border-width solid $fieldset-border-color;
+    border: none; //$fieldset-border-width solid $fieldset-border-color;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -44,13 +44,15 @@ fieldset#write-blog-post {
 article {
     display: inline-block;
     max-width: 750px;
+    position: relative;
+    left: 30px;
     padding-left: 10px;
     padding-right: 10px
 }
 
 legend {
     background-color: #f1f1f1;
-    border: $fieldset-border-width solid $fieldset-border-color;
+    //border: $fieldset-border-width solid $fieldset-border-color;
     //border-color: black;
 }
 
@@ -66,8 +68,15 @@ legend {
     display: inline-block;
     padding: 8px 12px;
     font-size: 14px;
-    border: $fieldset-border-width solid $fieldset-border-color;
+    //border: $fieldset-border-width solid $fieldset-border-color;
     width: 162px;
+}
+
+textarea {
+    min-width: 358px;
+    max-width: 358px;
+    max-height: 200px;
+    overflow: scroll;
 }
 
 .submit-button {

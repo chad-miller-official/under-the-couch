@@ -41,15 +41,18 @@
 						<fieldset>
 							<p>
 								<label class="nowidth" for="contactname">*Contact Name:</label>
-								<input class="textbox" type="text" name="contact_name" id="contact_name">
+								<input class="textbox" type="text" name="contact_name"
+									id="contact_name" placeholder="First Last">
 							</p>
 							<p>
 								<label class="nowidth" for="email">*Email Address:</label>
-								<input class="textbox" type="text" name="email" id="email">
+								<input class="textbox" type="text" name="email"
+									id="email" placeholder="you@example.com">
 							</p>
 							<p>
 								<label class="nowidth" for="number">Contact Phone Number:</label>
-								<input class="textbox" type="tel" name="phone" id="phone">
+								<input class="textbox" type="tel" name="phone"
+									id="phone" placeholder="(xxx)-xxx-xxxx">
 							</p>
 							<p>
 								<label class="nowidth" for="date">*Date Requested:</label>

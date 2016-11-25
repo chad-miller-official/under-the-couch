@@ -37,19 +37,23 @@
 						<fieldset>
 							<p>
 								<label class="nowidth" for="orgname">*Organization Name:</label>
-								<input class="textbox" type="text" name="org_name" id="org_name">
+								<input class="textbox" type="text" name="org_name"
+									id="org_name" placeholder="Musician's Network">
 							</p>
 							<p>
 								<label class="nowidth" for="contactname">*Contact Name:</label>
-								<input class="textbox" type="text" name="contact_name" id="contact_name">
+								<input class="textbox" type="text" name="contact_name"
+									id="contact_name" placeholder="First Last">
 							</p>
 							<p>
 								<label class="nowidth" for="email">*Email Address:</label>
-								<input class="textbox" type="text" name="email" id="email">
+								<input class="textbox" type="text" name="email"
+									id="email" placeholder="you@example.com">
 							</p>
 							<p>
 								<label class="nowidth" for="number">Contact Phone Number:</label>
-								<input class="textbox" type="tel" name="phone" id="phone">
+								<input class="textbox" type="tel" name="phone"
+									id="phone" placeholder="(xxx)-xxx-xxxx">
 							</p>
 							<p>
 								<label class="nowidth" for="date">*Date Requested:</label>
@@ -65,7 +69,8 @@
 							</p>
 							<p>
 								<label class="nowidth" for="description">*Description of Event:</label>
-								<input class="textbox" type="text" name="description" id="description">
+								<br>
+								<textarea name="description" class="textbox" id="description"></textarea>
 							</p>
 							<p>
 								<label class="nowidth" for="attendees">*Expected Number of Attendees:</label>
@@ -74,12 +79,13 @@
 							<p>
 								<label class="nowidth" for="comments">Additional comments:</label>
 								<br>
-								<textarea name="comments" id="comments"></textarea>
+								<textarea name="comments" class="comments"
+									placeholder="Anything else you'd like to add?"></textarea>
 							</p>
 							Required fields are marked with "*".
 							<br />
 							<br />
-							<u><a href="usageaggrement.pdf">USAGE AGREEMENT</a></u>: What we expect from you:
+							<u><a href="usageaggrement.pdf">USAGE AGREEMENT</a></u> &ndash; What we expect from you:
 							<ul>
 								<li>
 									You must clean up after the event; this includes taking trash out to the dumpster (do not
