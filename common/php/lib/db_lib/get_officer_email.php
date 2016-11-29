@@ -1,15 +1,13 @@
 <?
     /*
-     * DEPRECTATED. Use get_officer_email($role) instead.
-     *
-     * Gets the equipment manager's email address from the database.
+     * Gets an officer's email address from the database.
      *
      * Params:
-     *   None.
+     *   The role of the officer whose email should be retrieved.
      * Returns:
-     *   The equipment manager's email address.
+     *   The officer's email address.
      */
-    function get_equipment_manager_email()
+    function get_officer_email($role)
     {
         $email_query = <<<SQL
 select m.display_email_address
@@ -21,7 +19,7 @@ select m.display_email_address
  where r.role = ?role?
 SQL;
 
-        $params = [ 'role' => ROLE_EQUIPMENT_MANAGER ];
+        $params = [ 'role' => $role ];
         $result = query_execute( $email_query, $params );
 
         if( query_success( $result ) )

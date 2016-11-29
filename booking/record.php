@@ -1,6 +1,6 @@
 <?
-	db_include( 'get_equipment_manager_email' );
-	$email = get_equipment_manager_email();
+	db_include( 'get_officer_email' );
+	$email = get_officer_email(ROLE_EQUIPMENT_MANAGER);
 ?>
 
 <!doctype html>

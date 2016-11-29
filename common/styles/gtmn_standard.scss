@@ -74,6 +74,7 @@ nav {
     padding-top: 20px;
     margin: auto;
     max-width: $max-page-width;
+    min-height: (24px + 25px) * 11;
     //z-index: -10000;
 }
 
@@ -83,7 +84,9 @@ nav {
     padding-left: 4px;
     padding-right: 8px;
     float: left;
-    border: 3px solid #333;
+    background-color: #f1f1f1;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    //border: 3px solid #333;
 }
 
 #main-sidebar-title {

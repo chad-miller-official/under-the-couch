@@ -2,6 +2,7 @@
 
 #remember for later:
 #insert into tb_member_role ( member, role ) values ( 1, 2 );
+#why isn't this working?
 
 sql_dir="$(dirname $(greadlink -f $0))"
 cd $sql_dir;
