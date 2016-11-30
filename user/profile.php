@@ -55,50 +55,61 @@
 	<body>
         <? ui_insert( 'header' ); ?>
         <div class="container">
-            <section class="focus-content">
-    			<aside>
-                    <? if( $is_owner ): ?>
-                        <form id="form_upload_profile_photo"
-                              action="/"
-                              method="post"
-                              enctype="multipart/form-data"
-                        >
-                            <input type="file"
-                                   style="display:none"
-                                   id="input_upload_profile_photo"
-                                   name="profile_photo"
+
+            <? ui_insert( 'sidebar' ); ?>
+
+            <!--<section class="focus-content">-->
+            <article>
+                <h1>
+                    Your Profile
+                </h1>
+                <div class="profile-card">
+        			<aside id="profile-photo-wrapper">
+                        <? if( $is_owner ): ?>
+                            <form id="form_upload_profile_photo"
+                                  action="/"
+                                  method="post"
+                                  enctype="multipart/form-data"
                             >
-                            <input type="hidden" name="member_pk" id="member_pk" value="<?= $member_pk ?>" />
-                            <a href="" id="upload_profile_photo">Upload Photo</a>
-                    <? endif; ?>
-                            <img src="<?= $profile_photo_path ?>" id="profile_photo" />
-                    <? if( $is_owner ): ?>
-                        </form>
-                    <? endif; ?>
-                </aside>
-                <div id="public_info">
-                    <h2><?= $name ?></h2>
-                    <p><a href="mailto:<?= $email_address ?>"><?= $email_address?></a></p>
-                </div>
-                <? if( $is_owner ): ?>
-                    <div id="payment_dates">
-                        <p>
-                            Paid Dues: <?= $paid_dues_date ?>
-                            <br />
-                            Paid Practice Fees: <?= $paid_practice_date ?>
-                            <? if( $paid_locker_date ): ?>
-                                <br />
-                                <br />
-                                Paid Locker Fee: <?= $paid_locker_date ?>
-                                <br />
-                                Paid Through: <?= $locker_end_date ?>
-                                <br />
-                                Locker Number: <?= $locker_number ?>
-                            <? endif; ?>
-                        </p>
+                                <input type="file"
+                                       style="display:none"
+                                       id="input_upload_profile_photo"
+                                       name="profile_photo"
+                                >
+                                <input type="hidden" name="member_pk" id="member_pk" value="<?= $member_pk ?>" />
+                                <div id="upload_profile_photo">
+                                    <a href="" id="upload_profile_photo_link">Upload Photo</a>
+                                </div>
+                        <? endif; ?>
+                                <img src="<?= $profile_photo_path ?>" id="profile_photo" />
+                        <? if( $is_owner ): ?>
+                            </form>
+                        <? endif; ?>
+                    </aside>
+                    <div id="public_info">
+                        <h2><?= $name ?></h2>
+                        <p><a href="mailto:<?= $email_address ?>"><?= $email_address?></a></p>
                     </div>
-                <? endif; ?>
-            </section>
+                    <? if( $is_owner ): ?>
+                        <div id="payment_dates">
+                            <p>
+                                Paid Dues: <?= $paid_dues_date ?>
+                                <br />
+                                Paid Practice Fees: <?= $paid_practice_date ?>
+                                <? if( $paid_locker_date ): ?>
+                                    <br />
+                                    <br />
+                                    Paid Locker Fee: <?= $paid_locker_date ?>
+                                    <br />
+                                    Paid Through: <?= $locker_end_date ?>
+                                    <br />
+                                    Locker Number: <?= $locker_number ?>
+                                <? endif; ?>
+                            </p>
+                        </div>
+                    <? endif; ?>
+                </div>
+            </article>
         </div>
         <? ui_insert( 'footer' ); ?>
 	</body>
