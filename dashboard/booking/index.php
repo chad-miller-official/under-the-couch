@@ -15,7 +15,7 @@
 
         <div class="container">
             <center>
-                <table class="dynamic-data">
+                <table class="dynamic-data" cellspacing="0">
                     <tr>
                         <th>Request ID</th>
                         <th>Contact Name</th>

@@ -88,23 +88,35 @@
   padding-left: 8px;
   padding-right: 8px; }
 
+table {
+  border-spacing: 0;
+  border-collapse: collapse; }
+
 table.static-data th, table.static-data td {
   padding: 8px;
   text-align: left; }
 
 table.dynamic-data {
-  border: 2px solid black;
-  background-color: #f1f1f1;
+  border: none;
+  background-image: url("media/card-background.jpg");
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); }
-  table.dynamic-data th, table.dynamic-data td {
+  table.dynamic-data th {
+    padding: 8px;
+    text-align: left; }
+  table.dynamic-data td {
     padding: 8px;
     text-align: left;
-    border: none; }
-  table.dynamic-data td {
-    border-top: 2px solid black; }
+    border-top: 3px groove; }
   table.dynamic-data tr {
-    border-left: 2px solid black; }
+    background-color: rgba(255, 255, 255, 0.4); }
 
+/*
+* Statuses:
+* Unreviewed:   ff4d4d
+* Reviewed:     d8b858
+* Replied:      5878d9
+* Closed:       40cc54
+*/
 form.login {
   margin: inherit;
   max-width: 550px; }
@@ -122,7 +134,7 @@ div.form-row {
     text-align: left; }
 
 fieldset {
-  background-color: #f1f1f1;
+  background-image: url("media/card-background.jpg");
   padding-top: 0px;
   max-width: 386px;
   border: none;
@@ -188,12 +200,12 @@ textarea {
   display: none; }
 
 #profile_photo {
-  border: 1px solid black;
+  border: 2px solid black;
   height: 300px;
   width: 300px; }
 
 #upload_profile_photo {
-  padding-top: 267px;
+  padding-top: 268px;
   text-align: center;
   width: 300px;
   position: absolute; }
@@ -210,7 +222,7 @@ textarea {
   background-color: #ff4d4d; }
 
 .profile-card {
-  background-color: #f1f1f1;
+  background-image: url("media/card-background.jpg");
   padding: 21px 21px 9px 21px;
   max-width: 386px;
   border: none;
@@ -272,12 +284,12 @@ nav {
   min-height: 539px; }
 
 .main-sidebar {
-  max-width: 250px;
+  width: 250px;
   display: inline-block;
   padding-left: 4px;
   padding-right: 8px;
   float: left;
-  background-color: #f1f1f1;
+  background-image: url("media/card-background.jpg");
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); }
 
 #main-sidebar-title {

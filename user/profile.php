@@ -60,9 +60,11 @@
 
             <!--<section class="focus-content">-->
             <article>
-                <h1>
-                    Your Profile
-                </h1>
+                <? if ($is_owner): ?>
+                    <h1>
+                        Your Profile
+                    </h1>
+                <? endif; ?>
                 <div class="profile-card">
         			<aside id="profile-photo-wrapper">
                         <? if( $is_owner ): ?>

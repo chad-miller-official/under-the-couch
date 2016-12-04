@@ -13,7 +13,7 @@ $profile-photo-dimension: 300px;
 }
 
 #profile_photo {
-    border: 1px solid black;
+    border: 2px solid black;
     height: $profile-photo-dimension;
     width: $profile-photo-dimension;
 }
@@ -23,7 +23,7 @@ $profile-photo-dimension: 300px;
 }
 
 #upload_profile_photo {
-    padding-top: $profile-photo-dimension - 33;
+    padding-top: $profile-photo-dimension - 32;
     text-align: center;
     width: $profile-photo-dimension;
     position: absolute;
@@ -51,7 +51,8 @@ $profile-photo-dimension: 300px;
 }
 
 .profile-card {
-    background-color: #f1f1f1;
+    //background-color: #f1f1f1;
+    background-image: url("media/card-background.jpg");
     padding: 21px 21px 9px 21px;
     max-width: 386px;
     border: none;

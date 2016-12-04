@@ -1,8 +1,8 @@
 <header>
-	<? if( !file_exists( "{$GLOBALS['webroot']}/media/oldbanner.gif" ) ): ?>
+	<? if( !file_exists( "{$GLOBALS['webroot']}/media/oldbanner-fixed.gif" ) ): ?>
 		<h1 id="site-title">Under The Couch</h1>
 	<? else: ?>
-		<img src="/media/oldbanner.gif" id="banner-img">
+		<img src="/media/oldbanner-fixed.gif" id="banner-img">
 		<img/>
 	<? endif ?>
 	<nav>
