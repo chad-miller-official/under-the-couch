@@ -80,7 +80,7 @@ textarea {
     overflow: scroll;
 }
 
-.submit-button {
+.submit-button, .cancel-button {
     display: inline-block;
     text-decoration: none;
     border:none;
@@ -91,7 +91,7 @@ textarea {
     background-color: #333;
 }
 
-.submit-button:hover {
+.submit-button:hover, .cancel-button:hover {
     background-color: #ff4d4d;
 }
 

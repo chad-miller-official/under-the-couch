@@ -85,7 +85,7 @@
 							Required fields are marked with "*".
 							<br />
 							<br />
-							<u><a href="usageaggrement.pdf">USAGE AGREEMENT</a></u> &ndash; What we expect from you:
+							<u><a href="usageagreement.pdf">USAGE AGREEMENT</a></u> &ndash; What we expect from you:
 							<ul>
 								<li>
 									You must clean up after the event; this includes taking trash out to the dumpster (do not
@@ -112,7 +112,7 @@
 					<br />
 
 					The above form is the standard for booking events, but the booking agent may be emailed directly at
-					<a href="<?= EMAIL_BOOKING?>"><?= EMAIL_BOOKING ?></a>. Please have your email title begin
+					<a href="<?= EMAIL_BOOKING?>?subject=[GT Organization]"><?= EMAIL_BOOKING ?></a>. Please have your email subject begin
 					with "[GT Organization]" and include as much of the above information as possible in the email. If you
 					do not fill out the above form, please print and sign our <a href="usageagreement.pdf">Usage Agreement</a>
 					and bring it to the event.

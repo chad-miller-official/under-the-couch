@@ -75,7 +75,7 @@
 				<br />
 				<br />
 				The above form is the standard for booking shows, but the booking agent may be emailed directly at
-				<a href="mailto:<?= EMAIL_BOOKING ?>"><?= EMAIL_BOOKING ?></a>. Please have your email title begin
+				<a href="mailto:<?= EMAIL_BOOKING ?>?subject=[UTC Booking]"><?= EMAIL_BOOKING ?></a>. Please have your email subject begin
 				with "[UTC Booking]" and include as much of the above information as possible in the email.
 			</article>
 

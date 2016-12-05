@@ -49,7 +49,10 @@
 		<meta charset="utf-8" />
 		<title>Under the Couch - Profile - <?= $name ?></title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
-		<? js_common_include(); ?>
+        <?
+            js_common_include();
+            js_include( 'validate_lib.js' );
+		?>
         <script src="/user/js/profile.js"></script>
 	</head>
 	<body>
@@ -90,7 +93,16 @@
                     </aside>
                     <div id="public_info">
                         <h2><?= $name ?></h2>
-                        <p><a href="mailto:<?= $email_address ?>"><?= $email_address?></a></p>
+                        <p><? if(!$is_owner): ?>
+                                <a href="mailto:<?= $email_address ?>"><?= $email_address?></a>
+                            <? else: ?>
+                                <a id="change-email-link" href="javascript:;"><?= $email_address?></a>
+                                <div id="change-email">
+                                    <? require($GLOBALS[WEBROOT] . "/user/change_email_mini.php"); ?>
+                                    <script src="/user/js/change_email.js"></script>
+                                </div>
+                            <? endif; ?>
+                        </p>
                     </div>
                     <? if( $is_owner ): ?>
                         <div id="payment_dates">
