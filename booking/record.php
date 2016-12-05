@@ -76,7 +76,7 @@
 					<br />
 					<br />
 					The above form is the standard for recording at Under the Couch, but the equipment manager may be emailed
-					directly at <a href="mailto:<?= $email ?>"><?= $email ?></a>. Please have your email title begin
+					directly at <a href="mailto:<?= $email ?>?subject=[UTC Recording]"><?= $email ?></a>. Please have your email subject begin
 					with "[UTC Recording]" and include as much of the above information as possible in the email.
 				</article>
 			</div>
