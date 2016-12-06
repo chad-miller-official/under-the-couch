@@ -1,7 +1,5 @@
 <?
-    db_include('get_member');
-
-    function change_display_email($member_pk, $display_email_address) {
+    function update_member_display_email_address($member_pk, $display_email_address) {
         $query = <<<SQL
 update tb_member
 set display_email_address = ?display_email_address?

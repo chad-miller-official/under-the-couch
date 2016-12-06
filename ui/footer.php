@@ -1,7 +1,11 @@
+<?
+    $found_year      = 2016;
+    $current_year    = date( 'Y' );
+    $copyright_years = strval( $found_year );
+
+    if( $current_year > $found_year )
+        $copyright_years .= " &ndash; $current_year";
+?>
 <footer>
-    &copy; <? if (date ('Y') > 2016): ?>
-        2016 &ndash; <?= date('Y') ?> Under the Couch
-    <? else: ?>
-        <?= date('Y') ?> Under the Couch
-    <? endif ?>
+    &copy; <?= $copyright_years ?> Under the Couch
 </footer>

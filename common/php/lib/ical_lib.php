@@ -41,7 +41,10 @@
     function ics_to_array( $paramUrl )
     {
         // Read the URL as a text file
-        $icsFile = file_get_contents( $paramUrl );
+        $icsFile = @file_get_contents( $paramUrl );
+
+        if( $icsFile === false )
+            return [];
 
         // Tokenize what we just read - each token is an event
         $icsData = explode( 'BEGIN:', $icsFile );
@@ -84,6 +87,8 @@
 	 */
 	function get_ics_events( $icsEvents, $startDateTime, $endDateTime )
 	{
+        $events = [];
+
 		foreach( $icsEvents as $key => $value )
 		{
 			// If the event's "BEGIN" value begins with "VEVENT", it is a valid event

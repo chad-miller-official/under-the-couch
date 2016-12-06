@@ -28,7 +28,7 @@
         endif;
     }
 
-    $is_owner    = ( $member_pk == SessionLib::get( 'user_member.member' ) || SessionLib::get( 'user_member.is_admin' ) );
+    $is_owner    = ( $member_pk == SessionLib::get( 'user_member.member' ) );
     $member_info = get_member( $member_pk );
 
     $name          = $member_info['name'];
@@ -36,10 +36,10 @@
 
     $profile_photo_path = $member_info['profile_photo_path'] ?: '/media/profile/default.jpg';
 
-    $paid_dues_date     = $member_info['paid_dues_date'];
-    $paid_practice_date = $member_info['paid_practice_date'];
+    $paid_dues_date     = $member_info['paid_dues_date'] ?: 'N/A';
+    $paid_practice_date = $member_info['paid_practice_date'] ?: 'N/A';
 
-    $paid_locker_date = $member_info['paid_locker_date'];
+    $paid_locker_date = $member_info['paid_locker_date'] ?: 'N/A';
     $locker_end_date  = $member_info['locker_end_date'];
     $locker_number    = $member_info['locker_number'];
 ?>
@@ -58,10 +58,7 @@
 	<body>
         <? ui_insert( 'header' ); ?>
         <div class="container">
-
             <? ui_insert( 'sidebar' ); ?>
-
-            <!--<section class="focus-content">-->
             <article>
                 <? if ($is_owner): ?>
                     <h1>
@@ -99,17 +96,16 @@
                                 <a id="change-email-link" href="javascript:;"><?= $email_address?></a>
                                 <div id="change-email">
                                     <? require($GLOBALS[WEBROOT] . "/user/change_email_mini.php"); ?>
-                                    <script src="/user/js/change_email.js"></script>
                                 </div>
                             <? endif; ?>
                         </p>
                     </div>
-                    <? if( $is_owner ): ?>
+                    <? if( $is_owner || SessionLib::get( 'user_member.is_admin' ) ): ?>
                         <div id="payment_dates">
                             <p>
-                                Paid Dues: <?= $paid_dues_date ?>
+                                <span>Paid Dues:</span> <span><?= $paid_dues_date ?></span>
                                 <br />
-                                Paid Practice Fees: <?= $paid_practice_date ?>
+                                <span>Paid Practice Fees:</span> <span><?= $paid_practice_date ?></span>
                                 <? if( $paid_locker_date ): ?>
                                     <br />
                                     <br />

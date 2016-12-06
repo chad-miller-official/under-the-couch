@@ -7,7 +7,7 @@
      * Returns:
      *   The officer's email address.
      */
-    function get_officer_email($role)
+    function get_officer_email( $role )
     {
         $email_query = <<<SQL
 select m.display_email_address

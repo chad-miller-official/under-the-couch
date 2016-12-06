@@ -80,7 +80,7 @@
 								<label class="nowidth" for="comments">Additional comments:</label>
 								<br>
 								<textarea name="comments" class="comments"
-									placeholder="Anything else you'd like to add?"></textarea>
+									placeholder="Anything else you'd like to add?" id="comments"></textarea>
 							</p>
 							Required fields are marked with "*".
 							<br />

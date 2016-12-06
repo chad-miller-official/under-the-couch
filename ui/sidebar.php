@@ -15,12 +15,17 @@
 <aside class="main-sidebar">
 	<center id="main-sidebar-title"><b>Upcoming Events</b></center>
     <div id="main-sidebar-items">
-    	<? foreach( $events as $key => $value ): ?>
-    		<br />
-    		<?= "{$value['Date']} {$value['Time']}" ?>
-    		<br />
-    		<?= $value['Summary'] ?>
-    		<br />
-    	<? endforeach; ?>
+        <? if( count( $events ) == 0 ): ?>
+            <br />
+            <center>No events found.</center>
+        <? else: ?>
+        	<? foreach( $events as $key => $value ): ?>
+        		<br />
+        		<?= "{$value['Date']} {$value['Time']}" ?>
+        		<br />
+        		<?= $value['Summary'] ?>
+        		<br />
+        	<? endforeach; ?>
+        <? endif; ?>
     </div>
 </aside>

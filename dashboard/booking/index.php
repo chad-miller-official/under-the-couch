@@ -1,7 +1,3 @@
-<?
-    db_include( 'get_booking_requests_by_booking_request_type' );
-    $booking_requests = get_booking_requests_by_booking_request_type( BOOKING_REQUEST_TYPE_PERFORMANCE );
-?>
 <!doctype html>
 <html>
     <head>
@@ -9,45 +5,27 @@
         <title>Under the Couch - Booking Dashboard</title>
         <link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
         <? js_common_include(); ?>
+        <script src="/dashboard/booking/js/index.js"></script>
     </head>
     <body>
         <? ui_insert( 'header' ); ?>
-
         <div class="container">
             <center>
-                <table class="dynamic-data" cellspacing="0">
-                    <tr>
-                        <th>Request ID</th>
-                        <th>Contact Name</th>
-                        <th>Contact Email</th>
-                        <th>Contact Phone</th>
-                        <th>Date Requested</th>
-                        <th>Request Submitted</th>
-                    </tr>
-                    <?
-                        if( is_array( $booking_requests ) )
-                        {
-                            foreach( $booking_requests as $booking_request )
-                            {
-                                $booking_request_pk    = $booking_request['booking_request'];
-                                $contact_name          = $booking_request['contact_name'];
-                                $contact_email_address = $booking_request['contact_email_address'];
-                                $contact_phone_number  = $booking_request['contact_phone_number'];
-                                $date_requested        = $booking_request['date_requested'];
-                                $created               = $booking_request['created'];
-                    ?>
+                <table class="dynamic-data" cellspacing="0" id="booking_requests_table">
+                    <thead>
                         <tr>
-                            <td><?= $booking_request_pk ?></td>
-                            <td><?= $contact_name ?></td>
-                            <td><?= $contact_email_address ?></td>
-                            <td><?= $contact_phone_number ?></td>
-                            <td><?= $date_requested ?></td>
-                            <td><?= $created ?></td>
+                            <th>Request ID</th>
+                            <th>Contact Name</th>
+                            <th>Contact Email</th>
+                            <th>Contact Phone</th>
+                            <th>Date Requested</th>
+                            <th>Request Submitted</th>
+                            <th>Request Status</th>
                         </tr>
-                    <?
-                            }
-                        }
-                    ?>
+                    </thead>
+                    <tbody>
+                        <!-- Populated via JS -->
+                    </tbody>
                 </table>
             </center>
         </div>
