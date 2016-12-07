@@ -10,6 +10,7 @@
     <body>
         <? ui_insert( 'header' ); ?>
         <div class="container">
+            <span id="page_info"></span>
             <center>
                 <a href="#" id="prev" class="clean-button" style="float:left; display:none">Prev</a>
                 <a href="#" id="next" class="clean-button" style="float:right">Next</a>

@@ -1,7 +1,7 @@
 $( document ).ready( index_initialize );
 
 var offset = 0;
-var limit  = 15;
+var limit  = 2;
 
 function index_initialize()
 {
@@ -49,7 +49,10 @@ function send_get_performance_booking_requests_request()
             var total_count   = response['total'];
 
             if( data_count > 0 )
+            {
                 populate_booking_requests_table( response_data );
+                $( '#page_info' ).text( ( offset + 1 ) + ' - ' + ( offset + data_count ) + ' of ' + total_count );
+            }
 
             if( offset >= total_count - 1 || data_count == total_count )
                 $( '#next' ).css( 'display', 'none' );
