@@ -1,12 +1,19 @@
 <?
     db_include( 'get_booking_requests_by_booking_request_type' );
 
-    $data    = get_booking_requests_by_booking_request_type( BOOKING_REQUEST_TYPE_PERFORMANCE );
+    $limit  = $_REQUEST['limit'];
+    $offset = $_REQUEST['offset'];
+
+    $data    = get_booking_requests_by_booking_request_type( BOOKING_REQUEST_TYPE_PERFORMANCE, $limit, $offset );
     $success = $data !== false;
+    $count   = $success ? count( $data )    : 0;
+    $total   = $success ? $data[0]['total'] : 0;
 
     $retval = [
         'success' => $success,
-        'data'    => $data
+        'data'    => $data,
+        'count'   => $count,
+        'total'   => $total
     ];
 
     if( $success )

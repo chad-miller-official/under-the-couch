@@ -1,8 +1,9 @@
 <?
-    function get_booking_requests_by_booking_request_type( $booking_request_type )
+    function get_booking_requests_by_booking_request_type( $booking_request_type, $limit=0, $offset=null )
     {
         $get_booking_requests = <<<SQL
-  select br.booking_request,
+  select count(*) over () as total,
+         br.booking_request,
          br.contact_name,
          br.contact_email_address,
          br.contact_phone_number,
@@ -20,9 +21,16 @@
    using ( booking_request_type )
    where br.booking_request_type = ?booking_request_type?
 order by br.created
+   limit ?limit?
+  offset ?offset?
 SQL;
 
-        $params = [ 'booking_request_type' => $booking_request_type ];
+        $params = [
+            'booking_request_type' => $booking_request_type,
+            'limit'                => $limit,
+            'offset'               => $offset
+        ];
+
         $result = query_execute( $get_booking_requests, $params );
 
         return query_success( $result ) ? query_fetch_all( $result ) : false;

@@ -11,7 +11,9 @@
         <? ui_insert( 'header' ); ?>
         <div class="container">
             <center>
-                <table class="dynamic-data" cellspacing="0" id="booking_requests_table">
+                <a href="#" id="prev" class="clean-button" style="float:left; display:none">Prev</a>
+                <a href="#" id="next" class="clean-button" style="float:right">Next</a>
+                <table class="dynamic-data" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Request ID</th>
@@ -23,7 +25,7 @@
                             <th>Request Status</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="booking_requests_tbody">
                         <!-- Populated via JS -->
                     </tbody>
                 </table>

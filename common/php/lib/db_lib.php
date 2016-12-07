@@ -107,7 +107,12 @@
      */
     function query_fetch_one( $resource )
     {
-        return pg_fetch_assoc( $resource );
+        $retval = pg_fetch_assoc( $resource );
+
+        if( $retval === false )
+            return null;
+
+        return $retval;
     }
 
     /*
@@ -121,7 +126,12 @@
      */
     function query_fetch_all( $resource )
     {
-        return pg_fetch_all( $resource );
+        $retval = pg_fetch_all( $resource );
+
+        if( $retval === false )
+            return [];
+
+        return $retval;
     }
 
     /*
