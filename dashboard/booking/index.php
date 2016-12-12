@@ -4,31 +4,31 @@
         <meta charset="utf-8" />
         <title>Under the Couch - Booking Dashboard</title>
         <link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
-        <? js_common_include(); ?>
+        <?
+            js_common_include();
+            js_include( 'ext/pagination.min.js' );
+        ?>
         <script src="/dashboard/booking/js/index.js"></script>
     </head>
     <body>
         <? ui_insert( 'header' ); ?>
         <div class="container">
-            <span id="page_info"></span>
             <center>
-                <a href="#" id="prev" class="clean-button" style="float:left; display:none">Prev</a>
-                <a href="#" id="next" class="clean-button" style="float:right">Next</a>
+                <div class="paginationjs paginationjs-big" id="pagination-controls"></div>
+                <br />
                 <table class="dynamic-data" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Request ID</th>
+                            <th>Band Name</th>
                             <th>Contact Name</th>
                             <th>Contact Email</th>
-                            <th>Contact Phone</th>
                             <th>Date Requested</th>
                             <th>Request Submitted</th>
                             <th>Request Status</th>
                         </tr>
                     </thead>
-                    <tbody id="booking_requests_tbody">
-                        <!-- Populated via JS -->
-                    </tbody>
+                    <tbody id="booking_requests_tbody"></tbody>
                 </table>
             </center>
         </div>

@@ -1,83 +1,72 @@
 $( document ).ready( index_initialize );
 
-var offset = 0;
-var limit  = 2;
+var limit       = 15;
+var data_source = '/common/php/ajax/get_performance_booking_requests.php';
 
 function index_initialize()
 {
-    var booking_requests_body = $( '#booking_requests_tbody' );
-    var next = $( '#next' );
-    var prev = $( '#prev' );
+    var total_count = get_total_performance_booking_requests_count();
 
-    next.click( function( event ) {
-        event.preventDefault();
-        prev.css( 'display', '' );
-
-        offset += limit;
-
-        booking_requests_body.empty();
-        send_get_performance_booking_requests_request();
+    $( '#pagination-controls' ).pagination( {
+        'dataSource'  : data_source,
+        'locator'     : 'data',
+        'totalNumber' : total_count,
+        'pageSize'    : limit,
+        'callback'    : populate_booking_requests_table,
+        'className'   : 'paginationjs'
     });
-
-    prev.click( function( event ) {
-        event.preventDefault();
-        next.css( 'display', '' );
-
-        offset -= limit;
-
-        booking_requests_body.empty();
-        send_get_performance_booking_requests_request();
-    });
-
-    send_get_performance_booking_requests_request();
 }
 
-function send_get_performance_booking_requests_request()
+function get_total_performance_booking_requests_count()
 {
-    var url = '/common/php/ajax/get_performance_booking_requests.php';
-
     var data = {
-        'limit'  : limit,
-        'offset' : offset
+        'pageSize'   : 1,
+        'pageNumber' : 1,
+        '_no_data'   : true
     };
 
-    $.get( url, data, function( response, textStatus, jqXHR ) {
+    var total_count = 0;
+
+    $.ajax( {
+        'type'     : 'GET',
+        'url'      : data_source,
+        'data'     : data,
+        'dataType' : 'json',
+        'async'    : false,
+    })
+    .done( function( response, textStatus, jqXHR ) {
         if( response['success'] )
-        {
-            var response_data = response['data'];
-            var data_count    = response['count'];
-            var total_count   = response['total'];
-
-            if( data_count > 0 )
-            {
-                populate_booking_requests_table( response_data );
-                $( '#page_info' ).text( ( offset + 1 ) + ' - ' + ( offset + data_count ) + ' of ' + total_count );
-            }
-
-            if( offset >= total_count - 1 || data_count == total_count )
-                $( '#next' ).css( 'display', 'none' );
-            else if( offset <= 0 )
-                $( '#prev' ).css( 'display', 'none' );
-        }
+            total_count = response['total'];
         else
             alert( 'Failed to load booking requests.' );
-    }, 'json' )
+    })
     .fail( function() {
         alert( 'An error has occurred - please contact support.' );
     });
+
+    return total_count;
 }
 
-function populate_booking_requests_table( data )
+function populate_booking_requests_table( data, pagination )
 {
     var booking_requests_body = $( '#booking_requests_tbody' );
 
+    booking_requests_body.empty();
+
     $.each( data, function( i, booking_request ) {
+        var booking_request_pk_val         = booking_request['booking_request'];
         var booking_request_status_hex_rgb = booking_request['booking_request_status_hex_rgb'];
 
-        var booking_request_pk     = $( '<td>' ).text( booking_request['booking_request'] );
+        var booking_request_modal_link = $( '<a>' ).prop(
+            'href',
+            '/dashboard/booking/modal_performance_booking_request.php?booking_request=' + booking_request_pk_val
+        )
+        .text( booking_request['additional_information']['band_name'] );
+
+        var booking_request_pk     = $( '<td>' ).text( booking_request_pk_val );
+        var band_name              = $( '<td>' ).append( booking_request_modal_link );
         var contact_name           = $( '<td>' ).text( booking_request['contact_name'] );
         var contact_email_address  = $( '<td>' ).text( booking_request['contact_email_address'] );
-        var contact_phone_number   = $( '<td>' ).text( booking_request['contact_phone_number'] );
         var date_requested         = $( '<td>' ).text( booking_request['date_requested'] );
         var created                = $( '<td>' ).text( booking_request['created'] );
         var booking_request_status = $( '<td>' ).text( booking_request['booking_request_status'] );
@@ -86,9 +75,9 @@ function populate_booking_requests_table( data )
 
         row.append(
             booking_request_pk,
+            band_name,
             contact_name,
             contact_email_address,
-            contact_phone_number,
             date_requested,
             created,
             booking_request_status

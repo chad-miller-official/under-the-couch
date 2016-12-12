@@ -20,7 +20,7 @@
     join tb_booking_request_type brt
    using ( booking_request_type )
    where br.booking_request_type = ?booking_request_type?
-order by br.created
+order by br.created desc
    limit ?limit?
   offset ?offset?
 SQL;

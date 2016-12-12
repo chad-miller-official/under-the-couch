@@ -93,7 +93,7 @@
                         <p><? if(!$is_owner): ?>
                                 <a href="mailto:<?= $email_address ?>"><?= $email_address?></a>
                             <? else: ?>
-                                <a id="change-email-link" href="javascript:;"><?= $email_address?></a>
+                                <a id="change-email-link" href="javascript:void(0);"><?= $email_address?></a>
                                 <div id="change-email">
                                     <? require($GLOBALS[WEBROOT] . "/user/change_email_mini.php"); ?>
                                 </div>
