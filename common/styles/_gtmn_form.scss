@@ -38,6 +38,15 @@ fieldset.centered-fieldset {
     z-index: inherit;
 }
 
+fieldset.no-style {
+    //background-color: #f1f1f1;
+    background-image: none;
+    padding-top: auto;
+    max-width: auto;
+    border: none;
+    box-shadow: none;
+}
+
 fieldset#write-blog-post {
     left: 205px;
 }
@@ -77,6 +86,14 @@ textarea {
     min-width: 358px;
     max-width: 358px;
     max-height: 200px;
+    overflow: scroll;
+}
+
+textarea.wide {
+    min-width: 500px;
+    max-width: 500px;
+    min-height: 9em;
+    max-height: 14em;
     overflow: scroll;
 }
 

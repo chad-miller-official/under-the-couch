@@ -18,27 +18,50 @@
     $band_website           = $additional_information['band_website'];
 ?>
 <div class="modal">
-    <h3><?= $status ?> Request</h3>
-    Band Name: <?= $band_name ?>
-    <? if( $band_website ): ?>
-        (<a href="<?= $band_website ?>" target="_blank">Website</a>)
-    <? endif; ?>
-    <br />
-    <? if( $style_of_music ): ?>
-        Style of Music: <?= $style_of_music ?>
+    <div class="modal-column">
+        <h3><?= $status ?> Request</h3>
+        Band Name: <?= $band_name ?>
+        <? if( $band_website ): ?>
+            (<a href="<?= $band_website ?>" target="_blank">Website</a>)
+        <? endif; ?>
         <br />
-    <? endif; ?>
-    Date Requested: <?= $date_requested ?>
-    <br />
-    <br />
-    Contact Name: <?= $contact_name ?>
-    <br />
-    Contact Email: <?= $contact_email_address ?>
-    <br />
-    <? if( $contact_phone_number ): ?>
-        Contact Phone Number: <?= $contact_phone_number ?>
+        <? if( $style_of_music ): ?>
+            Style of Music: <?= $style_of_music ?>
+            <br />
+        <? endif; ?>
+        Date Requested: <?= $date_requested ?>
         <br />
-    <? endif; ?>
-    <br />
-    Request Submitted: <?= $created ?>
+        <br />
+        Contact Name: <?= $contact_name ?>
+        <br />
+        Contact Email: <a href="mailto:<?= $contact_email_address ?>"><?= $contact_email_address ?></a>
+        <br />
+        <? if( $contact_phone_number ): ?>
+            Contact Phone Number: <?= $contact_phone_number ?>
+            <br />
+        <? endif; ?>
+        <br />
+        Request Submitted: <?= $created ?>
+    </div>
+    <div class="modal-column">
+        <? if ( $comments ): ?>
+            Additional Comments:
+            <p id="booking-comments">
+                <?= $comments ?>
+            </p>
+        <? endif; ?>
+        <br />
+        <br />
+    </div>
+    <hr />
+    <form id="performance_booking_response">
+        <fieldset class="no-style">
+            <h3>Respond to this request</h3>
+            <p>
+                <label class="nowidth" for="email_text">Email text: </label>
+                <textarea class="wide" name="email_text" id="email_text" />
+            </p>
+            <input type="submit" class="submit-button"></input>
+        </fieldset>
+    </div>
 </div>

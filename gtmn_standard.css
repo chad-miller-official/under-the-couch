@@ -91,7 +91,7 @@
 table {
   border-spacing: 0;
   border-collapse: collapse;
-  overflow: auto; }
+  max-width: 774px; }
 
 table.static-data th, table.static-data td {
   padding: 8px;
@@ -100,8 +100,7 @@ table.static-data th, table.static-data td {
 table.dynamic-data {
   border: none;
   background-image: url("media/card-background.jpg");
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  width: 774px; }
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); }
   table.dynamic-data th {
     padding: 8px;
     text-align: left; }
@@ -111,6 +110,16 @@ table.dynamic-data {
     border-top: 3px groove; }
   table.dynamic-data tr {
     background-color: rgba(255, 255, 255, 0.4); }
+
+.modal-column {
+  display: inline-block;
+  max-width: 300px; }
+
+#booking-comments {
+  background: rgba(51, 51, 51, 0.2);
+  padding: 0.5em;
+  max-height: 4em;
+  overflow: scroll; }
 
 form.login {
   margin: inherit;
@@ -139,6 +148,13 @@ fieldset.centered-fieldset {
   position: relative;
   left: 64px;
   z-index: inherit; }
+
+fieldset.no-style {
+  background-image: none;
+  padding-top: auto;
+  max-width: auto;
+  border: none;
+  box-shadow: none; }
 
 fieldset#write-blog-post {
   left: 205px; }
@@ -170,6 +186,13 @@ textarea {
   min-width: 358px;
   max-width: 358px;
   max-height: 200px;
+  overflow: scroll; }
+
+textarea.wide {
+  min-width: 500px;
+  max-width: 500px;
+  min-height: 9em;
+  max-height: 14em;
   overflow: scroll; }
 
 .submit-button, .cancel-button {

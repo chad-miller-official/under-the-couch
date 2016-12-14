@@ -1,7 +1,8 @@
 table {
     border-spacing: 0;
     border-collapse: collapse;
-    overflow: auto;
+    //overflow: auto;
+    max-width: 774px;
 }
 
 table.static-data {
@@ -27,4 +28,17 @@ table.dynamic-data {
     tr {
         background-color: rgba(#fff, 0.4);
     }
+}
+
+.modal-column {
+    display: inline-block;
+    max-width: 300px;
+    //height: 2em;
+}
+
+#booking-comments {
+    background: rgba(#333, 0.2);
+    padding: 0.5em;
+    max-height: 4em;
+    overflow: scroll;
 }
