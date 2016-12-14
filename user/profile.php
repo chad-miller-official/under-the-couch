@@ -118,6 +118,12 @@
                             </p>
                         </div>
                     <? endif; ?>
+                    <h2>About Me</h2>
+                    <? if ($is_owner):
+                        require($GLOBALS[WEBROOT] . "/user/profile-card.php");
+                    else:
+                        require($GLOBALS[WEBROOT] . "/user/profile-card.php");
+                    endif; ?>
                 </div>
             </article>
         </div>
