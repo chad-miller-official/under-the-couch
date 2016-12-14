@@ -64,7 +64,7 @@
 						<p>
 							<label class="nowidth" for="comments">Additional comments:</label>
 							<br>
-							<textarea name="comments" class="comments"
+							<textarea name="comments" class="comments" id="comments"
 								placeholder="Anything else you'd like to add?"></textarea>
 						</p>
 						<input type="submit" class="submit-button"></input>

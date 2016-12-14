@@ -217,7 +217,7 @@ def main( argv ):
 
     print 'Applying patches...\n'
 
-    for patch_folder in os.listdir( 'data' ):
+    for patch_folder in reversed( os.listdir( 'data' ) ):
         patch_hierarchy = get_ordered_patches( 'data/' + patch_folder )
 
         while len( patch_hierarchy.keys() ) > 0:

@@ -4,9 +4,14 @@
         <meta charset="utf-8" />
         <title>Under the Couch - Booking Dashboard</title>
         <link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
+        <link rel="stylesheet" type="text/css" href="/pagination.css" />
+        <link rel="stylesheet" type="text/css" href="/featherlight.min.css" />
         <?
             js_common_include();
-            js_include( 'ext/pagination.min.js' );
+            js_include(
+                'ext/pagination.min.js',
+                'ext/featherlight.min.js'
+            );
         ?>
         <script src="/dashboard/booking/js/index.js"></script>
     </head>

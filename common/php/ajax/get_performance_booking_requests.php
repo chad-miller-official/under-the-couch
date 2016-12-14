@@ -9,7 +9,7 @@
     $data    = get_booking_requests_by_booking_request_type( BOOKING_REQUEST_TYPE_PERFORMANCE, $limit, $offset );
     $success = $data !== false;
     $count   = $success ? count( $data )    : 0;
-    $total   = $success ? $data[0]['total'] : 0;
+    $total   = $success && $count > 0 ? $data[0]['total'] : 0;
 
     $retval = [
         'success' => $success,

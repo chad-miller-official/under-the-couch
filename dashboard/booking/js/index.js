@@ -57,11 +57,13 @@ function populate_booking_requests_table( data, pagination )
         var booking_request_pk_val         = booking_request['booking_request'];
         var booking_request_status_hex_rgb = booking_request['booking_request_status_hex_rgb'];
 
-        var booking_request_modal_link = $( '<a>' ).prop(
-            'href',
-            '/dashboard/booking/modal_performance_booking_request.php?booking_request=' + booking_request_pk_val
-        )
-        .text( booking_request['additional_information']['band_name'] );
+        var booking_request_modal_link = $( '<a>' )
+            .text( booking_request['additional_information']['band_name'] )
+            .prop(
+                'href',
+                '/dashboard/booking/modal_performance_booking_request.php?booking_request=' + booking_request_pk_val
+            )
+            .attr( 'data-featherlight', '' );
 
         var booking_request_pk     = $( '<td>' ).text( booking_request_pk_val );
         var band_name              = $( '<td>' ).append( booking_request_modal_link );
