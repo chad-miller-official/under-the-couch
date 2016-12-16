@@ -113,13 +113,17 @@ table.dynamic-data {
 
 .modal-column {
   display: inline-block;
-  max-width: 300px; }
+  width: 300px; }
 
 #booking-comments {
-  background: rgba(51, 51, 51, 0.2);
+  background: rgba(255, 255, 255, 0.4);
   padding: 0.5em;
   max-height: 4em;
   overflow: scroll; }
+
+#led {
+  padding: 0.3em;
+  user-select: none; }
 
 form.login {
   margin: inherit;

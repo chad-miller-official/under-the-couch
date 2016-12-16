@@ -11,15 +11,19 @@
     $comments               = $booking_request['comments'];
     $created                = $booking_request['created'];
     $status                 = $booking_request['booking_request_status'];
+    $hex_rgba               = $booking_request['booking_request_status_hex_rgb'];
 
     $additional_information = json_decode( $booking_request['additional_information'], true );
     $band_name              = $additional_information['band_name'];
     $style_of_music         = $additional_information['style_of_music'];
     $band_website           = $additional_information['band_website'];
+
+    $hex_rgb = substr($hex_rgba, 0, strpos($hex_rgba, "0.4")) . "1)";
 ?>
 <div class="modal">
     <div class="modal-column">
-        <h3><?= $status ?> Request</h3>
+        <h3><span id="led" style="color: <?= $hex_rgb ?>; text-shadow: 0px 0px 1px black, 0px 1px 16px <?= $hex_rgb ?>;">
+            &#9679;</span><?= $status ?> Request</h3>
         Band Name: <?= $band_name ?>
         <? if( $band_website ): ?>
             (<a href="<?= $band_website ?>" target="_blank">Website</a>)
