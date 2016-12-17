@@ -15,6 +15,9 @@
                     <? if( access_allowed( 'dashboard/booking/index.php' ) ): ?>
                         <a href="/dashboard/booking">Booking Requests</a>
                     <? endif; ?>
+					<? if( access_allowed( 'dashboard/admin/index.php' ) ): ?>
+                        <a href="/dashboard/admin">Admin Dashboard</a>
+                    <? endif; ?>
                 </div>
             </li>
             <li class="main-nav-drop">
