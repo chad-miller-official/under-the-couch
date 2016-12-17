@@ -28,6 +28,10 @@
     define( 'BOOKING_REQUEST_TYPE_PERFORMANCE',     2 );
     define( 'BOOKING_REQUEST_TYPE_RECORDING',       3 );
 
+    define( 'BOOKING_REQUEST_STATUS_NOT_STARTED', 1 );
+    define( 'BOOKING_REQUEST_STATUS_IN_PROGRESS', 2 );
+    define( 'BOOKING_REQUEST_STATUS_CLOSED',      3 );
+
     // URL constants
     define( 'URL_ICAL_BOOKING', 'http://www.google.com/calendar/ical/kcbafbo67qe33jpj8s10b1ltk0@group.calendar.google.com/public/basic.ics');
     define( 'URL_CALENDAR',     'https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTz=0&amp;height=600&amp;'

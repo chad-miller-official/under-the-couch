@@ -74,5 +74,5 @@ create table tb_booking_request
     additional_information json,
     created                timestamp      not null default now(),
     modified               timestamp      not null default now(),
-    modifier               timestamp
+    modifier               integer        references tb_member ( member )
 );

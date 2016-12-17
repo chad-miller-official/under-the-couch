@@ -11,6 +11,7 @@
     // Require the necessary includes
     require_once( 'common/php/constants.php' );
     require_once( 'common/php/include.php' );
+    require_once "{$GLOBALS[WEBROOT]}/vendor/autoload.php";
 
     lib_include( 'db_lib' );
     lib_include( 'session_lib' );

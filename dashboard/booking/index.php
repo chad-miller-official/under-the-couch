@@ -19,7 +19,7 @@
         <? ui_insert( 'header' ); ?>
         <div class="container">
             <center>
-                <div class="paginationjs paginationjs-big" id="pagination-controls"></div>
+                <div class="paginationjs paginationjs-big" id="pagination_controls"></div>
                 <br />
                 <table class="dynamic-data" cellspacing="0">
                     <thead>

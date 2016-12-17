@@ -10,8 +10,9 @@ select br.booking_request,
        br.comments,
        br.additional_information,
        to_char( br.created, 'YYYY-MM-DD' ) as created,
-       brs.label as booking_request_status,
-       brs.hex_rgb as booking_request_status_hex_rgb,
+       br.booking_request_status as booking_request_status,
+       brs.label as booking_request_status_label,
+       brs.rgb_color as booking_request_status_rgb_color,
        brt.label as booking_request_type
   from tb_booking_request br
    join tb_booking_request_status brs

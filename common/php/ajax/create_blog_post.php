@@ -1,4 +1,5 @@
 <?
+
     db_include( 'create_or_update_blog_post' );
     lib_include( 'email_lib' );
 
@@ -24,6 +25,7 @@
         {
             $sent_email_success = send_html_email(
                 EMAIL_MAILING_LIST,
+                EMAIL_WEBMASTER,
                 $title,
                 $body
             );

@@ -50,5 +50,5 @@ function edit_blog_post( data )
     }, 'json' )
     .fail( function() {
         alert( 'An error has occurred - please contact support.' );
-    });;
+    });
 }

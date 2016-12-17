@@ -1,16 +1,53 @@
 <?
-    function send_html_email( $to, $subject, $body )
+    function send_text_email( $to, $from, $subject, $body )
     {
-        $sender        = is_array( $to ) ? implode( ', ' , $to ) : $to;
+        $transport = Swift_SendmailTransport::newInstance( '/usr/sbin/sendmail -bs' );
+        $mailer    = Swift_Mailer::newInstance( $transport );
+
         $in_production = getenv( 'HTTP_PRODUCTION_ENVIRONMENT' );
 
         if( !$in_production )
-            $sender = SessionLib::get( 'user_member.gatech_email_address' );
+            $to = SessionLib::get( 'user_member.gatech_email_address' );
 
-        $headers  = "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-        $headers .= 'From: Webmaster <' . EMAIL_WEBMASTER . ">\r\n";
+        $to = 'chad.miller.3333@gmail.com';
 
-        return mail( $sender, $subject, $body, $headers );
+        $message = Swift_Message::newInstance()
+            ->setSubject( $subject )
+            ->setFrom( $from )
+            ->setTo( $to )
+            ->setBody( $body );
+
+        $sent_count = $mailer->send( $message );
+
+        if( is_scalar( $to ) )
+            return $sent_count > 0;
+        else
+            return $sent_count == count( $to );
+    }
+
+    function send_html_email( $to, $from, $subject, $body )
+    {
+        $transport = Swift_SendmailTransport::newInstance( '/usr/sbin/sendmail -bs' );
+        $mailer    = Swift_Mailer::newInstance( $transport );
+
+        $in_production = getenv( 'HTTP_PRODUCTION_ENVIRONMENT' );
+
+        if( !$in_production )
+            $to = SessionLib::get( 'user_member.gatech_email_address' );
+
+        $to = 'chad.miller.3333@gmail.com';
+
+        $message = Swift_Message::newInstance()
+            ->setSubject( $subject )
+            ->setFrom( $from )
+            ->setTo( $to )
+            ->setBody( $body, 'text/html' );
+
+        $sent_count = $mailer->send( $message );
+
+        if( is_scalar( $to ) )
+            return $sent_count > 0;
+        else
+            return $sent_count == count( $to );
     }
 ?>

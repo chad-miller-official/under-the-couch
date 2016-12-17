@@ -7,7 +7,7 @@ function index_initialize()
 {
     var total_count = get_total_performance_booking_requests_count();
 
-    $( '#pagination-controls' ).pagination( {
+    $( '#pagination_controls' ).pagination( {
         'dataSource'  : data_source,
         'locator'     : 'data',
         'totalNumber' : total_count,
@@ -54,8 +54,8 @@ function populate_booking_requests_table( data, pagination )
     booking_requests_body.empty();
 
     $.each( data, function( i, booking_request ) {
-        var booking_request_pk_val         = booking_request['booking_request'];
-        var booking_request_status_hex_rgb = booking_request['booking_request_status_hex_rgb'];
+        var booking_request_pk_val           = booking_request['booking_request'];
+        var booking_request_status_rgb_color = booking_request['booking_request_status_rgb_color'];
 
         var booking_request_modal_link = $( '<a>' )
             .text( booking_request['additional_information']['band_name'] )
@@ -63,7 +63,7 @@ function populate_booking_requests_table( data, pagination )
                 'href',
                 '/dashboard/booking/modal_performance_booking_request.php?booking_request=' + booking_request_pk_val
             )
-            .attr( 'data-featherlight', '' );
+            .attr( 'data-featherlight', 'ajax' );
 
         var booking_request_pk     = $( '<td>' ).text( booking_request_pk_val );
         var band_name              = $( '<td>' ).append( booking_request_modal_link );
@@ -73,7 +73,7 @@ function populate_booking_requests_table( data, pagination )
         var created                = $( '<td>' ).text( booking_request['created'] );
         var booking_request_status = $( '<td>' ).text( booking_request['booking_request_status'] );
 
-        var row = $( '<tr>' ).css( 'background-color', booking_request_status_hex_rgb );
+        var row = $( '<tr>' ).css( 'background-color', 'rgba(' + booking_request_status_rgb_color + ',0.4)' );
 
         row.append(
             booking_request_pk,
@@ -87,4 +87,17 @@ function populate_booking_requests_table( data, pagination )
 
         booking_requests_body.append( row );
     });
+}
+
+function close_current_modal()
+{
+    $( '.featherlight-close' ).click();
+}
+
+function reload_pagination()
+{
+    var pagination_controls = $( '#pagination_controls' );
+    var current_page        = pagination_controls.pagination( 'getSelectedPageNum' );
+
+    pagination_controls.pagination( 'go', current_page );
 }

@@ -1,19 +1,22 @@
 alter table tb_booking_request_status
-    alter column hex_rgb type varchar(24);
+    drop column hex_rgb;
 
-create temp table tt_hex_rgbs
+alter table tb_booking_request_status
+    add column rgb_color varchar(11);
+
+create temp table tt_rgbs
 (
-    old varchar,
-    new varchar
+    label varchar,
+    rgb   varchar
 );
 
-insert into tt_hex_rgbs ( old,       new                   )
-                 values ( '#FF4D4D', 'rgba(255,77,77,0.4)' ),
-                        ( '#D8B858', 'rgba(216,184,88,0.4)' ),
-                        ( '#5878D9', 'rgba(88,120,217,0.4)' ),
-                        ( '#40CC54', 'rgba(64,204,84,0.4)' );
+insert into tt_rgbs ( label,        rgb          )
+             values ( 'Unreviewed', '255,77,77'  ),
+                    ( 'Reviewed',   '216,184,88' ),
+                    ( 'Replied',    '88,120,217' ),
+                    ( 'Closed',     '64,204,84'  );
 
 update tb_booking_request_status brs
-   set hex_rgb = tt.new
-  from tt_hex_rgbs tt
- where brs.hex_rgb = tt.old;
+   set rgb_color = tt.rgb
+  from tt_rgbs tt
+ where brs.label = tt.label;

@@ -3,3 +3,5 @@ common/sql/erd/*.bak
 .sass-cache
 media/profile/*
 !media/profile/default.jpg
+vendor
+composer.lock
