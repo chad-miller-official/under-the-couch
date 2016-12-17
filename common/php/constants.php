@@ -54,4 +54,7 @@
     // Globals
     define( 'WEBROOT',   'webroot'   );
     define( 'DB_HANDLE', 'db_handle' );
+
+    // Environment variables
+    define( 'GTMN_IN_PRODUCTION', 'GTMN_IN_PRODUCTION' );
 ?>

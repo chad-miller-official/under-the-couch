@@ -4,12 +4,10 @@
         $transport = Swift_SendmailTransport::newInstance( '/usr/sbin/sendmail -bs' );
         $mailer    = Swift_Mailer::newInstance( $transport );
 
-        $in_production = getenv( 'HTTP_PRODUCTION_ENVIRONMENT' );
+        $in_production = getenv( GTMN_IN_PRODUCTION );
 
         if( !$in_production )
             $to = SessionLib::get( 'user_member.gatech_email_address' );
-
-        $to = 'chad.miller.3333@gmail.com';
 
         $message = Swift_Message::newInstance()
             ->setSubject( $subject )
@@ -30,12 +28,10 @@
         $transport = Swift_SendmailTransport::newInstance( '/usr/sbin/sendmail -bs' );
         $mailer    = Swift_Mailer::newInstance( $transport );
 
-        $in_production = getenv( 'HTTP_PRODUCTION_ENVIRONMENT' );
+        $in_production = getenv( GTMN_IN_PRODUCTION );
 
         if( !$in_production )
             $to = SessionLib::get( 'user_member.gatech_email_address' );
-
-        $to = 'chad.miller.3333@gmail.com';
 
         $message = Swift_Message::newInstance()
             ->setSubject( $subject )
