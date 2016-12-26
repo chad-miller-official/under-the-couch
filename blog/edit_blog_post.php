@@ -19,7 +19,7 @@
             js_common_include();
             js_include(
                 'validate_lib.js',
-                'ext/tinymce/tinymce.min.js'
+                'tinymce'
             );
         ?>
         <script src="/blog/js/edit_blog_post.js"></script>

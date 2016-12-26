@@ -1,50 +1,15 @@
 $( document ).ready( index_initialize );
 
-var limit       = 15;
-var data_source = '/common/php/ajax/get_performance_booking_requests.php';
+var class_file = 'GetPerformanceBookingRequestsPaginator';
+var limit      = 15;
 
 function index_initialize()
 {
-    var total_count = get_total_performance_booking_requests_count();
-
-    $( '#pagination_controls' ).pagination( {
-        'dataSource'  : data_source,
-        'locator'     : 'data',
-        'totalNumber' : total_count,
-        'pageSize'    : limit,
-        'callback'    : populate_booking_requests_table,
-        'className'   : 'paginationjs'
-    });
-}
-
-function get_total_performance_booking_requests_count()
-{
-    var data = {
-        'pageSize'   : 1,
-        'pageNumber' : 1,
-        '_no_data'   : true
-    };
-
-    var total_count = 0;
-
-    $.ajax( {
-        'type'     : 'GET',
-        'url'      : data_source,
-        'data'     : data,
-        'dataType' : 'json',
-        'async'    : false,
-    })
-    .done( function( response, textStatus, jqXHR ) {
-        if( response['success'] )
-            total_count = response['total'];
-        else
-            alert( 'Failed to load booking requests.' );
-    })
-    .fail( function() {
-        alert( 'An error has occurred - please contact support.' );
-    });
-
-    return total_count;
+    pagination_init(
+        class_file,
+        limit,
+        populate_booking_requests_table
+    );
 }
 
 function populate_booking_requests_table( data, pagination )
@@ -87,17 +52,4 @@ function populate_booking_requests_table( data, pagination )
 
         booking_requests_body.append( row );
     });
-}
-
-function close_current_modal()
-{
-    $( '.featherlight-close' ).click();
-}
-
-function reload_pagination()
-{
-    var pagination_controls = $( '#pagination_controls' );
-    var current_page        = pagination_controls.pagination( 'getSelectedPageNum' );
-
-    pagination_controls.pagination( 'go', current_page );
 }

@@ -20,10 +20,7 @@
     $band_website           = $additional_information['band_website'];
 
     js_common_include();
-    js_include(
-        'validate_lib.js',
-        'ext/featherlight.min.js'
-    );
+    js_include( 'validate_lib.js' );
 ?>
 <script src="/dashboard/booking/js/modal_performance_booking_request.js"></script>
 <div class="modal">

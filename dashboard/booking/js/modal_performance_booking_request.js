@@ -34,8 +34,7 @@ function send_booking_request_email_request( data )
         if( response['success'] )
         {
             alert( 'Email sent!' );
-            close_current_modal();
-            reload_pagination();
+            window.location.reload();
         }
         else
             alert( response['error'] );

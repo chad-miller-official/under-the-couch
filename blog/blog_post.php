@@ -9,9 +9,8 @@
     $created = $blog_post['created'];
     $body    = $blog_post['body'];
 
-    $editor      = $blog_post['editor'];
-    $editor_role = $blog_post['editor_role'];
-    $edited      = $blog_post['edited'];
+    $editor = $blog_post['editor'];
+    $edited = $blog_post['edited'];
 ?>
 
 <!doctype html>

@@ -9,8 +9,9 @@
         <?
             js_common_include();
             js_include(
-                'ext/pagination.min.js',
-                'ext/featherlight.min.js'
+                'pagination',
+                'featherlight',
+                'pagination_lib.js'
             );
         ?>
         <script src="/dashboard/booking/js/index.js"></script>
@@ -19,7 +20,7 @@
         <? ui_insert( 'header' ); ?>
         <div class="container">
             <center>
-                <div class="paginationjs paginationjs-big" id="pagination_controls"></div>
+                <div id="pagination_controls" class="paginationjs paginationjs-big"></div>
                 <br />
                 <table class="dynamic-data" cellspacing="0">
                     <thead>

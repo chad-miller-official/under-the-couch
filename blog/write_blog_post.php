@@ -8,7 +8,7 @@
 		<?
             js_common_include();
             js_include(
-                'ext/tinymce/tinymce.min.js',
+                'tinymce',
                 'validate_lib.js'
             );
         ?>

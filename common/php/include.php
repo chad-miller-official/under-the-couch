@@ -4,7 +4,7 @@
         $args = func_get_args();
 
         foreach( $args as $arg )
-            require_once( $GLOBALS[WEBROOT] . "/common/php/lib/$arg.php" );
+            require_once( "{$GLOBALS[WEBROOT]}/common/php/lib/$arg.php" );
     }
 
     /*
@@ -21,7 +21,7 @@
         $args = func_get_args();
 
         foreach( $args as $arg )
-            require_once( $GLOBALS[WEBROOT] . "/common/php/lib/db_lib/$arg.php" );
+            require_once( "{$GLOBALS[WEBROOT]}/common/php/lib/db_lib/$arg.php" );
 	}
 
     /*
@@ -37,16 +37,26 @@
     {
         $args = func_get_args();
 
+        $js_lookup_table = [
+            'jquery'               => 'ext/jquery-3.1.1.min.js',
+            'tinymce'              => 'ext/tinymce/tinymce.min.js',
+            'pagination'           => 'ext/pagination.min.js',
+            'featherlight'         => 'ext/featherlight.min.js',
+            'featherlight-gallery' => 'ext/featherlight.gallery.min.js',
+        ];
+
         foreach( $args as $arg )
+        {
+            if( isset( $js_lookup_table[$arg] ) )
+                $arg = $js_lookup_table[$arg];
+
             echo "<script src=\"/common/js/$arg\"></script>";
+        }
     }
 
     function js_common_include()
     {
-        js_include(
-            'ext/jquery-3.1.1.min.js',
-            'common_document.js'
-        );
+        js_include( 'jquery' );
     }
 
     /*
@@ -60,6 +70,6 @@
      */
     function ui_insert( $ui_file )
     {
-        require( $GLOBALS[WEBROOT] . "/ui/$ui_file.php" );
+        require_once( "{$GLOBALS[WEBROOT]}/ui/$ui_file.php" );
     }
 ?>

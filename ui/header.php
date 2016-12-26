@@ -1,3 +1,4 @@
+<script src="/ui/js/header.js"></script>
 <header>
 	<? if( !file_exists( "{$GLOBALS['webroot']}/media/oldbanner-fixed.gif" ) ): ?>
 		<h1 id="site-title">Under The Couch</h1>

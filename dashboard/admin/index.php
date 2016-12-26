@@ -9,8 +9,8 @@
         <?
             js_common_include();
             js_include(
-                'ext/pagination.min.js',
-                'ext/featherlight.min.js'
+                'pagination',
+                'featherlight'
             );
         ?>
         <script src="/dashboard/admin/js/index.js"></script>

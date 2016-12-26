@@ -4,4 +4,4 @@ RewriteEngine on
 
 RewriteCond %{REQUEST_URI} !/router\.php [NC]
 RewriteCond %{REQUEST_URI} \.php [NC]
-RewriteRule ^(.*)$ /router.php?file=$1 [QSA,L]
+RewriteRule ^(.*)$ /router.php?_file=$1 [QSA,L]
