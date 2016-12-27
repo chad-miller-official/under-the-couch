@@ -25,6 +25,7 @@
      */
     function get_member( $member )
     {
+        // TODO Determine role.is_admin in a better way
         $get_member_query = <<<SQL
   select m.first_name,
          m.last_name,
@@ -39,6 +40,9 @@
          ) as locker_end_date,
          m.locker_number,
          m.profile_photo_path,
+         m.personal_website,
+         m.is_available_for_collaboration,
+         m.biography,
          m.first_name || ' ' || m.last_name as name,
          r.is_admin
     from tb_member m
