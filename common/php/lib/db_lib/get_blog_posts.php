@@ -30,10 +30,10 @@
           bp.blog_post,
           bp.title,
           bp.body,
-          to_char( bp.created, 'Day, Month DD, YYYY HH:MI:SS AM' ) as created,
+          to_char( bp.created, 'Day, Month DD, YYYY HH:MI AM' ) as created,
           m.first_name || ' ' || m.last_name                       as author,
           me.first_name || ' ' || me.last_name                     as editor,
-          to_char( bp.edited, 'Day, Month DD, YYYY HH:MI:SS AM' )  as edited
+          to_char( bp.edited, 'Day, Month DD, YYYY HH:MI AM' )  as edited
      from tb_blog_post bp
      join tb_member m
        on bp.creator = m.member

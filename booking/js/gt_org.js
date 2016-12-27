@@ -110,9 +110,9 @@ function send_gt_org_booking_request( data )
             location.reload();
         }
         else
-            alert( 'An error has occurred - please contact support.' );
+            alert( 'Booking request was not submitted. (Error Code: 0008)' );
     }, 'json' )
     .fail( function() {
-        alert( 'An error has occurred - please contact support.' );
+        alert( 'An error has occurred - please contact support. (Error Code: 0009)' );
     });
 }

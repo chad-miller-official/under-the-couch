@@ -1,6 +1,6 @@
 <?
-    require_once( 'session_lib/SessionLib.php' );
-    require_once( 'session_lib/GTMNSessionHandler.php' );
+    require_once( "{$GLOBALS[WEBROOT]}/common/php/lib/session_lib/SessionLib.php" );
+    require_once( "{$GLOBALS[WEBROOT]}/common/php/lib/session_lib/GTMNSessionHandler.php" );
 
     db_include( 'get_member_by_login_credentials' );
 

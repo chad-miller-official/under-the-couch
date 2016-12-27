@@ -1,7 +1,7 @@
 <?
     class GetPerformanceBookingRequestsPaginator extends Paginator
     {
-        public function getData()
+        protected function getData()
         {
             db_include( 'get_booking_requests_by_booking_request_type' );
 

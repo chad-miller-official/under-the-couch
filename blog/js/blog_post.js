@@ -23,10 +23,10 @@ function delete_blog_post()
             if( response['success'] )
                 window.location = '/index.php';
             else
-                alert( 'An error has occurred - please contact support.' );
+                alert( 'Unable to delete blog post. (Error Code: 0001)' );
         }, 'json' )
         .fail( function() {
-            alert( 'An error has occurred - please contact support.' );
+            alert( 'An error has occurred - please contact support. (Error Code: 0002)' );
         });;
     }
 }

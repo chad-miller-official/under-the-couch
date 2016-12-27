@@ -48,14 +48,14 @@ function create_blog_post( data )
             var created_blog_post = response['blog_post'];
 
             if( data['send_to_mailing_list'] && !response['sent_email_success'] )
-                alert( 'Blog post successful, but email was not sent - please contact support.' );
+                alert( 'Blog post successful, but email was not sent - please contact support. (Error Code: 0005)' );
 
             window.location = '/blog/blog_post.php?id=' + created_blog_post;
         }
         else
-            alert( 'An error has occurred - please contact support.' );
+            alert( 'Blog post unsuccessful. (Error Code: 0006)' );
     }, 'json' )
     .fail( function() {
-        alert( 'An error has occurred - please contact support.' );
+        alert( 'An error has occurred - please contact support. (Error Code: 0007)' );
     });;
 }

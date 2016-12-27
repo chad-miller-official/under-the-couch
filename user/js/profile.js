@@ -64,7 +64,7 @@ function perform_upload_profile_photo( event )
                 alert( response['message'] );
         },
         'fail' : function() {
-            alert( 'An error has occurred - please contact support.' );
+            alert( 'An error has occurred - please contact support. (Error Code: 0014)' );
         }
     });
 }
@@ -116,6 +116,6 @@ function send_change_email_request(data) {
         }
     }, 'json')
     .fail(function(){
-        alert('An error has occurred - please contact support.');
+        alert( 'An error has occurred - please contact support. (Error Code: 0015)' );
     });
 }

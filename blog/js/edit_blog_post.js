@@ -46,9 +46,9 @@ function edit_blog_post( data )
         if( response['success'] )
             window.location = '/blog/blog_post.php?id=' + data['blog_post'];
         else
-            alert( 'An error has occurred - please contact support.' );
+            alert( 'Unable to edit blog post. (Error Code: 0003)' );
     }, 'json' )
     .fail( function() {
-        alert( 'An error has occurred - please contact support.' );
+        alert( 'An error has occurred - please contact support. (Error Code: 0004)' );
     });
 }

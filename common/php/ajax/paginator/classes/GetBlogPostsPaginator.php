@@ -1,7 +1,7 @@
 <?
     class GetBlogPostsPaginator extends Paginator
     {
-        public function getData()
+        protected function getData()
         {
             db_include( 'get_blog_posts' );
 

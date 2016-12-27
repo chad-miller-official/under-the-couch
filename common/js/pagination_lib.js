@@ -5,7 +5,7 @@ function pagination_init( pagination_class, limit, callback )
 {
     var pagination_controls = $( pagination_controls_name );
     var data_source         = '/common/php/ajax/paginator/classes/' + pagination_class + '.php'
-    var total_number        = _pagination_get_total( data_source );
+    var total_number        = __pagination_get_total( data_source );
 
     pagination_controls.pagination( {
         'dataSource'  : data_source,
@@ -17,11 +17,10 @@ function pagination_init( pagination_class, limit, callback )
     });
 }
 
-function _pagination_get_total( data_source )
+function __pagination_get_total( data_source )
 {
     var total_count = 0;
-
-    var data = { '_total' : true };
+    var data        = { '_total' : true };
 
     $.ajax( {
         'type'     : 'GET',
@@ -34,10 +33,10 @@ function _pagination_get_total( data_source )
         if( response['success'] )
             total_count = response['total'];
         else
-            alert( 'Failed to load pagination.' );
+            alert( 'Failed to load pagination. (Error Code: 000E)' );
     })
     .fail( function() {
-        alert( 'An error has occurred - please contact support.' );
+        alert( 'An error has occurred - please contact support. (Error Code: 000F)' );
     });
 
     return total_count;

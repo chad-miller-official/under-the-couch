@@ -1,3 +1,8 @@
+<!--
+    TODO:
+        - Need to add interface to add music genres
+        - Need to add interface to add instruments
+-->
 <!doctype html>
 <html>
     <head>

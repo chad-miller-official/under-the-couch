@@ -38,7 +38,7 @@
     			<hr />
     			<?= $body ?>
     			<? if( $editor != NULL ): ?>
-    				<i>Last edited by: <?= "$editor ($editor_role)" ?> at <?= $edited ?></i>
+    				<i>Last edited by: <?= "$editor ($editor_role)" ?> on <?= $edited ?></i>
     				<br />
     			<? endif; ?>
                 <input type="hidden" id="blog_post_pk" name="blog_post_pk" value="<?= $blog_post_pk ?>" />

@@ -20,7 +20,7 @@
             $this->requestData = $requestData;
         }
 
-        abstract public function getData();
+        abstract protected function getData();
 
         public function run()
         {

@@ -178,7 +178,16 @@ def apply_patch_with_requires( hierarchy, patch_file, patch_folder ):
         if is_function:
             print 'Installing function: ' + full_patch_path
         else:
-            print 'Applying new patch: ' + full_patch_path
+            do_apply = ''
+            print( 'Apply patch ' + full_patch_path + '?' ),
+
+            while do_apply.lower() not in [ 'y', 'n' ]:
+                do_apply = raw_input( '(y/n) ' )
+
+            if do_apply.lower() == 'y':
+                print 'Applying patch: ' + full_patch_path
+            else:
+                return
 
     patch_success = apply_patch( patch_folder, patch_file )
 

@@ -52,7 +52,7 @@ function populate_blog_posts_div( data, pagination )
         if( blog_post_data['editor'] != null )
         {
             var editor = $( '<i>' ).text(
-                'Last edited by ' + blog_post_data['editor'] + ' at ' + blog_post_data['edited']
+                'Last edited by ' + blog_post_data['editor'] + ' on ' + blog_post_data['edited']
             );
 
             blog_post.append(

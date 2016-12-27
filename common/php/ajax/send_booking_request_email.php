@@ -8,29 +8,39 @@
     $booking_request_pk = $_REQUEST['booking_request'];
     $email_text         = $_REQUEST['email_text'];
 
-    $booking_request = get_booking_request( $booking_request_pk );
+    $success = false;
+    $error   = 'An error has occurred - please contact support.';
 
-    $email_retval = send_text_email(
-        $booking_request['contact_email_address'],
-        EMAIL_BOOKING,
-        "Under the Couch Booking Request for {$booking_request['date_requested']}",
-        $email_text
+    $update_success = update_booking_request_status(
+        $booking_request_pk,
+        BOOKING_REQUEST_STATUS_IN_PROGRESS
     );
 
-    if( $email_retval === true )
+    if( $update_success )
     {
-        $success = update_booking_request_status(
-            $booking_request_pk,
-            BOOKING_REQUEST_STATUS_IN_PROGRESS
+        $booking_request = get_booking_request( $booking_request_pk );
+
+        $email_success = send_text_email(
+            $booking_request['contact_email_address'],
+            EMAIL_BOOKING,
+            "Under the Couch Booking Request for {$booking_request['date_requested']}",
+            $email_text
         );
 
-        $error = null;
+        if( $email_success )
+            $success = true;
+        else
+        {
+            update_booking_request_status(
+                $booking_request_pk,
+                BOOKING_REQUEST_STATUS_NOT_STARTED
+            );
+
+            $error = 'Failed to send email.';
+        }
     }
     else
-    {
-        $success = false;
-        $error   = 'Failed to send email!';
-    }
+        $error = 'Failed to update booking request status.';
 
     $retval = [
         'success' => $success,
