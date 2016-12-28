@@ -97,6 +97,14 @@ textarea.wide {
     overflow: scroll;
 }
 
+select {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 14px;
+    width: 162px;
+    border-radius: 0px;
+}
+
 .submit-button, .cancel-button {
     display: inline-block;
     text-decoration: none;

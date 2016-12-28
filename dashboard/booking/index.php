@@ -26,12 +26,12 @@
                     <thead>
                         <tr>
                             <th>Request ID</th>
-                            <th>Band Name</th>
-                            <th>Contact Name</th>
-                            <th>Contact Email</th>
-                            <th>Date Requested</th>
-                            <th>Request Submitted</th>
-                            <th>Request Status</th>
+                            <th class="text-cell">Band Name</th>
+                            <th class="text-cell">Contact Name</th>
+                            <th class="email-cell">Contact Email</th>
+                            <th class="text-cell">Date Requested</th>
+                            <th class="text-cell">Request Submitted</th>
+                            <th class="text-cell">Request Status</th>
                         </tr>
                     </thead>
                     <tbody id="booking_requests_tbody"></tbody>

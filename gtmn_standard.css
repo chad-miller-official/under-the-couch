@@ -115,6 +115,16 @@ table.dynamic-data {
   display: inline-block;
   width: 300px; }
 
+.text-cell {
+  min-width: 100px;
+  max-width: 100px;
+  overflow-x: hidden; }
+
+.email-cell {
+  min-width: 200px;
+  max-width: 200px;
+  overflow-x: hidden; }
+
 #booking-comments {
   background: rgba(255, 255, 255, 0.4);
   padding: 0.5em;
@@ -198,6 +208,13 @@ textarea.wide {
   min-height: 9em;
   max-height: 14em;
   overflow: scroll; }
+
+select {
+  display: inline-block;
+  padding: 8px 12px;
+  font-size: 14px;
+  width: 162px;
+  font-family: "font-body", Verdana, sans-serif; }
 
 .submit-button, .cancel-button {
   display: inline-block;

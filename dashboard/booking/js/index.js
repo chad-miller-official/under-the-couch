@@ -31,12 +31,12 @@ function populate_booking_requests_table( data, pagination )
             .attr( 'data-featherlight', 'ajax' );
 
         var booking_request_pk     = $( '<td>' ).text( booking_request_pk_val );
-        var band_name              = $( '<td>' ).append( booking_request_modal_link );
-        var contact_name           = $( '<td>' ).text( booking_request['contact_name'] );
-        var contact_email_address  = $( '<td>' ).text( booking_request['contact_email_address'] );
-        var date_requested         = $( '<td>' ).text( booking_request['date_requested'] );
-        var created                = $( '<td>' ).text( booking_request['created'] );
-        var booking_request_status = $( '<td>' ).text( booking_request['booking_request_status'] );
+        var band_name              = $( '<td class="text-cell">' ).append( booking_request_modal_link );
+        var contact_name           = $( '<td class="text-cell">' ).text( booking_request['contact_name'] );
+        var contact_email_address  = $( '<td class="text-cell">' ).text( booking_request['contact_email_address'] );
+        var date_requested         = $( '<td class="text-cell">' ).text( booking_request['date_requested'] );
+        var created                = $( '<td class="text-cell">' ).text( booking_request['created'] );
+        var booking_request_status = $( '<td class="text-cell">' ).text( booking_request['booking_request_status'] );
 
         var row = $( '<tr>' ).css( 'background-color', 'rgba(' + booking_request_status_rgb_color + ',0.4)' );
 

@@ -36,6 +36,22 @@ table.dynamic-data {
     //height: 2em;
 }
 
+$text-cell-width: 100px;
+$email-cell-width: $text-cell-width + 100px;
+
+.text-cell {
+    min-width: $text-cell-width;
+    max-width: $text-cell-width;
+    //min-height: 2em;
+    overflow-x: hidden;
+}
+
+.email-cell {
+    min-width: $email-cell-width;
+    max-width: $email-cell-width;
+    overflow-x: hidden;
+}
+
 #booking-comments {
     background: rgba(#fff, 0.4);
     padding: 0.5em;

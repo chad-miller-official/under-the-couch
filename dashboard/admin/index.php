@@ -24,23 +24,24 @@
         <? ui_insert( 'header' ); ?>
 
         <div class="container">
-            <div style="position:relative; left:138px">
-                <div class="paginationjs paginationjs-big" id="pagination-controls"></div>
+            <center>
+                <div class="paginationjs paginationjs-big" id="pagination_controls"></div>
                 <br />
                 <table class="dynamic-data" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Gatech Email Address</th>
-                            <th>Display Email Address</th>
-                            <th>Paid Dues Date</th>
-                            <th>Paid Practice Fee Date</th>
+                            <th class="text-cell">Last Name</th>
+                            <th class="text-cell">First Name</th>
+                            <th class="email-cell">Gatech Email Address</th>
+                            <th class="email-cell">Display Email Address</th>
+                            <th class="text-cell">Paid Dues Date</th>
+                            <th class="text-cell">Paid Practice Fee Date</th>
+                            <th class="text-cell">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="admin_tbody"></tbody>
                 </table>
-            </div>
+            </center>
         </div>
 
         <? ui_insert( 'footer' ); ?>

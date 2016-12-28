@@ -26,7 +26,7 @@
 <div class="modal">
     <div class="modal-column">
         <h3><span id="led" style="color: rgba(<?= $hex_rgb ?>,1); text-shadow: 0px 0px 1px black, 0px 1px 16px rgba(<?= $hex_rgb ?>,1);">
-            &#9679;</span><?= $status ?> Request</h3>
+            &#9679;</span>Booking Request <?= $status ?></h3>
         Band Name: <?= $band_name ?>
         <? if( $band_website ): ?>
             (<a href="<?= $band_website ?>" target="_blank">Website</a>)
