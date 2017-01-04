@@ -50,7 +50,5 @@ function send_login_request( data )
         else
             alert( "Email address or password is incorrect." );
     }, 'json' )
-    .fail( function() {
-        alert( 'An error has occurred - please contact support. (Error Code: 0013)' );
-    });
+    .fail( js_generic_error );
 }

@@ -10,11 +10,12 @@
      *  <true> if the transaction is successful
      *  <false> otherwise
      */
-    function remove_role( $member_pk, $role_pk ) {
+    function remove_role_from_member( $member_pk, $role_pk )
+    {
         $query = <<<SQL
 DELETE FROM tb_member_role
-    WHERE member = ?member?
-    AND role = ?role?
+      WHERE member = ?member?
+        AND role = ?role?
 SQL;
 
         $params = [
@@ -23,7 +24,6 @@ SQL;
         ];
 
         $result = query_execute( $query, $params );
-
         return query_success( $result );
     }
 ?>

@@ -11,6 +11,8 @@
     $success = false;
     $error   = 'An error has occurred - please contact support.';
 
+    begin_transaction();
+
     $update_success = update_booking_request_status(
         $booking_request_pk,
         BOOKING_REQUEST_STATUS_IN_PROGRESS
@@ -28,19 +30,21 @@
         );
 
         if( $email_success )
+        {
+            commit_transaction();
             $success = true;
+        }
         else
         {
-            update_booking_request_status(
-                $booking_request_pk,
-                BOOKING_REQUEST_STATUS_NOT_STARTED
-            );
-
+            rollback_transaction();
             $error = 'Failed to send email.';
         }
     }
     else
+    {
+        rollback_transaction();
         $error = 'Failed to update booking request status.';
+    }
 
     $retval = [
         'success' => $success,

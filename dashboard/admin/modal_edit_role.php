@@ -1,13 +1,13 @@
 <?
     db_include (
         'get_member',
-        'get_member_roles',
-        'get_role_info'
+        'get_roles_by_member',
+        'get_role'
     );
 
     $member_pk                  = $_REQUEST[ 'member' ];
     $member                     = get_member( $member_pk );
-    $member_current_roles       = get_member_roles( $member_pk );
+    $member_current_roles       = get_roles_by_member( $member_pk );
 
     $member_name                = $member[ 'name' ];
     $member_roles_list          = [1];
@@ -33,7 +33,7 @@
                     $current_role_pk    = $current_role[ 'role' ];
                     if ( $current_role_pk > 1 ) {
                         array_push($member_roles_list, $current_role_pk);
-                        $current            = get_role_info( $current_role_pk );
+                        $current            = get_role( $current_role_pk );
                         echo( $current[ 'name' ] );
                         echo( '<br />' );
                     }
@@ -49,9 +49,9 @@
                 <p>
                     <label class="nowidth" for="add_role">Add Role:</label>
                     <select id="add_role" name="add_role">
-                        <option value="none">--</option>
+                        <option value="--">--</option>
                         <? for ($i = 2; $i < 14; $i++):
-                            $current = get_role_info( $i );
+                            $current = get_role( $i );
                             if (!in_array( $i, $member_roles_list )): ?>
                                 <option value="<?= $current[ 'abbreviation' ] ?>"><?= $current[ 'name' ] ?></option>
                             <? endif; ?>
@@ -61,10 +61,10 @@
                 <p>
                     <label class="nowidth" for="remove_role">Remove Role:</label>
                     <select id="remove_role" name="remove_role">
-                        <option value="none">--</option>
+                        <option value="--">--</option>
                         <? foreach ($member_roles_list as $current_role_pk):
                             if ( $current_role_pk > 1 ):
-                                $current = get_role_info( $current_role_pk );
+                                $current = get_role( $current_role_pk );
                                 ?> <option value="<?= $current[ 'abbreviation' ] ?>"><?= $current[ 'name' ]?></option>
                             <? endif; ?>
                         <? endforeach; ?>

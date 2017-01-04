@@ -4,21 +4,16 @@
 		<meta charset="utf-8" />
 		<title>Under the Couch - Performing</title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
-
 		<?
             js_common_include();
             js_include( 'validate_lib.js' );
         ?>
-
         <script src="/booking/js/perform.js"></script>
 	</head>
-
 	<body>
 		<? ui_insert( 'header' ); ?>
-
 		<div class="container">
 			<? ui_insert( 'sidebar' ); ?>
-
 			<article>
 				<h1>Bands and Promoters</h1>
 				Bands and promoters should fill out the form below to book the venue. We will read every email, but if we do
@@ -26,7 +21,7 @@
 				<br /><br />
 				<form method="post" id="perform_booking_form" action="/">
 					<fieldset>
-						<!--<legend><b>Booking Form</b></legend>-->
+						<!-- <legend><b>Booking Form</b></legend> -->
 						<p>
 							<label class="nowidth" for="contactname">*Contact Name:</label>
 							<input class="textbox" type="text" name="contact_name"
@@ -78,7 +73,6 @@
 				<a href="mailto:<?= EMAIL_BOOKING ?>?subject=[UTC Booking]"><?= EMAIL_BOOKING ?></a>. Please have your email subject begin
 				with "[UTC Booking]" and include as much of the above information as possible in the email.
 			</article>
-
 			<? ui_insert( 'footer' ); ?>
 		</div>
 	</body>

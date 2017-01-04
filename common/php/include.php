@@ -56,7 +56,10 @@
 
     function js_common_include()
     {
-        js_include( 'jquery' );
+        js_include(
+            'jquery',
+            'error.js'
+        );
     }
 
     /*

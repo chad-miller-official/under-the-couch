@@ -10,16 +10,18 @@
      *  <true> if the transaction is successful
      *  <false> otherwise
      */
-    function add_role( $member_pk, $role_pk ) {
+    function add_role_to_member( $member_pk, $role_pk ) {
         $query = <<<SQL
-INSERT INTO tb_member_role (
-        member,
-        role
-    )
-    VALUES (
-        ?member?,
-        ?role?
-    )
+INSERT INTO tb_member_role
+(
+    member,
+    role
+)
+VALUES
+(
+    ?member?,
+    ?role?
+)
 SQL;
 
         $params = [
@@ -28,7 +30,6 @@ SQL;
         ];
 
         $result = query_execute( $query, $params );
-
         return query_success( $result );
     }
 ?>

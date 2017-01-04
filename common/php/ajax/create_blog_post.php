@@ -1,5 +1,4 @@
 <?
-
     db_include( 'create_or_update_blog_post' );
     lib_include( 'email_lib' );
 

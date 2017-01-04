@@ -21,20 +21,19 @@ function profile_initialize()
     });
 
     // Email address init
-    $('#change-email-form').submit(validate_change_email);
+    $( '#change-email-form' ).submit( validate_change_email );
 
-    $( '#disp-email' ).change(reset_validation);
-    $( '#disp-email-again' ).change(reset_validation);
+    $( '#disp-email' ).change( reset_validation );
+    $( '#disp-email-again' ).change( reset_validation );
 
-    $("#change-email-link").click(function() {
-        $('#change-email').css("display", "block");
+    $( "#change-email-link" ).click( function() {
+        $( '#change-email' ).css( "display", "block" );
     });
 
-    $("#cancel-email").click(function() {
+    $( "#cancel-email" ).click( function() {
         reset_email_validation();
-
-        $('#change-email').css("display", "none");
-        $('.textbox').val("");
+        $( '#change-email' ).css( "display", "none" );
+        $( '.textbox' ).val( "" );
     });
 }
 
@@ -63,9 +62,7 @@ function perform_upload_profile_photo( event )
             else
                 alert( response['message'] );
         },
-        'fail' : function() {
-            alert( 'An error has occurred - please contact support. (Error Code: 0014)' );
-        }
+        'fail' : js_generic_error
     });
 }
 
@@ -81,8 +78,12 @@ function validate_change_email(event) {
     var disp_email          = $('#disp-email');
     var disp_email_again    = $('#disp-email-again');
 
-    if( !disp_email.val() || !disp_email_again.val() ||
-        !is_email(disp_email.val()) || !is_email(disp_email_again.val()))
+    if(
+           !disp_email.val()
+        || !disp_email_again.val()
+        || !is_email( disp_email.val() )
+        || !is_email( disp_email_again.val() )
+    )
     {
         validate_error( [ disp_email, disp_email_again ], 'Email is required.' );
         return;
@@ -95,27 +96,26 @@ function validate_change_email(event) {
     }
 
     var form_data = {
-        'member'                :   $('#member_pk').val(),
-        'display_email_address' :   disp_email.val()
+        'member'                : $('#member_pk').val(),
+        'display_email_address' : disp_email.val()
     };
 
-    send_change_email_request(form_data);
+    send_change_email_request( form_data );
 }
 
-function send_change_email_request(data) {
+function send_change_email_request( data )
+{
     var url = '/common/php/ajax/update_member_display_email_address.php';
 
-    $.post(url, data, function(response, textStatus, jqXHR) {
+    $.post( url, data, function( response, textStatus, jqXHR ) {
         if( response['success'] )
         {
             var new_email_address = response['display_email_address'];
-            $( '#change-email-link' ).text( new_email_address );
 
-            $('#change-email').css("display", "none");
-            $('.textbox').val("");
+            $( '#change-email-link' ).text( new_email_address );
+            $( '#change-email' ).css( "display", "none" );
+            $( '.textbox' ).val( "" );
         }
     }, 'json')
-    .fail(function(){
-        alert( 'An error has occurred - please contact support. (Error Code: 0015)' );
-    });
+    .fail( js_generic_error );
 }

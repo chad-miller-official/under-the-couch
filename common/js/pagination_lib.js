@@ -33,11 +33,9 @@ function __pagination_get_total( data_source )
         if( response['success'] )
             total_count = response['total'];
         else
-            alert( 'Failed to load pagination. (Error Code: 000E)' );
+            js_error( 'Failed to load pagination.', PAGINATION_FAILURE );
     })
-    .fail( function() {
-        alert( 'An error has occurred - please contact support. (Error Code: 000F)' );
-    });
+    .fail( js_generic_error );
 
     return total_count;
 }

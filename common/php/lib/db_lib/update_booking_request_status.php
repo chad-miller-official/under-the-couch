@@ -50,7 +50,6 @@ update tb_booking_request
 SQL;
 
         $result = query_execute( $query, $params );
-
         return query_success( $result ) ? true : $error_message;
     }
 ?>

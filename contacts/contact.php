@@ -4,18 +4,20 @@
 		'get_officer_info'
 	);
 
-	$position = get_role_by_abbreviation( $_GET['name'] );
+    $name     = $_REQUEST['name'];
+	$position = get_role_by_abbreviation( $name );
 
-	if( $position )
-	{
+	if( $position ):
 		$position_name        = $position['name'];
 		$position_description = $position['description_html'];
-	}
-	else
-	{
-		$position_name        = 'Officer Not Found';
-		$position_description = 'Officer position not found!';
-	}
+	else:
+?>
+        <script type="text/javascript">
+            window.location = '/404.php?file=contacts/contact.php?name=<?= $name ?>';
+        </script>
+<?
+        exit;
+	endif;
 
 	$officers = get_officer_info( $position['role'] );
 ?>
@@ -25,6 +27,7 @@
 		<meta charset="utf-8" />
 		<title>Under the Couch - <?= $position_name ?></title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
+        <? js_common_include(); ?>
 	</head>
 	<body>
 		<? ui_insert( 'header' ); ?>

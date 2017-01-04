@@ -89,9 +89,7 @@ function send_create_account_request( data )
         else
             alert( 'An account with the GATech email address ' + data['gatech_email_address'] + ' already exists.' );
     }, 'json' )
-    .fail( function() {
-        alert( 'An error has occurred - please contact support. (Error Code 0012)' );
-    });
+    .fail( js_generic_error );
 }
 
 function perform_login( data )

@@ -1,29 +1,23 @@
 <?
 	db_include( 'get_officer_email' );
-	$email = get_officer_email(ROLE_EQUIPMENT_MANAGER);
+	$email = get_officer_email( ROLE_EQUIPMENT_MANAGER );
 ?>
-
 <!doctype html>
 <html>
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - Recording</title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
-
 		<?
             js_common_include();
             js_include( 'validate_lib.js' );
 		?>
-
         <script src="/booking/js/record.js"></script>
 	</head>
-
 	<body>
 		<? ui_insert( 'header' ); ?>
-
 		<div class="container">
 			<? ui_insert( 'sidebar' ); ?>
-
 			<div class="primary">
 				<article>
 					<h1>Recording</h1>
@@ -69,9 +63,7 @@
 							<input type="submit" class="submit-button"></input>
 						</fieldset>
 					</form>
-
 					<br />
-
 					Required fields are marked with "*".
 					<br />
 					<br />
@@ -80,7 +72,6 @@
 					with "[UTC Recording]" and include as much of the above information as possible in the email.
 				</article>
 			</div>
-
 			<? ui_insert( 'footer' ); ?>
 		</div>
 	</body>

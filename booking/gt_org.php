@@ -4,21 +4,16 @@
 		<meta charset="utf-8">
 		<title>Under the Couch - Booking</title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css">
-
 		<?
             js_common_include();
             js_include( 'validate_lib.js' );
 		?>
-
         <script src="/booking/js/gt_org.js"></script>
 	</head>
-
 	<body>
 		<? ui_insert( 'header' ); ?>
-
 		<div class="container">
 			<? ui_insert( 'sidebar' ); ?>
-
 			<div class="primary">
 				<article>
 					<h1>GT Organization Booking</h1>
@@ -108,17 +103,14 @@
 							<input type="submit" class="submit-button"></input>
 						</fieldset>
 					</form>
-
 					<br />
-
 					The above form is the standard for booking events, but the booking agent may be emailed directly at
-					<a href="<?= EMAIL_BOOKING?>?subject=[GT Organization]"><?= EMAIL_BOOKING ?></a>. Please have your email subject begin
+					<a href="mailto:<?= EMAIL_BOOKING ?>?subject=[GT Organization]"><?= EMAIL_BOOKING ?></a>. Please have your email subject begin
 					with "[GT Organization]" and include as much of the above information as possible in the email. If you
 					do not fill out the above form, please print and sign our <a href="usageagreement.pdf">Usage Agreement</a>
 					and bring it to the event.
 				</article>
 			</div>
-
 			<? ui_insert( 'footer' ); ?>
 		</div>
 	</body>

@@ -62,7 +62,6 @@ function populate_blog_posts_div( data, pagination )
         }
 
         blog_post.append( '<br />' );
-
         blog_posts_div.append( blog_post );
     });
 }

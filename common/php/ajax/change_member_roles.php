@@ -1,41 +1,39 @@
 <?
     db_include(
-         'change_member_roles',
+         'add_role_to_member',
+         'remove_role_from_member',
          'get_role_by_abbreviation'
     );
 
-    $member_pk      = isset( $_POST[ 'member' ] ) ? $_POST[ 'member' ] : false;
-    $role_to_add    = isset( $_POST[ 'add' ] ) ? $_POST[ 'add' ] : 'none';
-    $role_to_remove = isset( $_POST[ 'remove' ] ) ? $_POST[ 'remove' ] : 'none';
-
-    //echo ( $member_pk . "\n" . $role_to_add . "\n" . $role_to_remove . "\n" );
+    $member_pk      = isset( $_REQUEST['member'] ) ? $_REQUEST['member'] : false;
+    $role_to_add    = isset( $_REQUEST['add'] )    ? $_REQUEST['add']    : false;
+    $role_to_remove = isset( $_REQUEST['remove'] ) ? $_REQUEST['remove'] : false;
 
     $error = null;
 
-    if( $role_to_add !== 'none' ) {
+    if( $role_to_add !== false )
+    {
         $current_role = get_role_by_abbreviation( $role_to_add );
-
-        $add_role_retval = add_role ( $member_pk, $current_role[ 'role' ] );
-    } else {
+        $add_role_retval = add_role_to_member( $member_pk, $current_role['role'] );
+    }
+    else
         $add_role_retval = true;
+
+    if( $role_to_remove !== false )
+    {
+        $current_role      = get_role_by_abbreviation( $role_to_remove );
+        $remove_role_retval = remove_role_from_member( $member_pk, $current_role['role'] );
     }
-
-    if( $role_to_remove !== 'none' ) {
-        $current_role = get_role_by_abbreviation( $role_to_remove );
-
-        $remove_role_retval = remove_role ( $member_pk, $current_role[ 'role' ] );
-    } else {
+    else
         $remove_role_retval = true;
-    }
 
-    if ( $add_role_retval === false ) {
+    if( $add_role_retval === false )
         $error = 'Failed to add role.';
-    } elseif ( $remove_role_retval === false ) {
+    elseif( $remove_role_retval === false )
         $error = 'Failed to remove role.';
-    }
 
     $retval = [
-        'success' => ($add_role_retval && $remove_role_retval),
+        'success' => ( $add_role_retval && $remove_role_retval ),
         'error'   => $error
     ];
 

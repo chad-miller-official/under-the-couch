@@ -26,8 +26,10 @@ returning booking_request
 SQL;
         $map['booking_request_type']   = $type;
 
-        if( $map['additional_information'] )
+        if( isset( $map['additional_information'] ) )
             $map['additional_information'] = json_encode( $map['additional_information'] );
+        else
+            $map['additional_information'] = null;
 
         $insert = query_execute( $insert_booking_request, $map );
 

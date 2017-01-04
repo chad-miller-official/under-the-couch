@@ -26,6 +26,7 @@
     function get_member( $member )
     {
         // TODO Determine role.is_admin in a better way
+
         $get_member_query = <<<SQL
   select m.first_name,
          m.last_name,

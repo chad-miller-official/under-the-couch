@@ -1,9 +1,10 @@
 <?
-    function get_role_info ( $role ) {
+    function get_role( $role )
+    {
         $get_role_info_query = <<<SQL
-    SELECT *
-            FROM tb_role
-            WHERE role = ?role?
+SELECT *
+  FROM tb_role
+ WHERE role = ?role?
 SQL;
 
         $params = [ 'role' => $role ];

@@ -46,9 +46,7 @@ function edit_blog_post( data )
         if( response['success'] )
             window.location = '/blog/blog_post.php?id=' + data['blog_post'];
         else
-            alert( 'Unable to edit blog post. (Error Code: 0003)' );
+            js_error( 'Unable to edit blog post.', EDIT_BLOG_POST_FAILURE );
     }, 'json' )
-    .fail( function() {
-        alert( 'An error has occurred - please contact support. (Error Code: 0004)' );
-    });
+    .fail( js_generic_error );
 }

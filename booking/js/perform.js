@@ -78,9 +78,7 @@ function send_perform_booking_request( data )
             location.reload();
         }
         else
-            alert( 'Booking request was not submitted. (Error Code: 000A)' );
+            js_error( 'Booking request was not submitted.', PERFORM_BOOKING_REQUEST_SUBMIT_FAILURE );
     }, 'json' )
-    .fail( function() {
-        alert( 'An error has occurred - please contact support. (Error Code: 000B)' );
-    });
+    .fail( js_generic_error );
 }

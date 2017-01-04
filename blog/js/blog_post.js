@@ -12,10 +12,7 @@ function delete_blog_post()
     if( perform_delete )
     {
         var blog_post = $( '#blog_post_pk' ).val();
-
-        var data = {
-            'blog_post' : blog_post
-        };
+        var data      = { 'blog_post' : blog_post };
 
         var url = '/common/php/ajax/delete_blog_post.php';
 
@@ -23,10 +20,8 @@ function delete_blog_post()
             if( response['success'] )
                 window.location = '/index.php';
             else
-                alert( 'Unable to delete blog post. (Error Code: 0001)' );
+                js_error( 'Unable to delete blog post.', DELETE_BLOG_POST_FAILURE );
         }, 'json' )
-        .fail( function() {
-            alert( 'An error has occurred - please contact support. (Error Code: 0002)' );
-        });;
+        .fail( js_generic_error );
     }
 }

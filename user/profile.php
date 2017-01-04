@@ -19,7 +19,7 @@
         if( $_REQUEST['member'] == -1 ):
 ?>
             <script type="text/javascript">
-                window.location = '/404.php?file=profile.php?member=-1';
+                window.location = '/404.php?file=user/profile.php?member=-1';
             </script>
 <?
             exit;

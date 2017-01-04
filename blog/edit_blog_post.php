@@ -7,14 +7,12 @@
     $title = $blog_post['title'];
     $body  = $blog_post['body'];
 ?>
-
 <!doctype html>
 <html>
 	<head>
 		<meta charset="utf-8" />
 		<title>Under the Couch - Edit Blog Post</title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
-
         <?
             js_common_include();
             js_include(
@@ -23,7 +21,6 @@
             );
         ?>
         <script src="/blog/js/edit_blog_post.js"></script>
-
 		<script>
 			tinymce.init( {
 				selector : 'textarea',
@@ -37,10 +34,8 @@
 			} );
 		</script>
 	</head>
-
 	<body>
 		<? ui_insert( 'header' ); ?>
-
 		<form method="post" id="edit_blog_post_form" action="/">
 			<fieldset>
 				<legend>Edit Blog Post</legend>
@@ -56,7 +51,6 @@
 				<input type="submit" />
 			</fieldset>
 		</form>
-
 		<? ui_insert( 'footer' ); ?>
 	</body>
 </html>

@@ -37,9 +37,7 @@ function send_booking_request_email_request( data )
             window.location.reload();
         }
         else
-            alert( response['error'] + ' (Error Code: 0010)' );
+            alert( response['error'] + SEND_BOOKING_REQUEST_EMAIL_ERROR );
     }, 'json' )
-    .fail( function() {
-        alert( 'An error has occurred - please contact support. (Error Code: 0011)' );
-    });
+    .fail( js_generic_error );
 }

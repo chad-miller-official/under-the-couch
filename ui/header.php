@@ -13,12 +13,13 @@
                 <a href="#" class="main-nav-drop-head">Dashboards</a>
                 <div class="main-nav-drop-content">
                     <a href="/dashboard/calendar">Calendar</a>
+                    <? if( access_allowed( 'dashboard/admin/index.php' ) ): ?>
+                        <a href="/dashboard/admin">Admin Dashboard</a>
+                    <? endif; ?>
                     <? if( access_allowed( 'dashboard/booking/index.php' ) ): ?>
                         <a href="/dashboard/booking">Booking Requests</a>
                     <? endif; ?>
-					<? if( access_allowed( 'dashboard/admin/index.php' ) ): ?>
-                        <a href="/dashboard/admin">Admin Dashboard</a>
-                    <? endif; ?>
+
                 </div>
             </li>
             <li class="main-nav-drop">

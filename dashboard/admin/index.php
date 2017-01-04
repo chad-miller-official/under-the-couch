@@ -15,14 +15,14 @@
             js_common_include();
             js_include(
                 'pagination',
-                'featherlight'
+                'featherlight',
+                'pagination_lib.js'
             );
         ?>
         <script src="/dashboard/admin/js/index.js"></script>
     </head>
     <body>
         <? ui_insert( 'header' ); ?>
-
         <div class="container">
             <center>
                 <div class="paginationjs paginationjs-big" id="pagination_controls"></div>
@@ -43,7 +43,6 @@
                 </table>
             </center>
         </div>
-
         <? ui_insert( 'footer' ); ?>
     </body>
 </html>

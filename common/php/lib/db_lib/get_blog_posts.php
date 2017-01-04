@@ -31,8 +31,8 @@
           bp.title,
           bp.body,
           to_char( bp.created, 'Day, Month DD, YYYY HH:MI AM' ) as created,
-          m.first_name || ' ' || m.last_name                       as author,
-          me.first_name || ' ' || me.last_name                     as editor,
+          m.first_name || ' ' || m.last_name                    as author,
+          me.first_name || ' ' || me.last_name                  as editor,
           to_char( bp.edited, 'Day, Month DD, YYYY HH:MI AM' )  as edited
      from tb_blog_post bp
      join tb_member m

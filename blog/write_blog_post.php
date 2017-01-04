@@ -4,7 +4,6 @@
 		<meta charset="utf-8" />
 		<title>Under the Couch - Write Blog Post</title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
-
 		<?
             js_common_include();
             js_include(
@@ -13,7 +12,6 @@
             );
         ?>
         <script src="/blog/js/write_blog_post.js"></script>
-
 		<script>
 			tinymce.init({
 				selector : 'textarea',
@@ -27,10 +25,8 @@
 			});
 		</script>
 	</head>
-
 	<body>
 		<? ui_insert( 'header' ); ?>
-
 		<div class="container">
 			<h1 class="centered-title">Write Blog Post</h1>
 			<form method="post" action="/" id="create_blog_post_form">
