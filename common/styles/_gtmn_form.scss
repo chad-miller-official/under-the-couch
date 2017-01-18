@@ -85,7 +85,8 @@ legend {
 textarea {
     min-width: 358px;
     max-width: 358px;
-    max-height: 200px;
+    min-height: 9em;
+    max-height: 14em;
     overflow: scroll;
 }
 

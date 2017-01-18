@@ -170,6 +170,14 @@ fieldset.no-style {
   border: none;
   box-shadow: none; }
 
+fieldset.no-style-wide {
+  background-image: none;
+  padding-top: auto;
+  max-width: auto;
+  border: none;
+  box-shadow: none;
+  padding-right: 20px; }
+
 fieldset#write-blog-post {
   left: 205px; }
 
@@ -199,7 +207,8 @@ legend {
 textarea {
   min-width: 358px;
   max-width: 358px;
-  max-height: 200px;
+  min-height: 9em;
+  max-height: 14em;
   overflow: scroll; }
 
 textarea.wide {
@@ -214,7 +223,7 @@ select {
   padding: 8px 12px;
   font-size: 14px;
   width: 162px;
-  font-family: "font-body", Verdana, sans-serif; }
+  border-radius: 0px; }
 
 .submit-button, .cancel-button {
   display: inline-block;

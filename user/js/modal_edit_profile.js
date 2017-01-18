@@ -7,6 +7,7 @@ function modal_edit_profile_initialize()
     $( '#display_email_address' ).change( reset_validation );
     $( '#password' ).change( reset_password_validation );
     $( '#password_again' ).change( reset_password_validation );
+    $( '#instruments_menu' ).chosen();
 }
 
 function reset_password_validation()

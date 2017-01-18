@@ -5,7 +5,7 @@
     $upload_file_info = $_FILES['profile_photo'];
     $upload_success   = true;
 
-    $max_file_size = 200000;
+    $max_file_size = 500000;
 
     if( $upload_file_info['error'] == UPLOAD_ERR_INI_SIZE || $upload_file_info['size'] > $max_file_size )
     {

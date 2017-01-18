@@ -42,9 +42,14 @@
 		<meta charset="utf-8" />
 		<title>Under the Couch - Profile - <?= $name ?></title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
+        <link rel="stylesheet" type="text/css" href="/featherlight.min.css" />
+        <link rel="stylesheet" type="text/css" href="/chosen.min.css" />
         <?
             js_common_include();
-            js_include( 'validate_lib.js' );
+            js_include(
+                'validate_lib.js',
+                'featherlight'
+            );
 		?>
         <script src="/user/js/profile.js"></script>
 	</head>
@@ -84,17 +89,11 @@
                     <div id="public_info">
                         <h2><?= $name ?></h2>
                         <p>
-                            <? if( !$is_owner ): ?>
-                                <a href="mailto:<?= $email_address ?>"><?= $email_address ?></a>
-                            <? else: ?>
-                                <a id="change-email-link" href="javascript:void(0);"><?= $email_address ?></a>
-                                <div id="change-email">
-                                    <? require( "{$GLOBALS[WEBROOT]}/user/change_email_mini.php" ); ?>
-                                </div>
-                            <? endif; ?>
+                            <a href="mailto:<?= $email_address ?>"><?= $email_address ?></a>
                         </p>
                     </div>
-                    <? require( "{$GLOBALS[WEBROOT]}/user/profile_card.php" ); ?>
+                    <? //require( "{$GLOBALS[WEBROOT]}/user/profile_card.php" ); ?>
+                    <a href="/user/modal_edit_profile.php?member=<?= $member_pk ?>" data-featherlight="ajax">Edit info</a>
                 </div>
             </article>
         </div>
