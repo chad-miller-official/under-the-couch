@@ -8,9 +8,9 @@
     $end = $end->add( new DateInterval( 'P3W' ) );
 
     $icsDates = ics_to_array( URL_ICAL_BOOKING );
-    $events   = get_ics_events( $icsDates, $now, $end );
+    $events   = ics_array_to_ical_events( $icsDates, $now, $end );
 
-    usort( $events, 'compare_ics_events' );
+    usort( $events, 'compare_ical_entries' );
 ?>
 <aside class="main-sidebar">
 	<center id="main-sidebar-title"><b>Upcoming Events</b></center>
@@ -19,11 +19,11 @@
             <br />
             <center>No events found.</center>
         <? else: ?>
-        	<? foreach( $events as $key => $value ): ?>
+        	<? foreach( $events as $event ): ?>
         		<br />
-        		<?= "{$value['Date']} {$value['Time']}" ?>
+        		<?= $event->getDate() . ' ' . $event->getTime() ?>
         		<br />
-        		<?= $value['Summary'] ?>
+        		<?= $event->getDescription() ?>
         		<br />
         	<? endforeach; ?>
         <? endif; ?>

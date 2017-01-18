@@ -1,32 +1,72 @@
 <?
+    class ICalEntry
+    {
+        const EVENT_ALL_DAY = 'All Day';
+
+        private $date;
+        private $time;
+        private $is_all_day;
+        private $description;
+
+        public function __construct( $date, $time, $description )
+        {
+            $this->time       = $time;
+            $this->is_all_day = false;
+
+            // All-day events start at 12:00 AM
+            if( $this->time == self::EVENT_ALL_DAY )
+            {
+                $this->time       = '12:00 AM';
+                $this->is_all_day = true;
+            }
+
+            $this->date        = $date;
+            $this->description = $description;
+        }
+
+        public function getTimestamp()
+        {
+            $time_str = str_replace( '-', '/', "$this->date $this->time" );
+            return strtotime( $time_str );
+        }
+
+        public function getDate()
+        {
+            return $this->date;
+        }
+
+        public function getTime()
+        {
+            return $this->is_all_day ? self::EVENT_ALL_DAY : $this->time;
+        }
+
+        public function getDescription()
+        {
+            $max_len = 40;
+            $retval  = $this->description;
+
+            if( strlen( $retval ) >= $max_len )
+                $retval = substr( $retval, 0, $max_len ) . '...';
+
+            return $retval;
+        }
+    }
+
     /*
      * Compares two iCal events by their event date.
      *
      * Params:
-     *   $o1 : iCal event from get_ics_events() - the first event.
-     *   $o2 : iCal event from get_ics_events() - the second event.
+     *   $o1 : an ICalEntry object - the first event.
+     *   $o2 : an ICalEntry object - the second event.
      * Returns:
      *   <<a positive integer>> if $o1 > $o2;
      *   <<zero>> if $o1 == $o2;
      *   <<a negative integer> if $o1 < o2.
      */
-    function compare_ics_events( $o1, $o2 )
+    function compare_ical_entries( $o1, $o2 )
     {
-        $d1 = $o1['Date'];
-        $d2 = $o2['Date'];
-        $t1 = $o1['Time'];
-        $t2 = $o2['Time'];
-
-        // All-day events start at 12:00 AM
-        if( $t1 == 'All Day' )
-            $t1 = '12:00 AM';
-
-        if( $t2 == 'All Day' )
-            $t2 = '12:00 AM';
-
-        $u1 = strtotime( str_replace( '-', '/', "$d1 $t1" ) );
-        $u2 = strtotime( str_replace( '-', '/', "$d2 $t2" ) );
-
+        $u1 = $o1->getTimestamp();
+        $u2 = $o2->getTimestamp();
         return $u1 - $u2;
     }
 
@@ -34,114 +74,122 @@
      * Gets an array of iCal events from an iCal URL.
      *
      * Params:
-     *   $paramUrl : string - the URL of the iCal whose events should be retrieved.
+     *   $ics_url : string - the URL of the iCal whose events should be retrieved.
      * Returns:
      *   <<an array of events>>
      */
-    function ics_to_array( $paramUrl )
+    function ics_to_array( $ics_url )
     {
         // Read the URL as a text file
-        $icsFile = @file_get_contents( $paramUrl );
+        $ics_file = @file_get_contents( $ics_url );
 
-        if( $icsFile === false )
+        if( $ics_file === false )
             return [];
 
+        $ics_file = str_replace( "\r\n ", '', $ics_file );
+
         // Tokenize what we just read - each token is an event
-        $icsData = explode( 'BEGIN:', $icsFile );
+        $ics_data       = explode( 'BEGIN:', $ics_file );
+        $ics_event_data = [];
 
         // Tokenize each event to get each event's data
-        foreach( $icsData as $key => $value )
-            $icsDatesMeta[$key] = explode( "\n", $value );
+        foreach( $ics_data as $ics_event )
+            $ics_event_data[] = explode( "\r\n", $ics_event );
 
-        foreach( $icsDatesMeta as $key => $value )
+        $ics_dates = [];
+
+        foreach( $ics_event_data as $index => $value )
         {
-            foreach( $value as $subKey => $subValue )
+            foreach( $value as $sub_index => $sub_value )
             {
-                if( $subValue != '' )
+                if( $sub_value != '' )
                 {
                     // Format events for further processing by get_ics_events()
-                    if( $key != 0 && $subKey == 0 )
-                        $icsDates[$key]['BEGIN'] = $subValue;
+                    if( $index != 0 && $sub_index == 0 )
+                        $ics_dates[$index]['BEGIN'] = $sub_value;
                     else
                     {
-                        $subValueArr                     = explode( ':', $subValue, 2 );
-                        $icsDates[$key][$subValueArr[0]] = isset( $subValueArr[1] ) ? $subValueArr[1] : '';
+                        $ics_data_pair = explode( ':', $sub_value, 2 );
+                        $ics_data_key  = $ics_data_pair[0];
+
+                        $ics_dates[$index][$ics_data_key] = isset( $ics_data_pair[1] ) ? $ics_data_pair[1] : '';
                     }
                 }
             }
         }
 
-        return $icsDates;
+        return $ics_dates;
     }
 
 	/*
 	 * Gets an array of iCal events given a date range.
 	 *
 	 * Params:
-	 *   $icsEvents     : array of iCal events from ics_to_array() - a list of iCal
+	 *   $ics_array     : array of iCal events from ics_to_array() - a list of iCal
 	 *                    events.
-	 *   $startDateTime : date - a date that no returned events should begin earlier than.
-	 *   $endDateTime   : date - a date that no returned events should begin later than.
+	 *   $start : date - a date that no returned events should begin earlier than.
+	 *   $end   : date - a date that no returned events should begin later than.
 	 * Returns:
 	 *   <<an array of events with the given date range>>
 	 */
-	function get_ics_events( $icsEvents, $startDateTime, $endDateTime )
+	function ics_array_to_ical_events( $ics_array, $start, $end )
 	{
         $events = [];
 
-		foreach( $icsEvents as $key => $value )
+		foreach( $ics_array as $key => $value )
 		{
 			// If the event's "BEGIN" value begins with "VEVENT", it is a valid event
-			if( strpos( $value['BEGIN'], 'VEVENT' ) === 0 )
+			if( preg_match( '/^VEVENT$/', $value['BEGIN'] ) )
 			{
 				// Get the time zone for the event
 				if( isset( $value['DTSTART'] ) )
 				{
-					$currDateStr = substr( $value['DTSTART'], 0, 8 );
-					$currTimeStr = substr( $value['DTSTART'], 9, 6 );
-					$timeZone    = new DateTimeZone( 'UTC' );
+					$current_date = substr( $value['DTSTART'], 0, 8 );
+					$current_time = substr( $value['DTSTART'], 9, 6 );
+					$time_zone    = new DateTimeZone( 'UTC' );
 				}
 				else if( isset( $value['DTSTART;VALUE=DATE'] ) )
 				{
-					$currDateStr = $value['DTSTART;VALUE=DATE'];
-					$currTimeStr = 'All Day';
-					$timeZone    = new DateTimeZone( 'America/New_York' );
+					$current_date = $value['DTSTART;VALUE=DATE'];
+					$current_time = ICalEntry::EVENT_ALL_DAY;
+					$time_zone    = new DateTimeZone( 'America/New_York' );
 				}
 				else if( isset( $value['DTSTART;TZID=America/New_York'] ) )
 				{
-					$currDateStr = substr( $value['DTSTART;TZID=America/New_York'], 0, 8 );
-					$currTimeStr = substr( $value['DTSTART;TZID=America/New_York'], 9 );
-					$timeZone    = new DateTimeZone( 'America/New_York' );
+					$current_date = substr( $value['DTSTART;TZID=America/New_York'], 0, 8 );
+					$current_time = substr( $value['DTSTART;TZID=America/New_York'], 9 );
+					$time_zone    = new DateTimeZone( 'America/New_York' );
 				}
 				else
-					echo( 'Unexpected value for DSTART!<br />' );
+					error_log( 'Unexpected value for DSTART! ' . print_r( $value, true ) );
 
-				$currDateStr = trim( $currDateStr );
-				$currTimeStr = trim( $currTimeStr );
+				$current_date = trim( $current_date );
+				$current_time = trim( $current_time );
 
 				// Construct the datetime string
-				if( $currTimeStr != 'All Day' )
-					$currDateTime = DateTime::createFromFormat( 'YmdGis', $currDateStr . $currTimeStr, $timeZone );
+				if( $current_time != ICalEntry::EVENT_ALL_DAY )
+					$current = DateTime::createFromFormat( 'YmdGis', $current_date . $current_time, $time_zone );
 				else
-					$currDateTime = DateTime::createFromFormat( 'Ymd', $currDateStr, $timeZone );
+					$current = DateTime::createFromFormat( 'Ymd', $current_date, $time_zone );
 
-				if( $currDateTime->getTimezone()->getName() == 'UTC' )
-					$currDateTime = $currDateTime->sub( new DateInterval('PT5H') );
+				if( $current->getTimezone()->getName() == 'UTC' )
+					$current = $current->sub( new DateInterval( 'PT5H' ) );
 
 				// Insert the event into the events list if it is within the date range
-				if( $startDateTime <= $currDateTime && $currDateTime <= $endDateTime )
+				if( $start <= $current && $current <= $end )
 				{
 					// Get the date part of the datetime
-					$events[$key]['Date'] = $currDateTime->format( 'n-j-Y' );
+					$date = $current->format( 'n-j-Y' );
 
 					// Get the time part of the datetime
-					if( $currTimeStr != 'All Day' )
-						$events[$key]['Time'] = $currDateTime->format( 'g:i A' );
+					if( $current_time != ICalEntry::EVENT_ALL_DAY )
+						$time = $current->format( 'g:i A' );
 					else
-						$events[$key]['Time'] = $currTimeStr;
+						$time = $current_time;
 
 					// Get the event description
-					$events[$key]['Summary'] = $value['SUMMARY'];
+					$description = $value['SUMMARY'];
+                    $events[]    = new ICalEntry( $date, $time, $description );
 				}
 			}
 		}
