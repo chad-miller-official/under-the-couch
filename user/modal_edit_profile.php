@@ -17,6 +17,7 @@
     $instruments  = get_instruments();
     $music_genres = get_music_genres();
 ?>
+<script src="/user/modal_edit_profile.js"></script>
 <div>
     <!-- TODO -->
 </div>

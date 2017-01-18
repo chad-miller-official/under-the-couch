@@ -47,7 +47,7 @@ function send_edit_role_request( data ) {
             location.reload(); /* TODO: Get pagination reload working */
         }
         else
-            alert( response['error'], MODIFY_ROLES_ERROR );
+            js_error( response['error'], MODIFY_ROLES_ERROR );
     }, 'json' )
     .fail( js_generic_error );
 }

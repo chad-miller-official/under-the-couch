@@ -43,6 +43,7 @@
             'pagination'           => 'ext/pagination.min.js',
             'featherlight'         => 'ext/featherlight.min.js',
             'featherlight-gallery' => 'ext/featherlight.gallery.min.js',
+            'chosen'               => '/ext/chosen_v1.6.2/chosen.jquery.min.js'
         ];
 
         foreach( $args as $arg )

@@ -1,11 +1,6 @@
 #!/bin/sh
 
-#remember for later:
-#insert into tb_member_role ( member, role ) values ( 1, 2 );
-#why isn't this working?
-
 sql_dir="$(dirname $(greadlink -f $0))"
-cd $sql_dir;
 
 # SQL credentials
 user="postgres"
@@ -38,7 +33,7 @@ pg_file "$sql_dir/data/2016-11/issue-1.patch_metadata_schema.sql" "$db_temp"
 echo "\nCreating upsert function..."
 pg_file "$sql_dir/functions/fn_insert_or_update_row.sql" "$db_temp"
 echo "\nRunning DB patcher..."
-python patch_db.py -U "$user" -d "$db_temp"
+./patch_db_osx.py -U "$user" -d "$db_temp"
 
 echo "\nDropping old database..."
 dropdb -e --if-exists -U "$user" -w "$db"

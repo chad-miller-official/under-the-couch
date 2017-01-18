@@ -37,7 +37,7 @@ function send_booking_request_email_request( data )
             window.location.reload();
         }
         else
-            alert( response['error'] + SEND_BOOKING_REQUEST_EMAIL_ERROR );
+            js_error( response['error'], SEND_BOOKING_REQUEST_EMAIL_ERROR );
     }, 'json' )
     .fail( js_generic_error );
 }
