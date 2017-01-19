@@ -8,6 +8,7 @@ function modal_edit_profile_initialize()
     $( '#password' ).change( reset_password_validation );
     $( '#password_again' ).change( reset_password_validation );
     $( '#instruments_menu' ).chosen();
+    $( '#music_genres_menu' ).chosen();
 }
 
 function reset_password_validation()

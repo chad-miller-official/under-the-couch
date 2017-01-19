@@ -56,6 +56,18 @@
                     </select>
                 </p>
                 <p>
+                    <label class="nowidth">Music Genres:</label>
+                    <select multiple id="music_genres_menu">
+                        <?
+                            foreach ( $music_genres as $genre ):
+                                $genre_pk   = $genre[ 'music_genre' ];
+                                $genre_name = $genre[ 'name' ];
+                        ?>
+                        <option value="<?= $genre_pk ?>"><?= $genre_name ?></option>
+                        <? endforeach; ?>
+                    </select>
+                </p>
+                <p>
                     <label class="nowidth">Available for Collaboration:</label><br>
                     <input type="radio" name="is_available_for_collaboration" id="is_available_for_collaboration" value="true">Yes<br>
                     <input type="radio" name="is_available_for_collaboration" id="is_available_for_collaboration" value="false">No
