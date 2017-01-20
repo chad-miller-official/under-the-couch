@@ -62,17 +62,11 @@
     </div>
     <hr />
     <? if( $status_pk == BOOKING_REQUEST_STATUS_NOT_STARTED ): ?>
-        <form id="performance_booking_response">
-            <fieldset class="no-style">
-                <h3>Respond to this request</h3>
-                <p>
-                    <label class="nowidth" for="email_text">Email text: </label>
-                    <textarea class="wide" name="email_text" id="email_text" />
-                </p>
-                <input type="hidden" name="booking_request_pk" id="booking_request_pk" value="<?= $booking_request_pk ?>" />
-                <input type="submit" class="submit-button"></input>
-            </fieldset>
-        </form>
+        <p>
+            This booking request has not been started.
+            <br />
+            Please use the booking officer email to begin correspondence.
+        </p>
     <? elseif( $status_pk == BOOKING_REQUEST_STATUS_IN_PROGRESS ): ?>
         <p>
             This booking request has already been replied to.
@@ -86,5 +80,12 @@
             No more actions can be performed on it.
         </p>
     <? endif; ?>
+    <br>
+    <div>
+        <button type="button" class="submit-button" id="booking_request_back">Back</button>
+        <button type="button" class="submit-button" id="booking_request_forward">Forward</button>
+        <input type="hidden" name="booking_request_pk" id="booking_request_pk" value="<?= $booking_request_pk ?>" />
+        <input type="hidden" name="status_pk" id="status_pk" value="<?= $status_pk ?>" />
+    </div>
     </div>
 </div>
