@@ -19,7 +19,9 @@
                     <? if( access_allowed( 'dashboard/booking/index.php' ) ): ?>
                         <a href="/dashboard/booking">Booking Requests</a>
                     <? endif; ?>
-
+					<? if( access_allowed( 'dashboard/treasurer/index.php' ) ): ?>
+						<a href="/dashboard/treasurer">Treasurer Dashboard</a>
+					<? endif; ?>
                 </div>
             </li>
             <li class="main-nav-drop">

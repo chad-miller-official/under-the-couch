@@ -106,7 +106,7 @@ select {
     border-radius: 0px;
 }
 
-.submit-button, .cancel-button {
+.submit-button, .cancel-button, .standard-button {
     display: inline-block;
     text-decoration: none;
     border:none;
@@ -117,7 +117,7 @@ select {
     background-color: #333;
 }
 
-.submit-button:hover, .cancel-button:hover {
+.submit-button:hover, .cancel-button:hover, .standard-button:hover {
     background-color: #ff4d4d;
 }
 

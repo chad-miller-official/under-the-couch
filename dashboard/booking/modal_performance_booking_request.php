@@ -82,10 +82,39 @@
     <? endif; ?>
     <br>
     <div>
-        <button type="button" class="submit-button" id="booking_request_back">Back</button>
-        <button type="button" class="submit-button" id="booking_request_forward">Forward</button>
-        <input type="hidden" name="booking_request_pk" id="booking_request_pk" value="<?= $booking_request_pk ?>" />
-        <input type="hidden" name="status_pk" id="status_pk" value="<?= $status_pk ?>" />
+        <form id="booking_request_status_change_form">
+            <label class="nowidth">Change the status of this booking request:</label>
+            <fieldset class="no-style">
+                <select id="new_booking_request_status">
+                    <option value="<?= BOOKING_REQUEST_STATUS_NOT_STARTED ?>"
+                        <? if( $status_pk == BOOKING_REQUEST_STATUS_NOT_STARTED || $status_pk == BOOKING_REQUEST_STATUS_CLOSED ): ?>
+                            disabled
+                        <? endif; ?>
+                        >Not Started</option>
+                    <option value="<?= BOOKING_REQUEST_STATUS_IN_PROGRESS ?>"
+                        <? if( $status_pk == BOOKING_REQUEST_STATUS_IN_PROGRESS || $status_pk == BOOKING_REQUEST_STATUS_CLOSED ): ?>
+                            disabled
+                        <? endif; ?>
+                        >In progress</option>
+                    <option value="<?= BOOKING_REQUEST_STATUS_CLOSED ?>"
+                        <? if( $status_pk == BOOKING_REQUEST_STATUS_NOT_STARTED || $status_pk == BOOKING_REQUEST_STATUS_CLOSED ): ?>
+                            disabled
+                        <? endif; ?>
+                        >Closed</option>
+                </select>
+                <input type="submit" class="submit-button" id="submit_booking_request_status_change"></input>
+            </fieldset>
+        </form>
+        <!-- keep these around for now
+            <button type="button" class="submit-button" id="booking_request_back">Back</button>
+            <button type="button" class="submit-button" id="booking_request_forward">Forward</button>
+        -->
     </div>
     </div>
+    <input type="hidden" name="booking_request_pk" id="booking_request_pk" value="<?= $booking_request_pk ?>" />
+    <input type="hidden" name="current_status_pk" id="current_status_pk" value="<?= $status_pk ?>" />
+
+    <input type="hidden" name="status_not_started" id="status_not_started" value="<?= BOOKING_REQUEST_STATUS_NOT_STARTED ?>" />
+    <input type="hidden" name="status_in_progress" id="status_in_progress" value="<?= BOOKING_REQUEST_STATUS_IN_PROGRESS ?>" />
+    <input type="hidden" name="status_closed" id="status_closed" value="<?= BOOKING_REQUEST_STATUS_CLOSED ?>" />
 </div>

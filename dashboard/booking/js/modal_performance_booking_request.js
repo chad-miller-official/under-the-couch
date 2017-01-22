@@ -2,35 +2,56 @@ $( document ).ready( initialize );
 
 function initialize()
 {
-    var booking_request_pk = $( '#booking_request_pk' ).val();
-    var status_pk = $( '#status_pk' ).val() * 1;
-
-    data_back = {
-        'booking_request' : booking_request_pk,
-        'status'          : (status_pk - 1)
-    }
-
-    data_forward = {
-        'booking_request' : booking_request_pk,
-        'status'          : (status_pk + 1)
-    }
-
-    //$( '#performance_booking_response' ).submit( validate_booking_request_email );
-    //$( '#email_text' ).change( reset_validation );
-    $( '#booking_request_back' ).click( data_back, status_change );
-    $( '#booking_request_forward' ).click( data_forward, status_change );
+    $( '#booking_request_status_change_form' ).submit( validate_status_change );
 }
 
-function status_change( event )
+function validate_status_change( event )
 {
-    booking_request_pk = event.data[ 'booking_request' ];
-    status_pk          = event.data[ 'status' ];
+    event.preventDefault();
 
-    alert( booking_request_pk + ", " + status_pk );
+    var booking_request_pk = $( '#booking_request_pk' ).val();
+    var current_status_pk  = $( '#current_status_pk' ).val();
+    var new_status_pk      = $( '#new_booking_request_status' ).val();
+
+    var status_not_started = $( '#status_not_started' ).val();
+    var status_in_progress = $( '#status_in_progress' ).val();
+    var status_closed      = $( '#status_closed' ).val();
+
+    var error_message = current_status_pk + " -> " + new_status_pk + ": Invalid status change."
+
+    alert( booking_request_pk + ":\n" + current_status_pk + " -> " + new_status_pk);
+
+    switch( current_status_pk )
+    {
+        case( status_not_started ):
+            if( new_status_pk == status_not_started || new_status_pk == status_closed )
+            {
+                alert( error_message );
+                return;
+            }
+            else
+                break;
+        case( status_in_progress ):
+            if( new_status_pk == status_in_progress )
+            {
+                alert( error_message );
+                return;
+            }
+            else
+                break;
+        case( status_closed ):
+            if( new_status_pk == status_not_started || new_status_pk == status_closed )
+            {
+                alert( error_message );
+                return;
+            }
+            else
+                break;
+    }
 
     var form_data = {
         'booking_request'        : booking_request_pk,
-        'booking_request_status' : status_pk
+        'booking_request_status' : new_status_pk
     }
 
     send_status_change_request( form_data );
@@ -54,6 +75,7 @@ function send_status_change_request( data )
     .fail( js_generic_error );
 }
 
+/*
 function validate_booking_request_email( event )
 {
     event.preventDefault();
@@ -89,3 +111,4 @@ function send_booking_request_email_request( data )
     }, 'json' )
     .fail( js_generic_error );
 }
+*/

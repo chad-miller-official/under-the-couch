@@ -170,14 +170,6 @@ fieldset.no-style {
   border: none;
   box-shadow: none; }
 
-fieldset.no-style-wide {
-  background-image: none;
-  padding-top: auto;
-  max-width: auto;
-  border: none;
-  box-shadow: none;
-  padding-right: 20px; }
-
 fieldset#write-blog-post {
   left: 205px; }
 
@@ -225,7 +217,7 @@ select {
   width: 162px;
   border-radius: 0px; }
 
-.submit-button, .cancel-button {
+.submit-button, .cancel-button, .standard-button {
   display: inline-block;
   text-decoration: none;
   border: none;
@@ -235,7 +227,7 @@ select {
   color: white;
   background-color: #333; }
 
-.submit-button:hover, .cancel-button:hover {
+.submit-button:hover, .cancel-button:hover, .standard-button:hover {
   background-color: #ff4d4d; }
 
 .required-is-empty {
