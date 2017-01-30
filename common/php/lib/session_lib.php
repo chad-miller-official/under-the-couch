@@ -25,7 +25,7 @@
     {
         $member = get_member_by_login_credentials( $email, $password );
 
-        if( $member !== false )
+        if( is_array( $member ) && count( $member ) == 1 )
         {
             SessionLib::set( 'user_member.member', $member['member'] );
             SessionLib::closeSession();

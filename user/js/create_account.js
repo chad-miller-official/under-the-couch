@@ -1,5 +1,8 @@
 $( document ).ready( create_account_initialize );
 
+var password       = $( '#password' );
+var password_again = $( '#password_again' );
+
 function create_account_initialize()
 {
     $( '#create_account_form' ).submit( validate_create_account_request );
@@ -8,25 +11,23 @@ function create_account_initialize()
     $( '#last_name' ).change( reset_validation );
     $( '#gatech_email' ).change( reset_validation );
 
-    $( '#password' ).change( reset_password_validation );
-    $( '#password_again' ).change( reset_password_validation );
+    password.change( reset_password_validation );
+    password.change( reset_password_validation );
 }
 
 function reset_password_validation()
 {
-    $( '#password' ).removeClass( error_border );
-    $( '#password_again' ).removeClass( error_border );
+    reset_validation.call( password );
+    reset_validation.call( password_again );
 }
 
 function validate_create_account_request( event )
 {
     event.preventDefault();
 
-    var first_name     = $( '#first_name' );
-    var last_name      = $( '#last_name' );
-    var gatech_email   = $( '#gatech_email' );
-    var password       = $( '#password' );
-    var password_again = $( '#password_again' );
+    var first_name   = $( '#first_name' );
+    var last_name    = $( '#last_name' );
+    var gatech_email = $( '#gatech_email' );
 
     if( !first_name.val() )
     {

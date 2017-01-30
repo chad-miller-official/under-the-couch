@@ -43,7 +43,6 @@
 		<title>Under the Couch - Profile - <?= $name ?></title>
 		<link rel="stylesheet" type="text/css" href="/gtmn_standard.css" />
         <link rel="stylesheet" type="text/css" href="/featherlight.min.css" />
-        <link rel="stylesheet" type="text/css" href="/chosen.min.css" />
         <?
             js_common_include();
             js_include(
@@ -92,8 +91,8 @@
                             <a href="mailto:<?= $email_address ?>"><?= $email_address ?></a>
                         </p>
                     </div>
-                    <? //require( "{$GLOBALS[WEBROOT]}/user/profile_card.php" ); ?>
-                    <a href="/user/modal_edit_profile.php?member=<?= $member_pk ?>" data-featherlight="ajax">Edit info</a>
+                    <? require( "{$GLOBALS[WEBROOT]}/user/profile_card.php" ); ?>
+                    <a href="/user/modal_edit_profile.php?member=<?= $member_pk ?>" data-featherlight="ajax">Edit Info</a>
                 </div>
             </article>
         </div>

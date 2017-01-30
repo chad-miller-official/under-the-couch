@@ -35,6 +35,7 @@
                     default:
                         return $error_message;
                 }
+                break;
             case BOOKING_REQUEST_STATUS_CLOSED:
                 return 'Cannot move booking request out of Closed.';
             default:
